@@ -1,227 +1,509 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="lavender">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PLNT Earth School — Learn the Field</title>
-<meta name="robots" content="noindex, nofollow" />
 <meta name="color-scheme" content="dark light" />
-<meta name="description" content="PLNT Earth School — a luminous orientation into the Field: physics, time, biology, resonance." />
+<title>PLNT Earth · School</title>
+<meta name="description" content="PLNT Earth School — Learn by light: practice, spark, and gentle science." />
 <style>
-  :root{
-    --bg:#080a0f; --panel:rgba(255,255,255,.04); --line:rgba(255,255,255,.12);
-    --fg:#e9f2ff; --muted:#8aa0b8; --accent:#7df9ff; --accent2:#7CFFB2;
-    --warn:#FFD166; --off:#3b465a;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%}
-  body{
-    margin:0; background:
-      radial-gradient(1100px 700px at 70% -10%, #1b2230 0%, var(--bg) 60%, #05070b 100%);
-    color:var(--fg);
-    font:16px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-  }
-  .wrap{max-width:1100px; margin:0 auto; padding:28px 22px 48px}
-  header{
-    position:relative; border:1px solid var(--line); border-radius:20px; padding:26px;
-    background:var(--panel); backdrop-filter: blur(8px);
-    box-shadow:0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.06);
-    overflow:hidden;
-  }
-  .glow{
-    position:absolute; inset:-40%;
-    background:
-      radial-gradient(40% 40% at 18% 8%, rgba(125,249,255,.20), transparent 60%),
-      radial-gradient(38% 38% at 85% 20%, rgba(124,255,178,.16), transparent 60%);
-    filter: blur(42px); pointer-events:none;
-    animation: drift 18s linear infinite alternate;
-  }
-  @keyframes drift{from{transform:translateY(-6%) translateX(2%)} to{transform:translateY(6%) translateX(-2%)}}
-  @media (prefers-reduced-motion: reduce){
-    .glow{animation:none}
-    *{scroll-behavior:auto}
-  }
-  h1{margin:0 0 6px; font-size:clamp(24px, 4.6vw, 34px); letter-spacing:.3px}
-  .sub{margin:0; color:var(--muted)}
-  .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
-  .btn{
-    display:inline-flex; align-items:center; gap:10px; border-radius:14px; padding:10px 14px;
-    text-decoration:none; border:1px solid rgba(0,0,0,.08); font-weight:700; color:#081016;
-    background:linear-gradient(180deg, var(--accent) 0%, #72eef5 100%);
-  }
-  .btn.ghost{
-    color:var(--fg); background:transparent; border:1px solid var(--line);
-  }
-  /* Section titles */
-  .h2{margin:26px 6px 10px; font-weight:700; letter-spacing:.2px}
-  /* Hex grid */
-  .hexgrid{display:grid; grid-template-columns:repeat(auto-fit, minmax(210px,1fr)); gap:14px; margin-top:8px}
-  .hex{
-    position:relative; border:1px solid var(--line); border-radius:16px; padding:14px 14px 12px; background:rgba(255,255,255,.03);
-    transition:transform .18s ease, border-color .18s ease; text-decoration:none; color:inherit;
-  }
-  .hex:hover{transform:translateY(-2px); border-color:rgba(125,249,255,.45)}
-  .hex .row{display:flex; align-items:center; gap:12px}
-  .g{font-size:22px}
-  .nm{font-weight:700}
-  .dmn{font-size:13px; color:var(--muted)}
-  .desc{margin:8px 0 0; color:var(--muted)}
-  .status{margin-top:10px; font-size:13px}
-  .badge{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius:999px; padding:5px 9px}
-  .dot{width:9px; height:9px; border-radius:50%; background:var(--off); box-shadow:0 0 0 rgba(0,0,0,0)}
-  .live{color:var(--accent2)} .live .dot{background:var(--accent2); box-shadow:0 0 14px var(--accent2)}
-  .soon{color:var(--warn)} .soon .dot{background:var(--warn)}
-  .offl{color:#75839a}
-  /* Cards */
-  .cards{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:14px}
-  .card{
-    border:1px solid var(--line); border-radius:16px; padding:14px; background:rgba(255,255,255,.03)
-  }
-  .card h3{margin:0 0 6px}
-  .mini{font-size:13px; color:var(--muted)}
-  /* Footer */
-  footer{margin-top:26px; color:var(--muted); font-size:13px}
-  .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+:root{
+  --bg: #0f0c13;
+  --card: #17131d;
+  --ink: #ece7f7;
+  --muted: #bdb6d9;
+  --line: #2a2334;
+  --lav: #b17cff;
+  --lav-2:#9a6bff;
+  --lav-3:#c7a7ff;
+  --ok:#7CFFB1; --warn:#FFD37C; --bad:#FF7C9a;
+  --glass: rgba(177,124,255,0.08);
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --radius: 18px;
+  --pad: 16px;
+  --speed: 28s;
+  --focus: 2px solid var(--lav);
+  --link: var(--lav-3);
+  --cta: #2a2236;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, Apple Color Emoji, Segoe UI Emoji;
+  background: radial-gradient(1200px 800px at 20% -10%, rgba(177,124,255,.10), transparent 60%),
+              radial-gradient(900px 700px at 120% 10%, rgba(199,167,255,.10), transparent 60%),
+              var(--bg);
+  color:var(--ink);
+}
+a{color:var(--link); text-decoration:none}
+a:focus-visible, button:focus-visible{outline:var(--focus); outline-offset:2px; border-radius:12px}
+h1,h2,h3{margin:0 0 .5rem 0}
+p{margin:.5rem 0 0 0; color:var(--muted)}
+.container{max-width:1100px; margin:0 auto; padding:20px}
+.topbar{
+  position:sticky; top:0; z-index:30; backdrop-filter:saturate(1.1) blur(10px);
+  background: linear-gradient(to bottom, rgba(15,12,19,.9), rgba(15,12,19,.6));
+  border-bottom:1px solid var(--line)
+}
+.topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 20px}
+.brand{display:flex; align-items:center; gap:10px}
+.glyph{width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 30% 30%, var(--lav-3), var(--lav));
+  box-shadow:0 0 20px rgba(177,124,255,.45)}
+.word{font-weight:700; letter-spacing:.4px}
+.nav{display:flex; gap:14px; flex-wrap:wrap}
+.nav a, .nav button{padding:8px 12px; border-radius:999px; background:rgba(177,124,255,.08); border:1px solid var(--line)}
+.energy{
+  margin:8px 20px 14px; display:flex; gap:8px; align-items:center; flex-wrap:wrap
+}
+.energy .chip{
+  padding:8px 12px; border:1px solid var(--line); border-radius:999px; background:var(--card); color:var(--muted);
+}
+.energy .chip.active{background:var(--cta); color:var(--ink); border-color:var(--lav)}
+.hero{
+  margin-top:12px; border:1px solid var(--line); background:linear-gradient(180deg, rgba(177,124,255,.12), rgba(177,124,255,.04));
+  border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden
+}
+.hero-inner{padding:32px 20px}
+.hero h1{font-size:32px}
+.hero p{max-width:60ch}
+.ctas{display:flex; gap:12px; margin-top:14px; flex-wrap:wrap}
+.btn{
+  appearance:none; border:1px solid var(--line); background:var(--cta); color:var(--ink);
+  padding:12px 16px; border-radius:14px; cursor:pointer
+}
+.btn.secondary{background:transparent}
+.grid{display:grid; gap:16px}
+.cards{grid-template-columns:repeat(auto-fit, minmax(240px,1fr))}
+.card{
+  background:linear-gradient(180deg, var(--glass), transparent), var(--card);
+  border:1px solid var(--line); border-radius:var(--radius); padding:16px; min-height:140px; position:relative
+}
+.tag{position:absolute; top:12px; right:12px; font-size:12px; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:4px 8px; background:rgba(255,255,255,0.02)}
+.rooms a.card{display:block; transition:transform .15s ease}
+.rooms a.card:hover{transform:translateY(-2px)}
+.small{font-size:12px; color:var(--muted)}
+.section{margin:26px 0}
+.kbd{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace; font-size:12px; padding:2px 6px; border:1px solid var(--line); border-radius:6px; background:rgba(255,255,255,.03)}
+.footer{margin:36px 0 60px; padding:16px; border-top:1px solid var(--line); color:var(--muted)}
+.alive{pointer-events:none; position:fixed; inset:0; overflow:hidden; z-index:0; opacity:.8}
+.star{position:absolute; width:2px; height:2px; background:radial-gradient(circle, var(--lav-3), transparent 70%); border-radius:50%;
+  animation: drift var(--speed) linear infinite; filter: drop-shadow(0 0 6px rgba(199,167,255,.6))}
+@keyframes drift{0%{transform: translate3d(0,0,0) rotate(0deg)}100%{transform: translate3d(0,-120vh,0) rotate(360deg)}}
+.reduce-motion .alive{display:none}
+.modal-back{position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index:50}
+.modal{width:min(620px, 92vw); background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px; box-shadow:var(--shadow)}
+.modal h3{margin-bottom:8px}
+.checks{margin-top:8px; border-top:1px solid var(--line); padding-top:8px}
+.checks li{margin:6px 0}
+.ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
+.visually-hidden{position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap}
 </style>
 </head>
 <body>
-  <div class="wrap">
-    <header role="banner" aria-label="PLNT Earth School">
-      <div class="glow" aria-hidden="true"></div>
-      <h1>PLNT Earth School</h1>
-      <p class="sub">Where science learns to feel. Start with the Field Guide, then visit the Labs.</p>
-      <div class="cta">
-        <a class="btn" id="startGuide" href="#curriculum" aria-label="Start the Field Guide">Start the Field Guide</a>
-        <a class="btn ghost" href="https://plnt.earth/" aria-label="Return to PLNT Earth hub">Return to Hub</a>
-      </div>
-    </header>
+<div class="alive" aria-hidden="true" id="alive"></div>
 
-    <h2 class="h2" id="curriculum">Curriculum · Labs</h2>
-    <div class="hexgrid" id="labs" role="list" aria-label="Lab links and status">
-      <!-- Cards are injected by JS so status can be updated -->
+<header class="topbar" role="banner">
+  <div class="topbar-inner container" aria-label="Top bar">
+    <div class="brand" aria-label="PLNT Earth">
+      <div class="glyph" aria-hidden="true"></div>
+      <div class="word">School</div>
     </div>
-
-    <h2 class="h2">What You’ll Learn</h2>
-    <div class="cards" role="region" aria-label="Core concepts">
-      <div class="card">
-        <h3>Ground → Flow → Rest</h3>
-        <p class="mini">Energy path for sane creation. Ground ethically, enter flow, then rest and integrate.</p>
-      </div>
-      <div class="card">
-        <h3>Light → Sound → Time</h3>
-        <p class="mini">Light is color, sound is frequency, time is the geometry that holds them together.</p>
-      </div>
-      <div class="card">
-        <h3>Self → Field → All</h3>
-        <p class="mini">You tune yourself, then the field, then the collective. Attention = energy = care.</p>
-      </div>
-    </div>
-
-    <footer>
-      © PLNT Earth School · This is an orientation space. Questions: <span class="mono">t@tristanwhite.co</span>
-    </footer>
+    <nav class="nav" aria-label="Primary">
+      <a href="https://time.plnt.earth" tabindex="0">Time</a>
+      <a href="https://mirrorhoney.plnt.earth" tabindex="0">MirrorHoney</a>
+      <a href="https://froot.plnt.earth" tabindex="0">Froot</a>
+      <a href="https://motion.plnt.earth" tabindex="0">Motion</a>
+      <a href="https://wonder.plnt.earth" tabindex="0">Wonder</a>
+      <a href="https://read.plnt.earth" tabindex="0">Read</a>
+      <a href="https://quietmoon.plnt.earth/charter" tabindex="0" aria-label="Quietmoon Charter">Charter</a>
+      <a href="https://quietmoon.plnt.earth/echo" tabindex="0" aria-label="Quietmoon Echo Mode">Echo Mode</a>
+      <button class="btn secondary" id="selfCheckBtn" aria-haspopup="dialog" aria-controls="selfCheckModal">Self-Check</button>
+    </nav>
   </div>
+  <div class="energy" aria-label="Energy Path mini-bar">
+    <span class="small">Energy Path:</span>
+    <button class="chip" data-energy="ground" aria-pressed="false">Ground</button>
+    <button class="chip" data-energy="flow" aria-pressed="false">Flow</button>
+    <button class="chip" data-energy="rest" aria-pressed="false">Rest</button>
+    <span class="small">· check · create · release</span>
+  </div>
+</header>
 
-  <script>
-  (function(){
-    // --- Config: labs to show (add/remove freely) ---
-    var labs = [
-      { glyph:"🕓", name:"Time", domain:"time.plnt.earth", desc:"Physics of consciousness, τ and field geometry.", status:"check" },
-      { glyph:"🧬", name:"DNA", domain:"dna.plnt.earth", desc:"Life patterns and resonance.", status:"soon" },
-      { glyph:"🦠", name:"Virus", domain:"virus.plnt.earth", desc:"Information spread, ethics of contagion.", status:"soon" },
-      { glyph:"🌍", name:"Earth", domain:"earth.plnt.earth", desc:"Sustainability, conscience, and feedback loops.", status:"soon" },
-      { glyph:"🧠", name:"Brain", domain:"brain.plnt.earth", desc:"Perception, processing, attention.", status:"soon" },
-      { glyph:"🪞", name:"MirrorHoney", domain:"mirrorhoney.plnt.earth", desc:"Reflection & resonance rooms.", status:"check" },
-      { glyph:"🔥", name:"Travel", domain:"travel.plnt.earth", desc:"Energy, expansion, motion.", status:"soon" },
-      { glyph:"📦", name:"Jar", domain:"jar.plnt.earth", desc:"Assets, experiments, and showcases.", status:"check" }
-    ];
+<main class="container" role="main">
+  <section class="hero" id="hero">
+    <div class="hero-inner">
+      <h1>PLNT Earth School</h1>
+      <p>Learn by light: practice, spark, and gentle science.</p>
+      <div class="ctas" role="group" aria-label="Hero actions">
+        <a class="btn" href="#sessions">Start a Session</a>
+        <a class="btn secondary" href="#rooms">Explore Rooms</a>
+      </div>
+    </div>
+  </section>
 
-    // --- Build grid
-    var grid = document.getElementById('labs');
-    labs.forEach(function(l){
-      var a = document.createElement('a');
-      a.className = 'hex';
-      a.setAttribute('role','listitem');
-      a.href = 'https://' + l.domain + '/';
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      a.setAttribute('aria-label', l.name + ' — open ' + l.domain + ' in a new tab');
+  <section class="section" aria-labelledby="triad">
+    <h2 id="triad">Sun · Bee · Moon</h2>
+    <div class="grid cards" style="margin-top:12px">
+      <article class="card" aria-label="Sun">
+        <h3>☀️ Sun (Victory Song)</h3>
+        <p>Declare the moment. Name your spark.</p>
+        <details style="margin-top:8px"><summary class="small">Learn more</summary>
+          <p>Sun is ignition. Use brief, bright intent to start without burning out. One flare, then steady glow.</p>
+        </details>
+      </article>
+      <article class="card" aria-label="Bee">
+        <h3>🐝 Bee (Practice)</h3>
+        <p>Work in small, sweet loops.</p>
+        <details style="margin-top:8px"><summary class="small">Learn more</summary>
+          <p>Bee is continuity. Short cycles (5–9 min), repeatable and kind. Pollinate across days.</p>
+        </details>
+      </article>
+      <article class="card" aria-label="L Moon">
+        <h3>🌙 L. Moon (Archivist)</h3>
+        <p>Observe, archive, and adjust.</p>
+        <details style="margin-top:8px"><summary class="small">Learn more</summary>
+          <p>Moon measures heat and water. Keep notes, spot patterns, and rebalance Fire/Water as needed.</p>
+        </details>
+      </article>
+    </div>
+  </section>
 
-      a.innerHTML =
-        '<div class="row"><div class="g" aria-hidden="true">'+l.glyph+
-        '</div><div><div class="nm">'+l.name+
-        '</div><div class="dmn mono">'+l.domain+
-        '</div></div></div><div class="desc">'+l.desc+
-        '</div><div class="status"><span class="badge '+(l.status==='soon'?'soon':'offl')+'"><span class="dot"></span><span class="txt">Checking…</span></span></div>';
+  <section class="section rooms" aria-labelledby="rooms">
+    <h2 id="rooms">Rooms</h2>
+    <div class="grid cards" style="margin-top:12px">
+      <a class="card room" data-domain="time.plnt.earth" href="https://time.plnt.earth">
+        <span class="tag" aria-live="polite">Checking…</span>
+        <h3>Time</h3>
+        <p>Physics × poetry instruments.</p>
+      </a>
+      <a class="card room" data-domain="mirrorhoney.plnt.earth" href="https://mirrorhoney.plnt.earth">
+        <span class="tag">Checking…</span>
+        <h3>MirrorHoney</h3>
+        <p>Closeness, tone, and reflection.</p>
+      </a>
+      <a class="card room" data-domain="froot.plnt.earth" href="https://froot.plnt.earth">
+        <span class="tag">Checking…</span>
+        <h3>Froot</h3>
+        <p>Color-synesthesia playlists.</p>
+      </a>
+      <a class="card room" data-domain="motion.plnt.earth" href="https://motion.plnt.earth">
+        <span class="tag">Checking…</span>
+        <h3>Motion</h3>
+        <p>Segment lab + live flow.</p>
+      </a>
+      <a class="card room" data-domain="wonder.plnt.earth" href="https://wonder.plnt.earth">
+        <span class="tag">Checking…</span>
+        <h3>Wonder</h3>
+        <p>Questions that build bridges.</p>
+      </a>
+      <a class="card room" data-domain="read.plnt.earth" href="https://read.plnt.earth">
+        <span class="tag">Checking…</span>
+        <h3>Read</h3>
+        <p>Notes, essays, and study.</p>
+      </a>
+      <div class="card soon" data-domain="labs.school.plnt.earth">
+        <span class="tag">Coming Soon</span>
+        <h3>Labs</h3>
+        <p>Experiments and prototypes.</p>
+      </div>
+      <div class="card soon" data-domain="archive.school.plnt.earth">
+        <span class="tag">Coming Soon</span>
+        <h3>Archive</h3>
+        <p>Past cycles and logs.</p>
+      </div>
+      <div class="card soon" data-domain="notes.school.plnt.earth">
+        <span class="tag">Coming Soon</span>
+        <h3>Notes</h3>
+        <p>Quick captures and seeds.</p>
+      </div>
+    </div>
+    <p class="small" style="margin-top:8px">“Coming Soon” tags auto-hide once a domain resolves.</p>
+  </section>
 
-      grid.appendChild(a);
-      l._el = a;
-    });
+  <section class="section" aria-labelledby="sessions" id="sessions">
+    <h2 id="sessions">Sessions</h2>
+    <div class="grid cards" style="margin-top:12px">
+      <article class="card" id="s-strike">
+        <h3>Strike → Glow</h3>
+        <p>90s ground · 6m flow · 90s rest</p>
+        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
+          <button class="btn" data-session="strike" data-action="start">Start</button>
+          <button class="btn secondary" data-session="strike" data-action="mark">Mark Done</button>
+          <span class="small" id="stamp-strike">Last: —</span>
+        </div>
+      </article>
+      <article class="card" id="s-balance">
+        <h3>Ophelia Balance</h3>
+        <p>Fire/Water blend: color + envelope</p>
+        <div style="margin-top:10px">
+          <label class="small" for="blend">Blend</label>
+          <input id="blend" type="range" min="0" max="100" value="50" aria-label="Fire to Water blend" />
+          <div aria-hidden="true" id="blendViz" style="height:16px; border-radius:12px; margin-top:8px; background:linear-gradient(90deg, #ff8fb7, #8fb7ff)"></div>
+        </div>
+        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
+          <button class="btn" data-session="balance" data-action="save">Save Setting</button>
+          <span class="small" id="stamp-balance">Saved: —</span>
+        </div>
+      </article>
+      <article class="card" id="s-dream">
+        <h3>Dream Trace</h3>
+        <p>2-minute pre-sleep cue + quick note</p>
+        <div style="margin-top:8px">
+          <label class="visually-hidden" for="dreamnote">Dream note</label>
+          <input id="dreamnote" placeholder="one line intention…" style="width:100%; padding:10px; border-radius:10px; border:1px solid var(--line); background:rgba(255,255,255,.02); color:var(--ink)"/>
+        </div>
+        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
+          <button class="btn" data-session="dream" data-action="save">Save Intention</button>
+          <span class="small" id="stamp-dream">Saved: —</span>
+        </div>
+      </article>
+    </div>
+  </section>
 
-    // --- Live status via image ping (no CORS/probing; works offline-safe)
-    function ping(domain, cb){
-      try{
-        var img = new Image();
-        var done = false;
-        var t = setTimeout(function(){ if(!done){ done=true; cb(false); } }, 3500);
-        img.onload = function(){ if(!done){ done=true; clearTimeout(t); cb(true); } };
-        img.onerror = function(){ if(!done){ done=true; clearTimeout(t); cb(false); } };
-        img.src = 'https://' + domain + '/favicon.ico?x=' + Math.random().toString(36).slice(2);
-      }catch(e){ cb(false); }
+  <section class="section" aria-labelledby="calendar">
+    <h2 id="calendar">Illumina Calendar</h2>
+    <div class="grid cards" style="margin-top:12px">
+      <article class="card">
+        <h3>Illumina 1 — Launch Cycle</h3>
+        <p>Nov 5 – Dec 17, 2025</p>
+        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
+          <button class="btn" id="icsBtn">Add to Calendar (.ics)</button>
+          <a class="btn secondary" href="https://time.plnt.earth" aria-label="Open Time">Open Time</a>
+        </div>
+      </article>
+      <article class="card">
+        <h3>Ethics & Safety</h3>
+        <p>Comfort first. Opt-out any time. Reduced-motion respected. Tones off by default.</p>
+        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
+          <a class="btn" href="https://quietmoon.plnt.earth/charter" aria-label="Read the Quietmoon Charter">Quietmoon Charter</a>
+          <a class="btn secondary" href="https://quietmoon.plnt.earth/echo" aria-label="Open Echo Mode">Echo Mode</a>
+          <button class="btn secondary" id="motionToggle">Toggle Reduced Motion</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="small">
+      <a href="https://quietmoon.plnt.earth/charter">Quietmoon Charter</a> ·
+      <a href="https://quietmoon.plnt.earth/echo">Echo Mode</a> ·
+      Domain family · Contact
+    </div>
+  </footer>
+</main>
+
+<div class="modal-back" id="selfCheckModal" role="dialog" aria-modal="true" aria-labelledby="selfCheckTitle">
+  <div class="modal">
+    <h3 id="selfCheckTitle">Self-Check</h3>
+    <p class="small">Quick diagnostics for this page.</p>
+    <ul class="checks" id="checkList" aria-live="polite"></ul>
+    <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end">
+      <button class="btn secondary" id="closeModal">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    root.classList.add('reduce-motion');
+  }
+
+  function mountStars(){
+    var alive = document.getElementById('alive');
+    if(!alive) return;
+    var count = 80;
+    var prefersReduced = root.classList.contains('reduce-motion');
+    if(prefersReduced) return;
+    for(let i=0;i<count;i++){
+      var s = document.createElement('div');
+      s.className = 'star';
+      var x = Math.random()*100, y = (Math.random()*100)+20;
+      s.style.left = x+'%';
+      s.style.top = y+'%';
+      s.style.animationDuration = (20 + Math.random()*20) + 's';
+      s.style.opacity = (0.35 + Math.random()*0.5).toString();
+      alive.appendChild(s);
     }
+  }
+  mountStars();
 
-    labs.forEach(function(l){
-      var badge = l._el.querySelector('.badge');
-      var txt = l._el.querySelector('.badge .txt');
-      if(l.status === 'soon'){
-        txt.textContent = 'Coming soon';
-        return;
+  var energyButtons = document.querySelectorAll('.energy .chip');
+  var energyKey = 'school.energyPath';
+  function setEnergy(val){
+    energyButtons.forEach(function(b){
+      var on = b.getAttribute('data-energy')===val;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on?'true':'false');
+    });
+    try{ localStorage.setItem(energyKey, val); }catch(e){}
+  }
+  energyButtons.forEach(function(b){
+    b.addEventListener('click', function(){ setEnergy(b.getAttribute('data-energy')); });
+  });
+  try{
+    var savedEnergy = localStorage.getItem(energyKey) || 'ground';
+    setEnergy(savedEnergy);
+  }catch(e){}
+
+  var soonKey = 'school.comingSoon';
+  var soonCache = {};
+  try{ soonCache = JSON.parse(localStorage.getItem(soonKey) || '{}'); }catch(e){ soonCache = {}; }
+
+  function markStatus(el, status){
+    var tag = el.querySelector('.tag');
+    if(!tag) return;
+    if(status==='live'){ tag.style.display='none'; }
+    else if(status==='checking'){ tag.textContent='Checking…'; tag.style.display=''; }
+    else{ tag.textContent='Coming Soon'; tag.style.display=''; }
+  }
+
+  function pingDomain(domain, onResult){
+    var img = new Image();
+    var done=false;
+    var timer = setTimeout(function(){ if(done) return; done=true; onResult('soon'); }, 5000);
+    img.onload = function(){ if(done) return; done=true; clearTimeout(timer); onResult('live'); };
+    img.onerror = function(){ if(done) return; done=true; clearTimeout(timer); onResult('soon'); };
+    img.src = 'https://' + domain + '/favicon.ico?_=' + Date.now();
+  }
+
+  function resolveRooms(){
+    var cards = document.querySelectorAll('[data-domain]');
+    cards.forEach(function(el){
+      var domain = el.getAttribute('data-domain');
+      var cached = soonCache[domain];
+      if(cached){ markStatus(el, cached); }
+      else { markStatus(el, 'checking'); }
+      pingDomain(domain, function(status){
+        markStatus(el, status);
+        soonCache[domain] = status;
+        try{ localStorage.setItem(soonKey, JSON.stringify(soonCache)); }catch(e){}
+      });
+    });
+  }
+  resolveRooms();
+
+  function stamp(id, text){
+    var el = document.getElementById('stamp-'+id);
+    if(el) el.textContent = text;
+  }
+  var sessionKey = 'school.session';
+  function setStamp(id){
+    var now = new Date().toISOString();
+    try{
+      var obj = JSON.parse(localStorage.getItem(sessionKey) || '{}');
+      obj[id] = now;
+      localStorage.setItem(sessionKey, JSON.stringify(obj));
+    }catch(e){}
+    stamp(id, 'Last: ' + new Date().toLocaleString());
+  }
+  function setSaved(id){
+    var now = new Date().toISOString();
+    try{
+      var obj = JSON.parse(localStorage.getItem(sessionKey) || '{}');
+      obj[id] = now;
+      localStorage.setItem(sessionKey, JSON.stringify(obj));
+    }catch(e){}
+    var label = (id==='balance')?'Saved: ':'Saved: ';
+    stamp(id, label + new Date().toLocaleString());
+  }
+  document.querySelectorAll('[data-session]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var id = btn.getAttribute('data-session');
+      var act = btn.getAttribute('data-action');
+      if(id==='strike' && (act==='start' || act==='mark')) setStamp('strike');
+      if(id==='balance' && act==='save') setSaved('balance');
+      if(id==='dream' && act==='save') {
+        try{
+          var note = (document.getElementById('dreamnote').value || '').trim();
+          var obj = JSON.parse(localStorage.getItem(sessionKey) || '{}');
+          obj['dream'] = { when:new Date().toISOString(), note: note };
+          localStorage.setItem(sessionKey, JSON.stringify(obj));
+        }catch(e){}
+        stamp('dream','Saved: ' + new Date().toLocaleString());
       }
-      if(l.status === 'check'){
-        txt.textContent = 'Checking…';
-        ping(l.domain, function(ok){
-          badge.classList.remove('offl','soon');
-          if(ok){
-            badge.classList.add('live');
-            txt.textContent = 'Live';
-          } else {
-            badge.classList.remove('live');
-            txt.textContent = 'Offline';
-          }
-        });
-      }
     });
+  });
+  try{
+    var obj = JSON.parse(localStorage.getItem(sessionKey) || '{}');
+    if(obj['strike']) stamp('strike','Last: ' + new Date(obj['strike']).toLocaleString());
+    if(obj['balance']) stamp('balance','Saved: ' + new Date(obj['balance']).toLocaleString());
+    if(obj['dream']) stamp('dream','Saved: ' + new Date(obj['dream'].when || obj['dream']).toLocaleString());
+  }catch(e){}
 
-    // --- Start button: scroll + (optional) gentle 128 Hz tone
-    var started = false, ctx, osc, gain;
-    var startBtn = document.getElementById('startGuide');
-    function ensureTone(){
-      if(started) return;
-      started = true;
-      try{
-        ctx = new (window.AudioContext || window.webkitAudioContext)();
-        gain = ctx.createGain(); gain.gain.value = 0.0001; // whisper by default
-        osc = ctx.createOscillator();
-        osc.type = 'sine'; osc.frequency.value = 128; // 128 Hz school tone
-        osc.connect(gain).connect(ctx.destination);
-        osc.start();
-        // fade up gently
-        var now = ctx.currentTime;
-        gain.gain.setValueAtTime(0.0001, now);
-        gain.gain.linearRampToValueAtTime(0.02, now + 1.2);
-      }catch(e){}
-    }
-    startBtn.addEventListener('click', function(e){
-      // Smooth anchor scroll then tone
-      ensureTone();
-    });
+  var blend = document.getElementById('blend');
+  var blendViz = document.getElementById('blendViz');
+  function updateBlend(){
+    var v = parseInt(blend.value,10);
+    var fire = Math.min(100, v + 20);
+    var water = Math.max(0, v - 20);
+    blendViz.style.background = 'linear-gradient(90deg, rgba(255,143,183,'+(fire/100)+'), rgba(143,183,255,'+(water/100)+'))';
+  }
+  blend.addEventListener('input', updateBlend);
+  updateBlend();
 
-    // Stop tone when user leaves page
-    window.addEventListener('pagehide', function(){
-      try{ osc && osc.stop(0); ctx && ctx.close(); }catch(e){}
-    });
+  function pad(n){ return (n<10? '0'+n : ''+n); }
+  function dtstamp(d){
+    return d.getUTCFullYear() + pad(d.getUTCMonth()+1) + pad(d.getUTCDate()) + 'T' + pad(d.getUTCHours()) + pad(d.getUTCMinutes()) + pad(d.getUTCSeconds()) + 'Z';
+  }
+  document.getElementById('icsBtn').addEventListener('click', function(){
+    var start = new Date('2025-11-05T00:00:00Z');
+    var end = new Date('2025-12-18T00:00:00Z');
+    var ics =
+      'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//PLNT Earth//School//EN\r\n' +
+      'BEGIN:VEVENT\r\n' +
+      'UID:illumina1-' + Date.now() + '@plnt.earth\r\n' +
+      'DTSTAMP:' + dtstamp(new Date()) + '\r\n' +
+      'DTSTART;VALUE=DATE:20251105\r\n' +
+      'DTEND;VALUE=DATE:20251218\r\n' +
+      'SUMMARY:Illumina 1 — Launch Cycle\r\n' +
+      'DESCRIPTION:Nov 5 – Dec 17, 2025 — Learn by light: practice, spark, and gentle science.\r\n' +
+      'END:VEVENT\r\nEND:VCALENDAR\r\n';
+    var blob = new Blob([ics], {type:'text/calendar'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url; a.download = 'Illumina-1.ics';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  });
 
-  })();
-  </script>
+  document.getElementById('motionToggle').addEventListener('click', function(){
+    root.classList.toggle('reduce-motion');
+    var alive = document.getElementById('alive');
+    if(root.classList.contains('reduce-motion')){ alive.innerHTML=''; }
+    else { alive.innerHTML=''; mountStars(); }
+  });
+
+  var openBtn = document.getElementById('selfCheckBtn');
+  var modal = document.getElementById('selfCheckModal');
+  var closeBtn = document.getElementById('closeModal');
+  function diag(){
+    var list = document.getElementById('checkList'); list.innerHTML='';
+    function li(text, cls){ var el=document.createElement('li'); el.textContent=text; el.className=cls; list.appendChild(el); }
+    var aliveOk = !!document.getElementById('alive');
+    li('Alive layer mounted ' + (aliveOk?'✅':'❌'), aliveOk?'ok':'bad');
+    var rmHonored = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? document.documentElement.classList.contains('reduce-motion') : true;
+    li('Reduced-motion preference honored ' + (rmHonored?'✅':'⚠️'), rmHonored?'ok':'warn');
+    var lsOk = true;
+    try{ localStorage.setItem('_school_test','1'); localStorage.removeItem('_school_test'); }catch(e){ lsOk=false; }
+    li('LocalStorage writable ' + (lsOk?'✅':'❌'), lsOk?'ok':'bad');
+    var ran = false;
+    try{
+      var cache = JSON.parse(localStorage.getItem('school.comingSoon')||'{}');
+      ran = Object.keys(cache).length>0;
+    }catch(e){}
+    li('Coming Soon resolver ran ' + (ran?'✅':'⚠️'), ran?'ok':'warn');
+    var tabbables = document.querySelectorAll('.nav a, .nav button');
+    li('Keyboard tabbables in top nav: ' + tabbables.length + ' ✅', 'ok');
+  }
+  function openModal(){ modal.style.display='flex'; diag(); closeBtn.focus(); }
+  function closeModal(){ modal.style.display='none'; openBtn.focus(); }
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if(e.target===modal) closeModal(); });
+
+})();
+</script>
 </body>
 </html>
