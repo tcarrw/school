@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PLNT Earth School — Learn the Field</title>
+<meta name="robots" content="noindex, nofollow" />
+<meta name="color-scheme" content="dark light" />
+<meta name="description" content="PLNT Earth School — a luminous orientation into the Field: physics, time, biology, resonance." />
+<style>
+  :root{
+    --bg:#080a0f; --panel:rgba(255,255,255,.04); --line:rgba(255,255,255,.12);
+    --fg:#e9f2ff; --muted:#8aa0b8; --accent:#7df9ff; --accent2:#7CFFB2;
+    --warn:#FFD166; --off:#3b465a;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:
+      radial-gradient(1100px 700px at 70% -10%, #1b2230 0%, var(--bg) 60%, #05070b 100%);
+    color:var(--fg);
+    font:16px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  }
+  .wrap{max-width:1100px; margin:0 auto; padding:28px 22px 48px}
+  header{
+    position:relative; border:1px solid var(--line); border-radius:20px; padding:26px;
+    background:var(--panel); backdrop-filter: blur(8px);
+    box-shadow:0 10px 40px rgba(0,0,0,.35), inset 0 0 0 1px rgba(255,255,255,.06);
+    overflow:hidden;
+  }
+  .glow{
+    position:absolute; inset:-40%;
+    background:
+      radial-gradient(40% 40% at 18% 8%, rgba(125,249,255,.20), transparent 60%),
+      radial-gradient(38% 38% at 85% 20%, rgba(124,255,178,.16), transparent 60%);
+    filter: blur(42px); pointer-events:none;
+    animation: drift 18s linear infinite alternate;
+  }
+  @keyframes drift{from{transform:translateY(-6%) translateX(2%)} to{transform:translateY(6%) translateX(-2%)}}
+  @media (prefers-reduced-motion: reduce){
+    .glow{animation:none}
+    *{scroll-behavior:auto}
+  }
+  h1{margin:0 0 6px; font-size:clamp(24px, 4.6vw, 34px); letter-spacing:.3px}
+  .sub{margin:0; color:var(--muted)}
+  .cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:16px}
+  .btn{
+    display:inline-flex; align-items:center; gap:10px; border-radius:14px; padding:10px 14px;
+    text-decoration:none; border:1px solid rgba(0,0,0,.08); font-weight:700; color:#081016;
+    background:linear-gradient(180deg, var(--accent) 0%, #72eef5 100%);
+  }
+  .btn.ghost{
+    color:var(--fg); background:transparent; border:1px solid var(--line);
+  }
+  /* Section titles */
+  .h2{margin:26px 6px 10px; font-weight:700; letter-spacing:.2px}
+  /* Hex grid */
+  .hexgrid{display:grid; grid-template-columns:repeat(auto-fit, minmax(210px,1fr)); gap:14px; margin-top:8px}
+  .hex{
+    position:relative; border:1px solid var(--line); border-radius:16px; padding:14px 14px 12px; background:rgba(255,255,255,.03);
+    transition:transform .18s ease, border-color .18s ease; text-decoration:none; color:inherit;
+  }
+  .hex:hover{transform:translateY(-2px); border-color:rgba(125,249,255,.45)}
+  .hex .row{display:flex; align-items:center; gap:12px}
+  .g{font-size:22px}
+  .nm{font-weight:700}
+  .dmn{font-size:13px; color:var(--muted)}
+  .desc{margin:8px 0 0; color:var(--muted)}
+  .status{margin-top:10px; font-size:13px}
+  .badge{display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); border-radius:999px; padding:5px 9px}
+  .dot{width:9px; height:9px; border-radius:50%; background:var(--off); box-shadow:0 0 0 rgba(0,0,0,0)}
+  .live{color:var(--accent2)} .live .dot{background:var(--accent2); box-shadow:0 0 14px var(--accent2)}
+  .soon{color:var(--warn)} .soon .dot{background:var(--warn)}
+  .offl{color:#75839a}
+  /* Cards */
+  .cards{display:grid; grid-template-columns:repeat(auto-fit, minmax(260px,1fr)); gap:14px}
+  .card{
+    border:1px solid var(--line); border-radius:16px; padding:14px; background:rgba(255,255,255,.03)
+  }
+  .card h3{margin:0 0 6px}
+  .mini{font-size:13px; color:var(--muted)}
+  /* Footer */
+  footer{margin-top:26px; color:var(--muted); font-size:13px}
+  .mono{font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header role="banner" aria-label="PLNT Earth School">
+      <div class="glow" aria-hidden="true"></div>
+      <h1>PLNT Earth School</h1>
+      <p class="sub">Where science learns to feel. Start with the Field Guide, then visit the Labs.</p>
+      <div class="cta">
+        <a class="btn" id="startGuide" href="#curriculum" aria-label="Start the Field Guide">Start the Field Guide</a>
+        <a class="btn ghost" href="https://plnt.earth/" aria-label="Return to PLNT Earth hub">Return to Hub</a>
+      </div>
+    </header>
+
+    <h2 class="h2" id="curriculum">Curriculum · Labs</h2>
+    <div class="hexgrid" id="labs" role="list" aria-label="Lab links and status">
+      <!-- Cards are injected by JS so status can be updated -->
+    </div>
+
+    <h2 class="h2">What You’ll Learn</h2>
+    <div class="cards" role="region" aria-label="Core concepts">
+      <div class="card">
+        <h3>Ground → Flow → Rest</h3>
+        <p class="mini">Energy path for sane creation. Ground ethically, enter flow, then rest and integrate.</p>
+      </div>
+      <div class="card">
+        <h3>Light → Sound → Time</h3>
+        <p class="mini">Light is color, sound is frequency, time is the geometry that holds them together.</p>
+      </div>
+      <div class="card">
+        <h3>Self → Field → All</h3>
+        <p class="mini">You tune yourself, then the field, then the collective. Attention = energy = care.</p>
+      </div>
+    </div>
+
+    <footer>
+      © PLNT Earth School · This is an orientation space. Questions: <span class="mono">t@tristanwhite.co</span>
+    </footer>
+  </div>
+
+  <script>
+  (function(){
+    // --- Config: labs to show (add/remove freely) ---
+    var labs = [
+      { glyph:"🕓", name:"Time", domain:"time.plnt.earth", desc:"Physics of consciousness, τ and field geometry.", status:"check" },
+      { glyph:"🧬", name:"DNA", domain:"dna.plnt.earth", desc:"Life patterns and resonance.", status:"soon" },
+      { glyph:"🦠", name:"Virus", domain:"virus.plnt.earth", desc:"Information spread, ethics of contagion.", status:"soon" },
+      { glyph:"🌍", name:"Earth", domain:"earth.plnt.earth", desc:"Sustainability, conscience, and feedback loops.", status:"soon" },
+      { glyph:"🧠", name:"Brain", domain:"brain.plnt.earth", desc:"Perception, processing, attention.", status:"soon" },
+      { glyph:"🪞", name:"MirrorHoney", domain:"mirrorhoney.plnt.earth", desc:"Reflection & resonance rooms.", status:"check" },
+      { glyph:"🔥", name:"Travel", domain:"travel.plnt.earth", desc:"Energy, expansion, motion.", status:"soon" },
+      { glyph:"📦", name:"Jar", domain:"jar.plnt.earth", desc:"Assets, experiments, and showcases.", status:"check" }
+    ];
+
+    // --- Build grid
+    var grid = document.getElementById('labs');
+    labs.forEach(function(l){
+      var a = document.createElement('a');
+      a.className = 'hex';
+      a.setAttribute('role','listitem');
+      a.href = 'https://' + l.domain + '/';
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.setAttribute('aria-label', l.name + ' — open ' + l.domain + ' in a new tab');
+
+      a.innerHTML =
+        '<div class="row"><div class="g" aria-hidden="true">'+l.glyph+
+        '</div><div><div class="nm">'+l.name+
+        '</div><div class="dmn mono">'+l.domain+
+        '</div></div></div><div class="desc">'+l.desc+
+        '</div><div class="status"><span class="badge '+(l.status==='soon'?'soon':'offl')+'"><span class="dot"></span><span class="txt">Checking…</span></span></div>';
+
+      grid.appendChild(a);
+      l._el = a;
+    });
+
+    // --- Live status via image ping (no CORS/probing; works offline-safe)
+    function ping(domain, cb){
+      try{
+        var img = new Image();
+        var done = false;
+        var t = setTimeout(function(){ if(!done){ done=true; cb(false); } }, 3500);
+        img.onload = function(){ if(!done){ done=true; clearTimeout(t); cb(true); } };
+        img.onerror = function(){ if(!done){ done=true; clearTimeout(t); cb(false); } };
+        img.src = 'https://' + domain + '/favicon.ico?x=' + Math.random().toString(36).slice(2);
+      }catch(e){ cb(false); }
+    }
+
+    labs.forEach(function(l){
+      var badge = l._el.querySelector('.badge');
+      var txt = l._el.querySelector('.badge .txt');
+      if(l.status === 'soon'){
+        txt.textContent = 'Coming soon';
+        return;
+      }
+      if(l.status === 'check'){
+        txt.textContent = 'Checking…';
+        ping(l.domain, function(ok){
+          badge.classList.remove('offl','soon');
+          if(ok){
+            badge.classList.add('live');
+            txt.textContent = 'Live';
+          } else {
+            badge.classList.remove('live');
+            txt.textContent = 'Offline';
+          }
+        });
+      }
+    });
+
+    // --- Start button: scroll + (optional) gentle 128 Hz tone
+    var started = false, ctx, osc, gain;
+    var startBtn = document.getElementById('startGuide');
+    function ensureTone(){
+      if(started) return;
+      started = true;
+      try{
+        ctx = new (window.AudioContext || window.webkitAudioContext)();
+        gain = ctx.createGain(); gain.gain.value = 0.0001; // whisper by default
+        osc = ctx.createOscillator();
+        osc.type = 'sine'; osc.frequency.value = 128; // 128 Hz school tone
+        osc.connect(gain).connect(ctx.destination);
+        osc.start();
+        // fade up gently
+        var now = ctx.currentTime;
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.linearRampToValueAtTime(0.02, now + 1.2);
+      }catch(e){}
+    }
+    startBtn.addEventListener('click', function(e){
+      // Smooth anchor scroll then tone
+      ensureTone();
+    });
+
+    // Stop tone when user leaves page
+    window.addEventListener('pagehide', function(){
+      try{ osc && osc.stop(0); ctx && ctx.close(); }catch(e){}
+    });
+
+  })();
+  </script>
+</body>
+</html>
