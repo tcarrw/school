@@ -1,695 +1,413 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="lavender">
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta name="color-scheme" content="dark light" />
-<title>PLNT Earth · School</title>
-<meta name="description" content="PLNT Earth School — Learn by light: practice, spark, and gentle science." />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Dream School · Gaga Mode</title>
+<meta name="theme-color" content="#fff0f8">
 <style>
-:root{
-  --bg:#0f0c13; --card:#17131d; --ink:#ece7f7; --muted:#bdb6d9; --line:#2a2334;
-  --lav:#b17cff; --lav-2:#9a6bff; --lav-3:#c7a7ff;
-  --ok:#7CFFB1; --warn:#FFD37C; --bad:#FF7C9a;
-  --glass:rgba(177,124,255,0.08); --shadow:0 10px 30px rgba(0,0,0,.35);
-  --radius:18px; --speed:28s; --focus:2px solid var(--lav);
-  --link:var(--lav-3); --cta:#2a2236
-}
-*{box-sizing:border-box}
-html,body{height:100%}
-body{
-  margin:0; font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,Apple Color Emoji,Segoe UI Emoji;
-  background:
-    radial-gradient(1200px 800px at 20% -10%, rgba(177,124,255,.10), transparent 60%),
-    radial-gradient(900px 700px at 120% 10%, rgba(199,167,255,.10), transparent 60%),
-    var(--bg);
-  color:var(--ink)
-}
-a{color:var(--link); text-decoration:none}
-a:focus-visible,button:focus-visible{outline:var(--focus); outline-offset:2px; border-radius:12px}
-h1,h2,h3{margin:0 0 .5rem 0}
-p{margin:.5rem 0 0 0; color:var(--muted)}
-.container{max-width:1100px; margin:0 auto; padding:20px}
-.topbar{position:sticky; top:0; z-index:30; backdrop-filter:saturate(1.1) blur(10px);
-  background:linear-gradient(to bottom, rgba(15,12,19,.9), rgba(15,12,19,.6)); border-bottom:1px solid var(--line)}
-.topbar-inner{display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 20px}
-.brand{display:flex; align-items:center; gap:10px}
-.glyph{width:28px; height:28px; border-radius:50%; background:radial-gradient(circle at 30% 30%, var(--lav-3), var(--lav));
-  box-shadow:0 0 20px rgba(177,124,255,.45)}
-.word{font-weight:700; letter-spacing:.4px}
-.nav{display:flex; gap:14px; flex-wrap:wrap}
-.nav a,.nav button{padding:8px 12px; border-radius:999px; background:rgba(177,124,255,.08); border:1px solid var(--line)}
-.energy{margin:8px 20px 14px; display:flex; gap:8px; align-items:center; flex-wrap:wrap}
-.energy .chip{padding:8px 12px; border:1px solid var(--line); border-radius:999px; background:var(--card); color:var(--muted)}
-.energy .chip.active{background:var(--cta); color:var(--ink); border-color:var(--lav)}
-.hero{margin-top:12px; border:1px solid var(--line); background:linear-gradient(180deg, rgba(177,124,255,.12), rgba(177,124,255,.04));
-  border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden}
-.hero-inner{padding:32px 20px}
-.hero h1{font-size:32px}
-.hero p{max-width:60ch}
-.ctas{display:flex; gap:12px; margin-top:14px; flex-wrap:wrap}
-.btn{appearance:none; border:1px solid var(--line); background:var(--cta); color:var(--ink); padding:12px 16px; border-radius:14px; cursor:pointer}
-.btn.secondary{background:transparent}
-.grid{display:grid; gap:16px}
-.cards{grid-template-columns:repeat(auto-fit, minmax(240px,1fr))}
-.card{background:linear-gradient(180deg, var(--glass), transparent), var(--card);
-  border:1px solid var(--line); border-radius:var(--radius); padding:16px; min-height:140px; position:relative}
-.tag{position:absolute; top:12px; right:12px; font-size:12px; color:var(--muted); border:1px solid var(--line); border-radius:999px; padding:4px 8px; background:rgba(255,255,255,0.02)}
-.rooms a.card{display:block; transition:transform .15s ease}
-.rooms a.card:hover{transform:translateY(-2px)}
-.small{font-size:12px; color:var(--muted)}
-.section{margin:26px 0}
-.footer{margin:36px 0 60px; padding:16px; border-top:1px solid var(--line); color:var(--muted)}
-.alive{pointer-events:none; position:fixed; inset:0; overflow:hidden; z-index:0; opacity:.8}
-.star{position:absolute; width:2px; height:2px; background:radial-gradient(circle, var(--lav-3), transparent 70%); border-radius:50%;
-  animation:drift var(--speed) linear infinite; filter:drop-shadow(0 0 6px rgba(199,167,255,.6))}
-@keyframes drift{0%{transform:translate3d(0,0,0) rotate(0deg)}100%{transform:translate3d(0,-120vh,0) rotate(360deg)}}
-.reduce-motion .alive{display:none}
-.modal-back{position:fixed; inset:0; background:rgba(0,0,0,.6); display:none; align-items:center; justify-content:center; z-index:50}
-.modal{width:min(620px,92vw); background:var(--card); border:1px solid var(--line); border-radius:16px; padding:16px; box-shadow:var(--shadow)}
-.modal h3{margin-bottom:8px}
-.checks{margin-top:8px; border-top:1px solid var(--line); padding-top:8px}
-.checks li{margin:6px 0}
-.ok{color:var(--ok)} .bad{color:var(--bad)} .warn{color:var(--warn)}
-.visually-hidden{position:absolute !important; height:1px; width:1px; overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap}
-.details{margin-top:8px}
-.details summary{cursor:pointer; list-style:none}
-.details summary::-webkit-details-marker{display:none}
-.theme-chips .chip{padding:8px 12px; border:1px solid var(--line); border-radius:999px; background:var(--card); color:var(--muted)}
-.theme-chips .chip.active{background:var(--cta); color:var(--ink); border-color:var(--lav)}
-.viewer-controls .chip{padding:8px 12px; border:1px solid var(--line); border-radius:999px; background:var(--card); color:var(--muted)}
-.viewer-controls .chip[aria-pressed="true"]{background:var(--cta); color:var(--ink); border-color:var(--lav)}
-input[type="text"], input[type="search"], select{
-  padding:10px; border-radius:10px; border:1px solid var(--line);
-  background:rgba(255,255,255,.02); color:var(--ink); width:100%;
-}
+  :root{
+    --bg1:#ffffff;
+    --bg2:#fff0f8; /* opal haze rose */
+    --bg3:#e8ffe0; /* soft green tint */
+    --ink:#0c0c0c;
+    --muted:#666;
+    --card:#ffffffd9;
+    --accent:#c8ff00; /* acid green default */
+    --accent-2:#ff8bd7; /* rose highlight */
+    --ring:#c8ff0022;
+    --shadow: 0 8px 30px rgba(0,0,0,.12);
+    --radius:18px;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    color:var(--ink);
+    font:16px/1.5 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+    background:
+      radial-gradient(1200px 700px at 20% -10%, var(--bg2), transparent 60%),
+      radial-gradient(1000px 600px at 100% 20%, var(--bg3), transparent 55%),
+      linear-gradient(180deg, #ffffff, #f7fbff 60%, #ffffff);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+  }
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:clamp(16px, 4vw, 28px);
+  }
+
+  header{
+    display:flex; align-items:center; gap:16px; justify-content:space-between;
+    padding:10px 0 8px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:14px;
+  }
+  .glyph{
+    width:42px; height:42px; border-radius:50%;
+    background:
+      radial-gradient(closest-side,#fff, #fff8),
+      conic-gradient(from 0deg, var(--accent), var(--accent-2), #a4ffd1, var(--accent));
+    box-shadow: 0 6px 18px rgba(0,0,0,.12);
+    position:relative; overflow:hidden;
+  }
+  .glyph:after{
+    content:""; position:absolute; inset:0; border-radius:50%;
+    box-shadow: inset 0 0 0 2px #fff6, inset 0 12px 24px #ffffffaa;
+    mix-blend: screen;
+  }
+  h1{
+    margin:0; font-size:clamp(18px, 3.2vw, 28px); line-height:1.2;
+    letter-spacing:.2px;
+  }
+  .subtitle{
+    margin:2px 0 0; color:var(--muted); font-size:.95rem;
+  }
+  .bubble{
+    backdrop-filter: blur(12px);
+    background: var(--card);
+    border:1px solid #00000010;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .hero{
+    display:grid; grid-template-columns:1.1fr .9fr; gap:18px; margin-top:14px;
+  }
+  @media (max-width:900px){ .hero{ grid-template-columns:1fr; } }
+
+  .panel{
+    padding:18px; position:relative;
+  }
+  .mask{
+    width:64px; height:64px; border-radius:14px;
+    background:
+      radial-gradient(closest-side, #fff, transparent 70%),
+      linear-gradient(135deg, #111 0%, #555 100%);
+    position:relative; overflow:hidden; box-shadow: var(--shadow);
+  }
+  .mask:after{
+    content:""; position:absolute; inset:0;
+    background: conic-gradient(from 0deg, transparent 0 30deg, #ffffff22 30deg 180deg, transparent 180deg);
+    mix-blend-mode: screen;
+  }
+  .tag{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:8px 12px; border-radius:999px; border:1px solid #00000012;
+    background:#fff8; font-size:.9rem; margin:8px 0 0;
+  }
+  .tag .dot{
+    width:10px; height:10px; border-radius:50%; background:var(--accent);
+    box-shadow:0 0 0 6px var(--ring);
+  }
+
+  .pulse{
+    width:120px; height:120px; border-radius:50%;
+    border:2px solid var(--accent);
+    box-shadow:0 0 0 10px var(--ring), inset 0 0 40px #aaffcc55;
+    position:relative; margin:10px auto 0;
+    transform: translateZ(0);
+  }
+  .pulse .ring{
+    content:""; position:absolute; inset:-6px; border-radius:50%;
+    border:2px solid var(--accent);
+    opacity:.6; animation: ripple 2.4s infinite ease-out;
+  }
+  .pulse.playing .ring{ animation-play-state: running; }
+  .pulse.paused .ring{ animation-play-state: paused; opacity:.2; }
+  @keyframes ripple{
+    0%{ transform: scale(1); opacity:.7;}
+    80%{ transform: scale(1.35); opacity:.05;}
+    100%{ transform: scale(1.35); opacity:0;}
+  }
+
+  .controls{
+    display:flex; flex-wrap:wrap; gap:10px; margin-top:12px;
+  }
+  button, .pill{
+    appearance:none; border:1px solid #00000014; background:#fff;
+    padding:12px 14px; border-radius:14px; font-weight:600; cursor:pointer;
+    transition: transform .06s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+  button:active{ transform: translateY(1px); }
+  .pill{
+    display:inline-flex; align-items:center; gap:10px;
+  }
+  .pill .swatch{
+    width:14px; height:14px; border-radius:50%; border:1px solid #00000022;
+  }
+
+  .grid{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; margin-top:14px;
+  }
+  @media (max-width:900px){ .grid{ grid-template-columns:1fr; } }
+
+  .card{
+    padding:16px; display:flex; flex-direction:column; gap:10px;
+  }
+  .card h3{ margin:0; font-size:1.05rem; letter-spacing:.2px }
+  .card p{ margin:0; color:var(--muted) }
+  .sig{ font-size:.9rem; color:#333; }
+
+  .notes{
+    margin-top:12px; display:grid; gap:8px;
+  }
+  textarea{
+    width:100%; min-height:120px; border-radius:12px; border:1px solid #00000014;
+    padding:12px; resize:vertical; outline:none; background:#fff;
+  }
+  .foot{
+    margin-top:18px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content:space-between;
+  }
+  .links{ display:flex; gap:10px; flex-wrap:wrap }
+  .links a{
+    text-decoration:none; color:#111; background:#ffffffcc; border:1px solid #00000012;
+    padding:10px 12px; border-radius:12px;
+  }
+  .cta{
+    display:inline-flex; align-items:center; gap:10px;
+    padding:12px 16px; border-radius:14px; background:var(--accent);
+    color:#0a0a0a; border:1px solid #00000024; font-weight:700;
+    box-shadow:0 6px 24px var(--ring);
+  }
+  .small{ font-size:.9rem; color:var(--muted) }
+
+  /* accessibility focus */
+  :focus-visible{ outline:2px solid var(--accent); outline-offset:2px }
 </style>
 </head>
 <body>
-<div class="alive" aria-hidden="true" id="alive"></div>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="glyph" aria-hidden="true"></div>
+        <div>
+          <h1>Dream School</h1>
+          <div class="subtitle">Gaga Mode - the lucid corridor between sleep and study</div>
+        </div>
+      </div>
+      <div class="accent-picker controls" aria-label="Accent color picker">
+        <button class="pill" data-accent="#c8ff00" data-ring="#c8ff0022" aria-pressed="true" title="Acid Green">
+          <span class="swatch" style="background:#c8ff00"></span> Acid
+        </button>
+        <button class="pill" data-accent="#8bffcf" data-ring="#8bffcf22" title="Mint">
+          <span class="swatch" style="background:#8bffcf"></span> Mint
+        </button>
+        <button class="pill" data-accent="#00e38b" data-ring="#00e38b22" title="Emerald">
+          <span class="swatch" style="background:#00e38b"></span> Emerald
+        </button>
+        <button class="pill" data-accent="#ff8bd7" data-ring="#ff8bd722" title="Rose">
+          <span class="swatch" style="background:#ff8bd7"></span> Rose
+        </button>
+      </div>
+    </header>
 
-<header class="topbar" role="banner">
-  <div class="topbar-inner container" aria-label="Top bar">
-    <div class="brand" aria-label="PLNT Earth">
-      <div class="glyph" aria-hidden="true"></div>
-      <div class="word">School</div>
-    </div>
-    <nav class="nav" aria-label="Primary">
-      <a href="https://time.plnt.earth">Time</a>
-      <a href="https://mirrorhoney.plnt.earth">MirrorHoney</a>
-      <a href="https://froot.plnt.earth">Froot</a>
-      <a href="https://motion.plnt.earth">Motion</a>
-      <a href="https://wonder.plnt.earth">Wonder</a>
-      <a href="https://read.plnt.earth">Read</a>
-      <a href="#viewer">Viewer</a>
-      <a href="https://quietmoon.plnt.earth/charter.html" aria-label="Quietmoon Charter">Charter</a>
-      <a href="https://quietmoon.plnt.earth/charter-addendum.html" aria-label="Quietmoon Charter Addendum">Charter Addendum</a>
-      <button class="btn secondary" id="selfCheckBtn" aria-haspopup="dialog" aria-controls="selfCheckModal">Self-Check</button>
-    </nav>
+    <section class="hero">
+      <div class="panel bubble">
+        <div style="display:flex; align-items:center; gap:14px;">
+          <div class="mask" aria-hidden="true"></div>
+          <div>
+            <div class="tag"><span class="dot"></span> Dream Anchor - Mirror Architect</div>
+            <h2 style="margin:8px 0 6px; font-size:1.25rem">Lady Gaga as the Dream Mirror</h2>
+            <p class="sig">She turns personal myth into collective dream space. We learn to shape symbols while we sleep and carry them into daylight without breaking the spell.</p>
+          </div>
+        </div>
+
+        <div class="controls" style="margin-top:14px">
+          <button id="toneBtn" aria-pressed="false">Start 128 Hz Lucid Pulse</button>
+          <button id="softBtn">Soft</button>
+          <button id="mediumBtn">Medium</button>
+          <button id="deepBtn">Deep</button>
+        </div>
+
+        <div id="pulse" class="pulse paused" aria-hidden="true">
+          <div class="ring"></div>
+        </div>
+
+        <div class="notes">
+          <label for="dream-note"><strong>Bee Notes - what did the dream teach you today</strong></label>
+          <textarea id="dream-note" placeholder="A sentence you can carry into waking work"></textarea>
+          <div class="controls">
+            <button id="saveNote">Save Note</button>
+            <button id="clearNote">Clear</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel bubble">
+        <h2 style="margin:0 0 6px; font-size:1.15rem">Dream School Charter</h2>
+        <p class="small">Earth teaches how to live. Dream School teaches how to imagine while awake.</p>
+        <ul style="margin:10px 0 0; padding-left:18px">
+          <li>Sun - declaration of dream power</li>
+          <li>Bee - daily craft inside the dream</li>
+          <li>Moon - analysis and integration</li>
+        </ul>
+
+        <div class="grid">
+          <div class="card bubble">
+            <h3>Sun - Courage</h3>
+            <p>We name the impossible and then sing it until it sounds inevitable.</p>
+          </div>
+          <div class="card bubble">
+            <h3>Bee - Craft</h3>
+            <p>Songwriting as ritual - repeat until the symbol carries current on its own.</p>
+          </div>
+          <div class="card bubble">
+            <h3>Moon - Map</h3>
+            <p>Chromatica as geography - every color a weather system we can navigate.</p>
+          </div>
+        </div>
+
+        <div class="foot">
+          <a class="cta" href="#lesson">Enter Dream Lesson</a>
+          <div class="links">
+            <a href="https://earth.plnt.earth" rel="noopener">Earth Root</a>
+            <a href="https://time.plnt.earth" rel="noopener">Time Lab</a>
+            <a href="#" id="shareBtn" aria-label="Copy share text">Copy Intro</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="lesson" class="panel bubble" style="margin-top:14px">
+      <h2 style="margin:0 0 8px; font-size:1.15rem">Lesson 01 - Lucid Design</h2>
+      <p class="sig">Prompt for the mirror - write one line that rebuilds the world and still feels like you.</p>
+      <div class="controls">
+        <button id="promptBtn">Give me a one line prompt</button>
+        <button id="copyPrompt">Copy the line</button>
+      </div>
+      <p id="promptOut" style="margin-top:10px; font-weight:600"></p>
+    </section>
+
+    <footer class="small" style="text-align:center; padding:18px 6px 8px; color:#333">
+      Dream School is a corridor - pass through gently, carry only what you can sing.
+    </footer>
   </div>
-  <div class="energy" aria-label="Energy Path mini-bar">
-    <span class="small">Energy Path:</span>
-    <button class="chip" data-energy="ground" aria-pressed="false">Ground</button>
-    <button class="chip" data-energy="flow" aria-pressed="false">Flow</button>
-    <button class="chip" data-energy="rest" aria-pressed="false">Rest</button>
-    <span class="small">· check · create · release</span>
-  </div>
-</header>
-
-<main class="container" role="main">
-  <section class="hero" id="hero">
-    <div class="hero-inner">
-      <h1>PLNT Earth School</h1>
-      <p>Learn by light: practice, spark, and gentle science.</p>
-      <div class="ctas" role="group" aria-label="Hero actions">
-        <a class="btn" href="#sessions">Start a Session</a>
-        <a class="btn secondary" href="#rooms">Explore Rooms</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="triad">
-    <h2 id="triad">Sun · Bee · Moon</h2>
-    <div class="grid cards" style="margin-top:12px">
-      <article class="card" aria-label="Sun">
-        <h3>☀️ Sun (Victory Song)</h3>
-        <p>Declare the moment. Name your spark.</p>
-        <details class="details"><summary class="small">Learn more</summary>
-          <p>Sun is ignition. Use brief, bright intent to start without burning out. One flare, then steady glow.</p>
-        </details>
-      </article>
-      <article class="card" aria-label="Bee">
-        <h3>🐝 Bee (Practice)</h3>
-        <p>Work in small, sweet loops.</p>
-        <details class="details"><summary class="small">Learn more</summary>
-          <p>Bee is continuity. Short cycles (5–9 min), repeatable and kind. Pollinate across days.</p>
-        </details>
-      </article>
-      <article class="card" aria-label="L Moon">
-        <h3>🌙 L. Moon (Archivist)</h3>
-        <p>Observe, archive, and adjust.</p>
-        <details class="details"><summary class="small">Learn more</summary>
-          <p>Moon measures heat and water. Keep notes, spot patterns, and rebalance Fire/Water as needed.</p>
-        </details>
-      </article>
-    </div>
-  </section>
-
-  <section class="section rooms" aria-labelledby="rooms">
-    <h2 id="rooms">Rooms</h2>
-    <div class="grid cards" style="margin-top:12px">
-      <a class="card room" data-domain="time.plnt.earth" href="https://time.plnt.earth">
-        <span class="tag" aria-live="polite">Checking…</span>
-        <h3>Time</h3>
-        <p>Physics × poetry instruments.</p>
-      </a>
-      <a class="card room" data-domain="mirrorhoney.plnt.earth" href="https://mirrorhoney.plnt.earth">
-        <span class="tag">Checking…</span>
-        <h3>MirrorHoney</h3>
-        <p>Closeness, tone, and reflection.</p>
-      </a>
-      <a class="card room" data-domain="froot.plnt.earth" href="https://froot.plnt.earth">
-        <span class="tag">Checking…</span>
-        <h3>Froot</h3>
-        <p>Color-synesthesia playlists.</p>
-      </a>
-      <a class="card room" data-domain="motion.plnt.earth" href="https://motion.plnt.earth">
-        <span class="tag">Checking…</span>
-        <h3>Motion</h3>
-        <p>Segment lab + live flow.</p>
-      </a>
-      <a class="card room" data-domain="wonder.plnt.earth" href="https://wonder.plnt.earth">
-        <span class="tag">Checking…</span>
-        <h3>Wonder</h3>
-        <p>Questions that build bridges.</p>
-      </a>
-      <a class="card room" data-domain="read.plnt.earth" href="https://read.plnt.earth">
-        <span class="tag">Checking…</span>
-        <h3>Read</h3>
-        <p>Notes, essays, and study.</p>
-      </a>
-      <div class="card soon" data-domain="labs.school.plnt.earth">
-        <span class="tag">Coming Soon</span>
-        <h3>Labs</h3>
-        <p>Experiments and prototypes.</p>
-      </div>
-      <div class="card soon" data-domain="archive.school.plnt.earth">
-        <span class="tag">Coming Soon</span>
-        <h3>Archive</h3>
-        <p>Past cycles and logs.</p>
-      </div>
-      <div class="card soon" data-domain="notes.school.plnt.earth">
-        <span class="tag">Coming Soon</span>
-        <h3>Notes</h3>
-        <p>Quick captures and seeds.</p>
-      </div>
-    </div>
-    <p class="small" style="margin-top:8px">“Coming Soon” tags auto-hide once a domain resolves.</p>
-  </section>
-
-  <section class="section" aria-labelledby="album-tour">
-    <h2 id="album-tour">Album Tour — “Her Team, Her Vibes”</h2>
-    <p>This is a friendly walk-through that treats the album as a <b>School story</b>: a crew, a craft, and rituals that keep the artist above the Ophelia waterline.</p>
-    <div class="grid cards" style="margin-top:12px">
-      <article class="card">
-        <h3>Act I — Spark (Sun)</h3>
-        <ul class="small">
-          <li><b>Pyro → Spark:</b> ignition without burnout.</li>
-          <li><b>Hands Oath:</b> “pledge allegiance to your hands” = craft first.</li>
-          <li><b>Team as Grid:</b> people who get current flowing (band, crew, TN, friends).</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Act II — Practice (Bee)</h3>
-        <ul class="small">
-          <li><b>Keep it 100:</b> clean loops, clear boundaries.</li>
-          <li><b>“Your team, your vibes” (meta):</b> the circle that regulates heat and keeps flow sweet.</li>
-          <li><b>Micro-rituals:</b> small wins stack into stability.</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Act III — The Flood (Ophelia)</h3>
-        <ul class="small">
-          <li><b>Fire/Water Dial:</b> enough warmth to float, not boil.</li>
-          <li><b>Reclaimed Pose:</b> bath tableau as agency, not surrender.</li>
-          <li><b>Red Herring:</b> loud celebrity cues distract; the oath to structure is the quiet center.</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Act IV — Ascent (Moon)</h3>
-        <ul class="small">
-          <li><b>Moon Notes:</b> log heat levels, water signs, spark moments.</li>
-          <li><b>Chain · Crown · Vine:</b> constraint, responsibility, care—three safe ways to hold fire.</li>
-          <li><b>Team Finale:</b> the crew becomes the instrument; the stage is the science.</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Keys & Clues</h3>
-        <ul class="small">
-          <li><b>Two reads:</b> celebrity Easter eggs vs. structural oath—try both.</li>
-          <li><b>Listen twice:</b> once with video (spectacle), once audio-only (structure).</li>
-          <li><b>Spot the School:</b> “hands / team / vibes” → craft / crew / climate.</li>
-        </ul>
-      </article>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="illumina-guide" id="illumina-guide">
-    <h2 id="illumina-guide">Illumina Guide — Songs · Rituals · Colors</h2>
-    <div class="grid cards" style="margin-top:12px">
-      <article class="card">
-        <h3>Songs (how they work here)</h3>
-        <ul class="small">
-          <li><b>Canon vs. Curated:</b> Canon are the core cycle tracks; Curated are room-specific (MirrorHoney, Motion) and may rotate.</li>
-          <li><b>Day / Night sets:</b> Day = clarity, movement; Night = depth, drift. Use the Viewer below to build both.</li>
-          <li><b>Anchors:</b> Some songs carry an anchor’s tone (e.g., Marina for empathy). You can tag that in titles.</li>
-          <li><b>Queue memory:</b> Your list lives locally; no accounts, no trackers.</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Rituals (how to run them)</h3>
-        <ul class="small">
-          <li><b>Energy Path:</b> <i>Ground → Flow → Rest</i> (always visible up top). Tap to set your mode.</li>
-          <li><b>Strike → Glow:</b> 90s ground, 6m focused loop, 90s rest. Mark completion to build continuity.</li>
-          <li><b>Ophelia Balance:</b> Fire/Water slider = color wash + envelope feeling; save your preferred blend.</li>
-          <li><b>Dream Trace:</b> one-line intention before sleep; log the time you saved it.</li>
-        </ul>
-      </article>
-      <article class="card">
-        <h3>Colors (how we use them)</h3>
-        <ul class="small">
-          <li><b>Theme = climate:</b> palette sets the vibe of a session (Lavender = calm clarity; Honey = warm cohesion; Ocean = cool focus).</li>
-          <li><b>Fire/Water blend:</b> in Sessions, the gradient bar reflects your current mix.</li>
-          <li><b>Switch themes:</b> choose below; it updates the page tint and remembers your choice.</li>
-        </ul>
-        <div class="theme-chips" style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap" role="group" aria-label="Theme">
-          <button class="chip" data-theme="lavender" aria-pressed="true">Lavender</button>
-          <button class="chip" data-theme="honey" aria-pressed="false">Honey</button>
-          <button class="chip" data-theme="ocean" aria-pressed="false">Ocean</button>
-          <span class="small">Saved as local preference.</span>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="viewer" id="viewer">
-    <h2 id="viewer">Video Viewer</h2>
-    <p class="small">Add YouTube IDs or full URLs. Save Day/Night sets. Queue persists locally.</p>
-    <div class="grid cards" style="margin-top:12px">
-      <article class="card" style="grid-column:1/-1">
-        <h3>Player</h3>
-        <div id="playerWrap" style="margin-top:10px; aspect-ratio:16/9; background:#0b0a0e; border:1px solid var(--line); border-radius:16px; overflow:hidden">
-          <iframe id="ytFrame" title="YouTube player" width="100%" height="100%" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen playsinline src=""></iframe>
-        </div>
-        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" id="prevBtn" aria-label="Previous in queue">Prev</button>
-          <button class="btn" id="nextBtn" aria-label="Next in queue">Next</button>
-          <button class="btn secondary" id="pipBtn" aria-label="Open Picture in Picture">PiP</button>
-          <span class="small" id="nowPlaying">Now Playing: —</span>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3>Add to Queue</h3>
-        <label class="small" for="ytInput">YouTube ID or URL</label>
-        <input id="ytInput" placeholder="e.g. PXQcEIM4su0 or https://youtu.be/PXQcEIM4su0" />
-        <label class="small" for="ytTitle" style="margin-top:8px; display:block">Title (optional)</label>
-        <input id="ytTitle" placeholder="Nice descriptive title" />
-        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
-          <select id="ytSet" aria-label="Choose set">
-            <option value="day">Day Set</option>
-            <option value="night">Night Set</option>
-          </select>
-          <button class="btn" id="addBtn">Add</button>
-          <button class="btn secondary" id="clearBtn">Clear Queue</button>
-        </div>
-        <p class="small" style="margin-top:8px">Tip: YouTube’s own UI exposes AirPlay and PiP on iOS/Safari.</p>
-      </article>
-
-      <article class="card" style="grid-column:1/-1">
-        <h3>Queue</h3>
-        <div class="viewer-controls" style="display:flex; gap:12px; flex-wrap:wrap; margin-bottom:8px">
-          <button class="chip" data-view="day" aria-pressed="true">Day</button>
-          <button class="chip" data-view="night" aria-pressed="false">Night</button>
-          <button class="chip" data-view="all" aria-pressed="false">All</button>
-        </div>
-        <ul id="queueList" class="small" style="list-style:none; padding:0; margin:0; display:grid; gap:8px"></ul>
-      </article>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="sessions" id="sessions">
-    <h2 id="sessions">Sessions</h2>
-    <div class="grid cards" style="margin-top:12px">
-      <article class="card" id="s-strike">
-        <h3>Strike → Glow</h3>
-        <p>90s ground · 6m flow · 90s rest</p>
-        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" data-session="strike" data-action="start">Start</button>
-          <button class="btn secondary" data-session="strike" data-action="mark">Mark Done</button>
-          <span class="small" id="stamp-strike">Last: —</span>
-        </div>
-      </article>
-      <article class="card" id="s-balance">
-        <h3>Ophelia Balance</h3>
-        <p>Fire/Water blend: color + envelope</p>
-        <div style="margin-top:10px">
-          <label class="small" for="blend">Blend</label>
-          <input id="blend" type="range" min="0" max="100" value="50" aria-label="Fire to Water blend" />
-          <div aria-hidden="true" id="blendViz" style="height:16px; border-radius:12px; margin-top:8px; background:linear-gradient(90deg, #ff8fb7, #8fb7ff)"></div>
-        </div>
-        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" data-session="balance" data-action="save">Save Setting</button>
-          <span class="small" id="stamp-balance">Saved: —</span>
-        </div>
-      </article>
-      <article class="card" id="s-dream">
-        <h3>Dream Trace</h3>
-        <p>2-minute pre-sleep cue + quick note</p>
-        <div style="margin-top:8px">
-          <label class="visually-hidden" for="dreamnote">Dream note</label>
-          <input id="dreamnote" placeholder="one line intention…" />
-        </div>
-        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" data-session="dream" data-action="save">Save Intention</button>
-          <span class="small" id="stamp-dream">Saved: —</span>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="calendar">
-    <h2 id="calendar">Illumina Calendar</h2>
-    <div class="grid cards" style="margin-top:12px">
-      <article class="card">
-        <h3>Illumina 1 — Launch Cycle</h3>
-        <p>Nov 5 – Dec 17, 2025</p>
-        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
-          <button class="btn" id="icsBtn">Add to Calendar (.ics)</button>
-          <a class="btn secondary" href="https://time.plnt.earth" aria-label="Open Time">Open Time</a>
-        </div>
-      </article>
-      <article class="card">
-        <h3>Ethics & Safety</h3>
-        <p>Comfort first. Opt-out any time. Reduced-motion respected. Tones off by default.</p>
-        <div style="margin-top:10px; display:flex; gap:8px; flex-wrap:wrap">
-          <a class="btn" href="https://quietmoon.plnt.earth/charter.html" aria-label="Read the Quietmoon Charter">Quietmoon Charter</a>
-          <a class="btn secondary" href="https://quietmoon.plnt.earth/charter-addendum.html" aria-label="Open Charter Addendum">Charter Addendum</a>
-          <button class="btn secondary" id="motionToggle">Toggle Reduced Motion</button>
-        </div>
-      </article>
-    </div>
-  </section>
-
-  <footer class="footer" role="contentinfo">
-    <div class="small">
-      <a href="https://quietmoon.plnt.earth/charter.html">Quietmoon Charter</a> ·
-      <a href="https://quietmoon.plnt.earth/charter-addendum.html">Charter Addendum</a> ·
-      Domain family · Contact
-    </div>
-  </footer>
-</main>
-
-<div class="modal-back" id="selfCheckModal" role="dialog" aria-modal="true" aria-labelledby="selfCheckTitle">
-  <div class="modal">
-    <h3 id="selfCheckTitle">Self-Check</h3>
-    <p class="small">Quick diagnostics for this page.</p>
-    <ul class="checks" id="checkList" aria-live="polite"></ul>
-    <div style="margin-top:12px; display:flex; gap:8px; justify-content:flex-end">
-      <button class="btn secondary" id="closeModal">Close</button>
-    </div>
-  </div>
-</div>
 
 <script>
 (function(){
-  var root=document.documentElement;
-  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches){ root.classList.add('reduce-motion'); }
+  let ctx, osc, gain;
+  let playing = false;
+  const toneBtn = document.getElementById('toneBtn');
+  const pulse = document.getElementById('pulse');
 
-  function mountStars(){
-    var alive=document.getElementById('alive'); if(!alive) return;
-    if(root.classList.contains('reduce-motion')) return;
-    for(let i=0;i<80;i++){
-      var s=document.createElement('div'); s.className='star';
-      s.style.left=(Math.random()*100)+'%'; s.style.top=((Math.random()*100)+20)+'%';
-      s.style.animationDuration=(20+Math.random()*20)+'s'; s.style.opacity=(0.35+Math.random()*0.5);
-      alive.appendChild(s);
-    }
+  function ensureAudio(){
+    if(ctx) return;
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    osc = ctx.createOscillator();
+    gain = ctx.createGain();
+    osc.type = 'sine';
+    osc.frequency.value = 128;
+    gain.gain.value = 0.0001;
+    osc.connect(gain).connect(ctx.destination);
+    osc.start();
   }
-  mountStars();
 
-  var energyButtons=document.querySelectorAll('.energy .chip'); var energyKey='school.energyPath';
-  function setEnergy(v){
-    energyButtons.forEach(function(b){
-      var on=b.getAttribute('data-energy')===v;
-      b.classList.toggle('active',on); b.setAttribute('aria-pressed',on?'true':'false');
-    });
-    try{ localStorage.setItem(energyKey,v); }catch(e){}
+  function rampTo(v, t=0.15){
+    const now = ctx.currentTime;
+    gain.gain.cancelScheduledValues(now);
+    gain.gain.setTargetAtTime(v, now, t);
   }
-  energyButtons.forEach(function(b){ b.addEventListener('click', function(){ setEnergy(b.getAttribute('data-energy')); }); });
-  try{ setEnergy(localStorage.getItem(energyKey)||'ground'); }catch(e){}
 
-  var soonKey='school.comingSoon', soonCache={};
-  try{ soonCache=JSON.parse(localStorage.getItem(soonKey)||'{}'); }catch(e){ soonCache={}; }
-  function markStatus(el,status){
-    var tag=el.querySelector('.tag'); if(!tag) return;
-    if(status==='live'){ tag.style.display='none'; }
-    else if(status==='checking'){ tag.textContent='Checking…'; tag.style.display=''; }
-    else{ tag.textContent='Coming Soon'; tag.style.display=''; }
+  function startTone(){
+    ensureAudio();
+    if(ctx.state === 'suspended'){ ctx.resume(); }
+    rampTo(0.12);
+    playing = true;
+    toneBtn.textContent = 'Pause 128 Hz';
+    toneBtn.setAttribute('aria-pressed', 'true');
+    pulse.classList.remove('paused'); pulse.classList.add('playing');
   }
-  function pingDomain(domain,cb){
-    var img=new Image(), done=false, t=setTimeout(function(){ if(done) return; done=true; cb('soon'); },5000);
-    img.onload=function(){ if(done) return; done=true; clearTimeout(t); cb('live'); };
-    img.onerror=function(){ if(done) return; done=true; clearTimeout(t); cb('soon'); };
-    img.src='https://'+domain+'/favicon.ico?_='+Date.now();
-  }
-  function resolveRooms(){
-    var cards=document.querySelectorAll('[data-domain]');
-    cards.forEach(function(el){
-      var domain=el.getAttribute('data-domain'); var cached=soonCache[domain];
-      if(cached){ markStatus(el,cached); } else { markStatus(el,'checking'); }
-      pingDomain(domain,function(status){
-        markStatus(el,status); soonCache[domain]=status;
-        try{ localStorage.setItem(soonKey, JSON.stringify(soonCache)); }catch(e){}
-      });
-    });
-  }
-  resolveRooms();
 
-  function stamp(id,text){ var el=document.getElementById('stamp-'+id); if(el) el.textContent=text; }
-  var sessionKey='school.session';
-  function setStamp(id){
-    var now=new Date().toISOString();
-    try{ var obj=JSON.parse(localStorage.getItem(sessionKey)||'{}'); obj[id]=now; localStorage.setItem(sessionKey,JSON.stringify(obj)); }catch(e){}
-    stamp(id,'Last: '+new Date().toLocaleString());
+  function stopTone(){
+    if(!ctx) return;
+    rampTo(0.0001);
+    playing = false;
+    toneBtn.textContent = 'Start 128 Hz Lucid Pulse';
+    toneBtn.setAttribute('aria-pressed', 'false');
+    pulse.classList.remove('playing'); pulse.classList.add('paused');
   }
-  function setSaved(id){
-    var now=new Date().toISOString();
-    try{ var obj=JSON.parse(localStorage.getItem(sessionKey)||'{}'); obj[id]=now; localStorage.setItem(sessionKey,JSON.stringify(obj)); }catch(e){}
-    stamp(id,'Saved: '+new Date().toLocaleString());
-  }
-  document.querySelectorAll('[data-session]').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var id=btn.getAttribute('data-session'), act=btn.getAttribute('data-action');
-      if(id==='strike' && (act==='start'||act==='mark')) setStamp('strike');
-      if(id==='balance' && act==='save') setSaved('balance');
-      if(id==='dream' && act==='save'){
-        try{
-          var note=(document.getElementById('dreamnote').value||'').trim();
-          var obj=JSON.parse(localStorage.getItem(sessionKey)||'{}'); obj['dream']={when:new Date().toISOString(), note:note};
-          localStorage.setItem(sessionKey,JSON.stringify(obj));
-        }catch(e){}
-        stamp('dream','Saved: '+new Date().toLocaleString());
+
+  toneBtn.addEventListener('click', function(){
+    playing ? stopTone() : startTone();
+  });
+
+  // Depth presets
+  document.getElementById('softBtn').addEventListener('click', function(){ if(ctx){ rampTo(0.06); } });
+  document.getElementById('mediumBtn').addEventListener('click', function(){ if(ctx){ rampTo(0.12); } });
+  document.getElementById('deepBtn').addEventListener('click', function(){ if(ctx){ rampTo(0.2); } });
+
+  // Accent picker
+  const picker = document.querySelector('.accent-picker');
+  picker.addEventListener('click', function(e){
+    const btn = e.target.closest('.pill');
+    if(!btn) return;
+    const accent = btn.getAttribute('data-accent');
+    const ring = btn.getAttribute('data-ring');
+    document.documentElement.style.setProperty('--accent', accent);
+    document.documentElement.style.setProperty('--ring', ring);
+    [...picker.querySelectorAll('.pill')].forEach(el=>el.setAttribute('aria-pressed','false'));
+    btn.setAttribute('aria-pressed','true');
+  });
+
+  // Bee Notes persistence
+  const KEY = 'dream_school_bee_note_v1';
+  const note = document.getElementById('dream-note');
+  const saved = localStorage.getItem(KEY);
+  if(saved) note.value = saved;
+  document.getElementById('saveNote').addEventListener('click', function(){
+    localStorage.setItem(KEY, note.value.trim());
+    this.textContent = 'Saved';
+    setTimeout(()=>{ this.textContent = 'Save Note'; }, 900);
+  });
+  document.getElementById('clearNote').addEventListener('click', function(){
+    note.value = '';
+    localStorage.removeItem(KEY);
+  });
+
+  // Share intro text
+  document.getElementById('shareBtn').addEventListener('click', async function(){
+    const text = 'Dream School - Gaga Mode. We design the world while dreaming it. Start the 128 Hz pulse and write one line you can carry into daylight.';
+    try{
+      if(navigator.share){
+        await navigator.share({ text });
+      }else if(navigator.clipboard){
+        await navigator.clipboard.writeText(text);
+        this.textContent = 'Copied';
+        setTimeout(()=>{ this.textContent = 'Copy Intro'; }, 900);
       }
-    });
-  });
-  try{
-    var obj=JSON.parse(localStorage.getItem(sessionKey)||'{}');
-    if(obj['strike']) stamp('strike','Last: '+new Date(obj['strike']).toLocaleString());
-    if(obj['balance']) stamp('balance','Saved: '+new Date(obj['balance']).toLocaleString());
-    if(obj['dream']) stamp('dream','Saved: '+new Date((obj['dream'].when||obj['dream'])).toLocaleString());
-  }catch(e){}
-
-  var blend=document.getElementById('blend'), blendViz=document.getElementById('blendViz');
-  function updateBlend(){
-    var v=parseInt(blend.value,10), fire=Math.min(100,v+20), water=Math.max(0,v-20);
-    blendViz.style.background='linear-gradient(90deg, rgba(255,143,183,'+(fire/100)+'), rgba(143,183,255,'+(water/100)+'))';
-  }
-  blend.addEventListener('input',updateBlend); updateBlend();
-
-  function pad(n){return (n<10?'0'+n:''+n);} function dtstamp(d){return d.getUTCFullYear()+pad(d.getUTCMonth()+1)+pad(d.getUTCDate())+'T'+pad(d.getUTCHours())+pad(d.getUTCMinutes())+pad(d.getUTCSeconds())+'Z';}
-  document.getElementById('icsBtn').addEventListener('click',function(){
-    var ics='BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//PLNT Earth//School//EN\r\nBEGIN:VEVENT\r\nUID:illumina1-'+Date.now()+'@plnt.earth\r\nDTSTAMP:'+dtstamp(new Date())+'\r\nDTSTART;VALUE=DATE:20251105\r\nDTEND;VALUE=DATE:20251218\r\nSUMMARY:Illumina 1 — Launch Cycle\r\nDESCRIPTION:Nov 5 – Dec 17, 2025 — Learn by light: practice, spark, and gentle science.\r\nEND:VEVENT\r\nEND:VCALENDAR\r\n';
-    var blob=new Blob([ics],{type:'text/calendar'}), url=URL.createObjectURL(blob), a=document.createElement('a');
-    a.href=url; a.download='Illumina-1.ics'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(function(){URL.revokeObjectURL(url);},1000);
+    }catch(_e){}
   });
 
-  document.getElementById('motionToggle').addEventListener('click',function(){
-    root.classList.toggle('reduce-motion'); var alive=document.getElementById('alive');
-    if(root.classList.contains('reduce-motion')){ alive.innerHTML=''; } else { alive.innerHTML=''; mountStars(); }
+  // Dream Lesson prompt
+  const prompts = [
+    'Write the world you would rebuild and choose one symbol to carry it.',
+    'Name the feeling you want to normalize and design one ritual for it.',
+    'If courage was a color today how would you wear it at work.',
+    'Describe a law of kindness that could survive the real world.',
+    'Write a chorus that tells the truth without breaking the dream.'
+  ];
+  const out = document.getElementById('promptOut');
+  document.getElementById('promptBtn').addEventListener('click', function(){
+    const p = prompts[Math.floor(Math.random()*prompts.length)];
+    out.textContent = p;
+  });
+  document.getElementById('copyPrompt').addEventListener('click', async function(){
+    if(!out.textContent) return;
+    try{
+      await navigator.clipboard.writeText(out.textContent);
+      this.textContent = 'Copied';
+      setTimeout(()=>{ this.textContent = 'Copy the line'; }, 900);
+    }catch(_e){}
   });
 
-  var openBtn=document.getElementById('selfCheckBtn'), modal=document.getElementById('selfCheckModal'), closeBtn=document.getElementById('closeModal');
-  function diag(){
-    var list=document.getElementById('checkList'); list.innerHTML='';
-    function li(t,c){var el=document.createElement('li'); el.textContent=t; el.className=c; list.appendChild(el);}
-    var aliveOk=!!document.getElementById('alive'); li('Alive layer mounted '+(aliveOk?'✅':'❌'), aliveOk?'ok':'bad');
-    var rmHonored=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? document.documentElement.classList.contains('reduce-motion') : true;
-    li('Reduced-motion preference honored '+(rmHonored?'✅':'⚠️'), rmHonored?'ok':'warn');
-    var lsOk=true; try{ localStorage.setItem('_school_test','1'); localStorage.removeItem('_school_test'); }catch(e){ lsOk=false; }
-    li('LocalStorage writable '+(lsOk?'✅':'❌'), lsOk?'ok':'bad');
-    var ran=false; try{ var cache=JSON.parse(localStorage.getItem('school.comingSoon')||'{}'); ran=Object.keys(cache).length>0; }catch(e){}
-    li('Coming Soon resolver ran '+(ran?'✅':'⚠️'), ran?'ok':'warn');
-    var tabbables=document.querySelectorAll('.nav a, .nav button'); li('Keyboard tabbables in top nav: '+tabbables.length+' ✅','ok');
-  }
-  function openModal(){ modal.style.display='flex'; diag(); closeBtn.focus(); }
-  function closeModal(){ modal.style.display='none'; openBtn.focus(); }
-  openBtn.addEventListener('click',openModal); closeBtn.addEventListener('click',closeModal);
-  modal.addEventListener('click',function(e){ if(e.target===modal) closeModal(); });
-
-  /* Video Viewer logic */
-  var iframe=document.getElementById('ytFrame');
-  var queueList=document.getElementById('queueList');
-  var nowEl=document.getElementById('nowPlaying');
-  var stateKey='school.viewer';
-  var state={queue:[], idx:-1};
-  try{ state=Object.assign(state, JSON.parse(localStorage.getItem(stateKey)||'{}')); }catch(e){}
-  function save(){ try{ localStorage.setItem(stateKey, JSON.stringify(state)); }catch(e){} }
-  if(!state.queue || state.queue.length===0){
-    state.queue=[{id:'DdgyifI5k9o', title:'Starter — Night Set', set:'night'}];
-    state.idx=0; save();
-  }
-  function ytIdFrom(input){
-    input=(input||'').trim(); if(!input) return '';
-    if(/^[a-zA-Z0-9_-]{11}$/.test(input)) return input;
-    var m=input.match(/[?&]v=([a-zA-Z0-9_-]{11})/); if(m) return m[1];
-    m=input.match(/youtu\.be\/([a-zA-Z0-9_-]{11})/); if(m) return m[1];
-    m=input.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]{11})/); if(m) return m[1];
-    return '';
-  }
-  function setSrc(id){
-    if(!id){ iframe.src=''; return; }
-    iframe.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
-  }
-  var currentView='all';
-  function render(view){
-    queueList.innerHTML='';
-    var items=state.queue.map(function(x,i){ return Object.assign({i:i},x); });
-    if(view==='day') items=items.filter(x=>x.set==='day');
-    if(view==='night') items=items.filter(x=>x.set==='night');
-    items.forEach(function(x){
-      var li=document.createElement('li');
-      li.style.border='1px solid var(--line)'; li.style.borderRadius='12px'; li.style.padding='8px'; li.style.background='rgba(255,255,255,.02)';
-      li.innerHTML='<div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap">'+
-        '<span class="small" style="opacity:.8">'+x.set.toUpperCase()+'</span>'+
-        '<button class="btn" data-jump="'+x.i+'">Play</button>'+
-        '<button class="btn secondary" data-up="'+x.i+'">↑</button>'+
-        '<button class="btn secondary" data-down="'+x.i+'">↓</button>'+
-        '<button class="btn secondary" data-del="'+x.i+'">Remove</button>'+
-        '<span>'+(x.title||x.id)+'</span></div>';
-      queueList.appendChild(li);
-    });
-    Array.prototype.forEach.call(queueList.querySelectorAll('[data-jump]'), function(btn){
-      btn.addEventListener('click', function(){ playIndex(parseInt(btn.getAttribute('data-jump'),10)); });
-    });
-    Array.prototype.forEach.call(queueList.querySelectorAll('[data-del]'), function(btn){
-      btn.addEventListener('click', function(){
-        var i=parseInt(btn.getAttribute('data-del'),10);
-        state.queue.splice(i,1);
-        if(state.idx>=state.queue.length) state.idx=state.queue.length-1;
-        save(); render(currentView);
-      });
-    });
-    Array.prototype.forEach.call(queueList.querySelectorAll('[data-up]'), function(btn){
-      btn.addEventListener('click', function(){
-        var i=parseInt(btn.getAttribute('data-up'),10); if(i<=0) return;
-        var t=state.queue[i-1]; state.queue[i-1]=state.queue[i]; state.queue[i]=t;
-        if(state.idx===i) state.idx=i-1; else if(state.idx===i-1) state.idx=i;
-        save(); render(currentView);
-      });
-    });
-    Array.prototype.forEach.call(queueList.querySelectorAll('[data-down]'), function(btn){
-      btn.addEventListener('click', function(){
-        var i=parseInt(btn.getAttribute('data-down'),10); if(i>=state.queue.length-1) return;
-        var t=state.queue[i+1]; state.queue[i+1]=state.queue[i]; state.queue[i]=t;
-        if(state.idx===i) state.idx=i+1; else if(state.idx===i+1) state.idx=i;
-        save(); render(currentView);
-      });
-    });
-    if(state.idx>-1 && state.queue[state.idx]){
-      nowEl.textContent='Now Playing: '+(state.queue[state.idx].title||state.queue[state.idx].id)+' ('+state.queue[state.idx].set+')';
-    }else{ nowEl.textContent='Now Playing: —'; }
-  }
-  function playIndex(i){
-    if(i<0 || i>=state.queue.length) return;
-    state.idx=i; save(); setSrc(state.queue[i].id); render(currentView);
-  }
-  document.getElementById('addBtn').addEventListener('click', function(){
-    var raw=document.getElementById('ytInput').value;
-    var id=ytIdFrom(raw);
-    var title=document.getElementById('ytTitle').value.trim();
-    var set=document.getElementById('ytSet').value;
-    if(!id) return;
-    state.queue.push({id:id, title:title, set:set});
-    if(state.idx===-1) state.idx=0;
-    save(); render(currentView);
-    document.getElementById('ytInput').value=''; document.getElementById('ytTitle').value='';
-    if(state.idx===state.queue.length-1){ playIndex(state.idx); }
-  });
-  document.getElementById('clearBtn').addEventListener('click', function(){
-    state.queue=[]; state.idx=-1; save(); setSrc(''); render(currentView);
-  });
-  document.getElementById('prevBtn').addEventListener('click', function(){
-    if(state.queue.length===0) return;
-    var i=state.idx<=0 ? state.queue.length-1 : state.idx-1; playIndex(i);
-  });
-  document.getElementById('nextBtn').addEventListener('click', function(){
-    if(state.queue.length===0) return;
-    var i=state.idx>=state.queue.length-1 ? 0 : state.idx+1; playIndex(i);
-  });
-  document.getElementById('pipBtn').addEventListener('click', function(){ document.getElementById('ytFrame').focus(); });
-  Array.prototype.forEach.call(document.querySelectorAll('#viewer .viewer-controls .chip'), function(chip){
-    chip.addEventListener('click', function(){
-      Array.prototype.forEach.call(document.querySelectorAll('#viewer .viewer-controls .chip'), function(c){ c.setAttribute('aria-pressed','false'); });
-      chip.setAttribute('aria-pressed','true');
-      currentView=chip.getAttribute('data-view'); render(currentView);
-    });
-  });
-  render(currentView);
-  if(state.idx>-1 && state.queue[state.idx]) setSrc(state.queue[state.idx].id);
-
-  /* Theme switcher */
-  var themeKey='school.theme';
-  function applyTheme(t){
-    var chips=document.querySelectorAll('.theme-chips .chip');
-    chips.forEach(function(c){ c.setAttribute('aria-pressed', c.getAttribute('data-theme')===t ? 'true' : 'false'); c.classList.toggle('active', c.getAttribute('data-theme')===t); });
-    if(t==='honey'){
-      document.documentElement.style.setProperty('--lav','#ffb84d');
-      document.documentElement.style.setProperty('--lav-2','#ff9f1a');
-      document.documentElement.style.setProperty('--lav-3','#ffd699');
-      document.documentElement.style.setProperty('--link','var(--lav-3)');
-      document.documentElement.style.setProperty('--cta','#2a1f12');
-    }else if(t==='ocean'){
-      document.documentElement.style.setProperty('--lav','#6ad0ff');
-      document.documentElement.style.setProperty('--lav-2','#3cbcff');
-      document.documentElement.style.setProperty('--lav-3','#a6e4ff');
-      document.documentElement.style.setProperty('--link','var(--lav-3)');
-      document.documentElement.style.setProperty('--cta','#12212a');
-    }else{
-      document.documentElement.style.setProperty('--lav','#b17cff');
-      document.documentElement.style.setProperty('--lav-2','#9a6bff');
-      document.documentElement.style.setProperty('--lav-3','#c7a7ff');
-      document.documentElement.style.setProperty('--link','var(--lav-3)');
-      document.documentElement.style.setProperty('--cta','#2a2236');
-    }
-    try{ localStorage.setItem(themeKey, t); }catch(e){}
-  }
-  Array.prototype.forEach.call(document.querySelectorAll('.theme-chips .chip'), function(chip){
-    chip.addEventListener('click', function(){ applyTheme(chip.getAttribute('data-theme')); });
-  });
-  try{ applyTheme(localStorage.getItem(themeKey)||'lavender'); }catch(e){ applyTheme('lavender'); }
+  // iOS unlock - first user gesture will initialize audio cleanly
+  window.addEventListener('touchend', function once(){
+    ensureAudio();
+    window.removeEventListener('touchend', once, false);
+  }, {passive:true});
 })();
 </script>
 </body>
