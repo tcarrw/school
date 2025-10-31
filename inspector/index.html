@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>School — Inspector</title>
+<meta name="description" content="Inspector of continuity. Check coherence, lesson, loop closure, and credits. Update School state for the Garlic → School → Earth → Harbor → Dagny path." />
+<style>
+  :root{
+    --bg:#0b0c11; --panel:#0f1221; --ink:#eaf0ff; --muted:#aab0d5;
+    --line:#2a2f4a; --good:#73e3c5; --warn:#ffd089; --pink:#ff39a8; --violet:#d08bff;
+    --shadow:0 10px 30px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; color:var(--ink);
+    background: radial-gradient(1200px 800px at 70% 20%, #14172b 0%, #0b0c11 60%, #08090e 100%);
+    font: 500 16px/1.45 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  }
+  .wrap{max-width:1100px; margin:0 auto; padding:22px; display:grid; gap:14px}
+
+  .hdr{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
+  .title{font-weight:900; font-size:24px; letter-spacing:.3px; text-transform:uppercase}
+  .tag{font:700 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding:4px 8px; border-radius:999px; border:1px solid rgba(200,210,255,.28); color:#dbe2ff}
+
+  .card{
+    background:linear-gradient(180deg, rgba(18,22,40,.92), rgba(14,17,32,.92));
+    border:1px solid rgba(120,130,170,.22);
+    border-radius:16px; padding:16px; box-shadow:var(--shadow);
+  }
+  h2{margin:0 0 8px 0; font-size:18px; letter-spacing:.2px}
+  .muted{color:var(--muted); font-size:14px}
+  .row{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
+  .pill{padding:4px 8px; border-radius:999px; border:1px solid rgba(120,130,170,.35); font:700 11px ui-monospace, SFMono-Regular, Menlo, monospace; color:#d6dcff}
+  .ok{border-color:rgba(115,227,197,.75); color:#eafff8}
+  .warn{border-color:rgba(255,208,137,.8); color:#fff3dc}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; text-decoration:none; cursor:pointer;
+    border:1px solid rgba(120,130,170,.35); color:#eaf0ff; font-weight:800; letter-spacing:.12em; text-transform:uppercase;
+    background:rgba(255,255,255,.04); transition:transform .12s ease, border-color .12s ease, background .12s ease;
+  }
+  .btn:hover{ transform:translateY(-1px) }
+  .btn.primary{ border-color:rgba(115,227,197,.75); background:rgba(115,227,197,.12) }
+  .btn.pink{ border-color:rgba(255,57,168,.6); background:linear-gradient(180deg, rgba(255,57,168,.16), rgba(255,57,168,.06)) }
+
+  .check{
+    display:flex; align-items:flex-start; gap:12px; padding:10px 12px; border-radius:12px;
+    border:1px solid rgba(120,130,170,.28); background:rgba(255,255,255,.03); color:#dfe3ff; font-size:14px;
+  }
+  .check input{ width:18px; height:18px; margin-top:2px }
+
+  .pad{
+    border:1px solid rgba(150,160,210,.28); border-radius:12px; padding:12px; min-height:110px;
+    background:rgba(12,14,26,.65); outline:none; color:#eaf0ff;
+  }
+
+  .grid{display:grid; gap:12px}
+  @media(min-width:900px){ .grid.two{ grid-template-columns: 1fr 1fr } }
+
+  .foot{ text-align:center; color:var(--muted); font-size:12px; padding:8px 0 16px }
+  .kbd{font:600 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding:2px 6px; border:1px solid rgba(200,210,255,.2); border-radius:6px; background:#0f1221; color:#dde3ff}
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <header class="hdr">
+      <div class="title">School — Inspector</div>
+      <div class="tag">continuity · taylor</div>
+    </header>
+
+    <!-- Context -->
+    <section class="card">
+      <h2>Context</h2>
+      <p class="muted">Inspector verifies continuity. If the action fits the story, the lesson is written, the loop is closed, and credits are clear, then School may mark its state as green for this device. This feeds the Garlic → School → Earth → Harbor → Dagny path.</p>
+
+      <div class="row">
+        <div>
+          <span id="g-path" class="pill">garlic path: —</span>
+          <span id="h-path" class="pill">harbor: —</span>
+        </div>
+        <div>
+          <a class="btn" href="https://garlic.plnt.earth" rel="noopener">Garlic</a>
+          <a class="btn" href="https://earth.plnt.earth" rel="noopener">Earth</a>
+          <a class="btn" href="https://harbor.plnt.earth" rel="noopener">Harbor</a>
+          <a class="btn pink" href="https://dagny.plnt.earth" rel="noopener">Dagny</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Checks -->
+    <section class="card">
+      <h2>Checks</h2>
+      <div class="check"><input type="checkbox" id="fit"><label for="fit"><strong>Story fit</strong> — it belongs in the ongoing narrative</label></div>
+      <div class="check"><input type="checkbox" id="lesson"><label for="lesson"><strong>Lesson written</strong> — one sentence is ready for the archive</label></div>
+      <div class="check"><input type="checkbox" id="loop"><label for="loop"><strong>Loop closed</strong> — this either completes a thread or opens a clear next step</label></div>
+      <div class="check"><input type="checkbox" id="credit"><label for="credit"><strong>Credit and consent clear</strong> — names and permissions are explicit</label></div>
+
+      <div class="grid two" style="margin-top:10px">
+        <div>
+          <h3>Lesson sentence</h3>
+          <div id="lessonText" class="pad" contenteditable="true" aria-label="Lesson sentence"></div>
+        </div>
+        <div>
+          <h3>Notes (private)</h3>
+          <div id="notes" class="pad" contenteditable="true" aria-label="Inspector notes"></div>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:10px">
+        <span id="grade" class="pill">grade: —</span>
+        <div>
+          <button id="compute" class="btn primary" type="button">Compute grade</button>
+          <button id="mark" class="btn primary" type="button">Mark School green</button>
+          <button id="reset" class="btn" type="button">Reset School</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Summary -->
+    <section class="card">
+      <h2>Summary</h2>
+      <p class="muted">Auto generated from the checks. You can edit before copying.</p>
+      <div id="summary" class="pad" contenteditable="true" aria-label="Summary"></div>
+      <div class="row" style="margin-top:10px; justify-content:flex-end">
+        <button id="copy" class="btn primary" type="button">Copy</button>
+      </div>
+    </section>
+
+    <footer class="foot"><span class="kbd">Garlic</span> → <span class="kbd">School</span> → <span class="kbd">Earth</span> → <span class="kbd">Harbor</span> → <span class="kbd">Dagny</span></footer>
+  </main>
+
+<script>
+(function(){
+  // helpers
+  function truthy(v){ if(v==null) return false; var s=String(v).toLowerCase().trim(); return !(s===""||s==="0"||s==="false"||s==="null"||s==="undefined"); }
+  function getJSON(key, fallback){ try{ var raw = localStorage.getItem(key); if(!raw) return fallback; var val = JSON.parse(raw); return (val && typeof val==="object")? val : fallback; }catch(e){ return fallback; } }
+  function setJSON(key, val){ try{ localStorage.setItem(key, JSON.stringify(val)); }catch(e){} }
+
+  // context pills
+  var gPill = document.getElementById('g-path');
+  var hPill = document.getElementById('h-path');
+
+  // read Garlic path (illumina.afg.v1)
+  var four = getJSON('illumina.afg.v1', {});
+  var gAll = ['garlic','school','earth','dagny'].every(function(k){ return !!four[k]; });
+  gPill.textContent = 'garlic path: ' + (gAll ? 'all green' : 'in progress');
+  gPill.classList.add(gAll ? 'ok':'warn');
+
+  // read Harbor triple
+  var creditOK  = truthy(localStorage.getItem('harbor.credit'));
+  var consentOK = truthy(localStorage.getItem('harbor.consent'));
+  var resourceOK= truthy(localStorage.getItem('harbor.resource'));
+  var hAll = creditOK && consentOK && resourceOK;
+  hPill.textContent = 'harbor: ' + (hAll? 'green' : ['credit','consent','resource'].filter(function(k){
+    if(k==='credit') return !creditOK;
+    if(k==='consent') return !consentOK;
+    if(k==='resource') return !resourceOK;
+  }).join(' · ') || 'green');
+  hPill.classList.add(hAll ? 'ok':'warn');
+
+  // elements
+  var fit = document.getElementById('fit');
+  var lesson = document.getElementById('lesson');
+  var loop = document.getElementById('loop');
+  var credit = document.getElementById('credit');
+  var lessonText = document.getElementById('lessonText');
+  var notes = document.getElementById('notes');
+  var grade = document.getElementById('grade');
+  var summary = document.getElementById('summary');
+  var compute = document.getElementById('compute');
+  var mark = document.getElementById('mark');
+  var reset = document.getElementById('reset');
+  var copyBtn = document.getElementById('copy');
+
+  // restore any saved inputs
+  ['fit','lesson','loop','credit'].forEach(function(id){
+    var el = document.getElementById(id);
+    var saved = localStorage.getItem('school.inspector.'+id);
+    if(saved==='true') el.checked = true;
+    el.addEventListener('change', function(){ localStorage.setItem('school.inspector.'+id, el.checked ? 'true':'false'); auto(); }, {passive:true});
+  });
+  ['lessonText','notes','summary'].forEach(function(id){
+    var el = document.getElementById(id);
+    var saved = localStorage.getItem('school.inspector.'+id);
+    if(saved!=null) el.innerHTML = saved;
+    el.addEventListener('input', function(){
+      clearTimeout(el._t); el._t = setTimeout(function(){
+        try{ localStorage.setItem('school.inspector.'+id, el.innerHTML); }catch(e){}
+        auto();
+      }, 300);
+    }, {passive:true});
+  });
+
+  function computeGrade(){
+    var ticks = (fit.checked?1:0) + (lesson.checked?1:0) + (loop.checked?1:0) + (credit.checked?1:0);
+    var g = '—';
+    if(ticks===4) g = 'A';
+    else if(ticks===3) g = 'B';
+    else if(ticks===2) g = 'C';
+    else if(ticks===1) g = 'D';
+    else g = 'F';
+    grade.textContent = 'grade: ' + g;
+    grade.classList.remove('ok','warn');
+    grade.classList.add(ticks>=3 ? 'ok' : 'warn');
+    return {ticks:g, n:ticks};
+  }
+
+  function buildSummary(){
+    var lines = [];
+    lines.push('Inspector Summary');
+    lines.push('Story fit: ' + (fit.checked?'✔ yes':'○ no'));
+    lines.push('Lesson written: ' + (lesson.checked?'✔ yes':'○ no'));
+    lines.push('Loop closed: ' + (loop.checked?'✔ yes':'○ no'));
+    lines.push('Credit and consent: ' + (credit.checked?'✔ yes':'○ no'));
+    var lt = (lessonText.textContent||'').trim();
+    if(lt) lines.push('Lesson: ' + lt);
+    var n = (notes.textContent||'').trim();
+    if(n) lines.push('Notes: ' + n);
+    lines.push('');
+    lines.push('Pathway: Garlic → School → Earth → Harbor → Dagny');
+    summary.textContent = lines.join('\n');
+  }
+
+  function auto(){ computeGrade(); buildSummary(); }
+
+  compute.addEventListener('click', auto, {passive:true});
+
+  // mark School green in illumina.afg.v1
+  mark.addEventListener('click', function(){
+    var state = getJSON('illumina.afg.v1', {});
+    state.school = true;
+    setJSON('illumina.afg.v1', state);
+    // refresh pill
+    var fresh = getJSON('illumina.afg.v1', {});
+    var ok = ['garlic','school','earth','dagny'].every(function(k){ return !!fresh[k]; });
+    gPill.textContent = 'garlic path: ' + (ok?'all green':'in progress');
+    gPill.classList.remove('ok','warn'); gPill.classList.add(ok?'ok':'warn');
+  }, {passive:true});
+
+  // reset School only
+  reset.addEventListener('click', function(){
+    var state = getJSON('illumina.afg.v1', {});
+    state.school = false;
+    setJSON('illumina.afg.v1', state);
+    var fresh = getJSON('illumina.afg.v1', {});
+    var ok = ['garlic','school','earth','dagny'].every(function(k){ return !!fresh[k]; });
+    gPill.textContent = 'garlic path: ' + (ok?'all green':'in progress');
+    gPill.classList.remove('ok','warn'); gPill.classList.add(ok?'ok':'warn');
+  }, {passive:true});
+
+  // copy summary
+  copyBtn.addEventListener('click', function(){
+    var r = document.createRange(); r.selectNodeContents(summary);
+    var sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+    try{ document.execCommand('copy'); }catch(e){}
+    sel.removeAllRanges();
+  }, {passive:true});
+
+  // initial pass
+  auto();
+})();
+</script>
+</body>
+</html>
