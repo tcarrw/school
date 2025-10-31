@@ -1,237 +1,236 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>PLNT • School</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#fffdf7">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <style>
-    :root{
-      --paper:#fffdf7;
-      --ink:#1b1720;
-      --rose:#ffdce8;
-      --gold:#ffeaa7;
-      --mint:#d8ffe8;
-      --line:#e9e4da;
-      --accent:#6b4b8a; /* quiet purple, notebook vibe */
-      --shadow:0 10px 40px rgba(0,0,0,.08);
-    }
-    html,body{height:100%}
-    body{
-      margin:0; background:var(--paper); color:var(--ink);
-      font:16px/1.5 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
-      display:grid; place-items:center;
-      background-image:
-        linear-gradient(#fff, #fffdf7),
-        repeating-linear-gradient(0deg, transparent 0 28px, rgba(107,75,138,.08) 28px 29px); /* faint ruled lines */
-      background-attachment: fixed;
-    }
-    .wrap{
-      width:min(900px,92vw);
-      background:rgba(255,255,255,.9);
-      backdrop-filter:saturate(110%) blur(6px);
-      border:1px solid var(--line);
-      border-radius:20px;
-      box-shadow:var(--shadow);
-      padding:22px 20px 18px;
-      position:relative;
-      overflow:hidden;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>School — Dashboard</title>
+<meta name="description" content="School dashboard: continuity status, Inspector checks, and Sigrid Continuity Kit readiness." />
+<style>
+  :root{
+    --bg:#0b0c11; --panel:#0f1221; --ink:#eaf0ff; --muted:#aab0d5;
+    --line:#2a2f4a; --good:#73e3c5; --warn:#ffd089; --pink:#ff39a8; --sea:#79e0c8;
+    --shadow:0 10px 30px rgba(0,0,0,.45);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; color:var(--ink);
+    background: radial-gradient(1200px 800px at 70% 20%, #14172b 0%, #0b0c11 60%, #08090e 100%);
+    font: 500 16px/1.45 ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+  }
+  .wrap{max-width:1100px; margin:0 auto; padding:22px; display:grid; gap:14px}
+  .hdr{display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap}
+  .title{font-weight:900; font-size:24px; letter-spacing:.3px; text-transform:uppercase}
+  .tag{font:700 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding:4px 8px; border-radius:999px; border:1px solid rgba(200,210,255,.28); color:#dbe2ff}
 
-    /* header */
-    .top{
-      display:flex; gap:10px; align-items:center; justify-content:space-between; flex-wrap:wrap;
-      margin-bottom:10px;
-    }
-    .brand{
-      display:flex; gap:10px; align-items:center;
-    }
-    .pencil{
-      width:30px; height:30px; border-radius:6px;
-      background:linear-gradient(135deg, var(--gold), #fff5cf);
-      border:1px solid #f6e6a7;
-      box-shadow:0 4px 14px rgba(255,234,167,.6);
-      position:relative;
-    }
-    .pencil::after{
-      content:""; position:absolute; right:-8px; top:8px; width:0; height:0;
-      border-left:8px solid #e5b591; border-top:6px solid transparent; border-bottom:6px solid transparent; transform:rotate(0.5deg);
-      filter:drop-shadow(0 0 6px rgba(229,181,145,.7));
-    }
-    h1{
-      margin:0; font-size:clamp(22px,4.6vw,30px); letter-spacing:.3px; font-weight:750;
-    }
-    .note{
-      padding:8px 10px; border-radius:10px;
-      background:linear-gradient(180deg, #fff, #fff9fb);
-      border:1px dashed #e3d8e8; color:#5a476d; font-size:13px;
-    }
+  .grid{display:grid; gap:12px}
+  @media(min-width:900px){ .grid{grid-template-columns: 1.1fr .9fr} }
 
-    /* sections */
-    .grid{display:grid; gap:14px; grid-template-columns:repeat(12,1fr); margin-top:8px}
-    .card{
-      grid-column:span 12;
-      background:#fff; border:1px solid var(--line); border-radius:16px; padding:16px 14px;
-      box-shadow:0 6px 24px rgba(0,0,0,.05);
-    }
-    .card h2{margin:0 0 8px 0; font-size:18px}
-    .card p{margin:6px 0 0 0; color:#413a4a}
+  .card{
+    background:linear-gradient(180deg, rgba(18,22,40,.92), rgba(14,17,32,.92));
+    border:1px solid rgba(120,130,170,.22);
+    border-radius:16px; padding:16px; box-shadow:var(--shadow);
+  }
+  h2{margin:0 0 8px 0; font-size:18px; letter-spacing:.2px}
+  .muted{color:var(--muted); font-size:14px}
+  .row{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
 
-    .cta{
-      display:flex; gap:10px; flex-wrap:wrap; margin-top:10px
-    }
-    button, .linkbtn{
-      appearance:none; border:none; text-decoration:none; cursor:pointer;
-      padding:12px 14px; border-radius:12px; font-weight:700; letter-spacing:.2px;
-      background:linear-gradient(180deg, #fef, var(--rose)); color:#3a243f; border:1px solid #f4cfe0;
-    }
-    button.secondary, .linkbtn.secondary{
-      background:linear-gradient(180deg, #f7fff9, var(--mint)); color:#203227; border:1px solid #ccefdc;
-    }
-    .chip{
-      display:inline-flex; align-items:center; gap:6px;
-      padding:6px 10px; border-radius:999px; font-size:12px;
-      background:#fff; border:1px solid var(--line); color:#574f60;
-    }
-    .soon{background:linear-gradient(180deg,#fff,#fff6f6); border-color:#efdede; color:#6a5353}
+  .pill{padding:4px 8px; border-radius:999px; border:1px solid rgba(120,130,170,.35); font:700 11px ui-monospace, SFMono-Regular, Menlo, monospace; color:#d6dcff}
+  .ok{border-color:rgba(115,227,197,.75); color:#eafff8}
+  .warn{border-color:rgba(255,208,137,.8); color:#fff3dc}
 
-    /* footer */
-    .foot{
-      margin-top:14px; display:flex; gap:8px; align-items:center; flex-wrap:wrap; font-size:12px; color:#534a60
-    }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px; text-decoration:none; cursor:pointer;
+    border:1px solid rgba(120,130,170,.35); color:#eaf0ff; font-weight:800; letter-spacing:.12em; text-transform:uppercase;
+    background:rgba(255,255,255,.04); transition:transform .12s ease, border-color .12s ease, background .12s ease;
+  }
+  .btn:hover{ transform:translateY(-1px) }
+  .btn.primary{ border-color:rgba(115,227,197,.75); background:rgba(115,227,197,.12) }
+  .btn.pink{ border-color:rgba(255,57,168,.6); background:linear-gradient(180deg, rgba(255,57,168,.16), rgba(255,57,168,.06)) }
 
-    /* responsive */
-    @media (min-width:760px){
-      .card.span6{grid-column:span 6}
-      .card.span4{grid-column:span 4}
-      .card.span8{grid-column:span 8}
-    }
-  </style>
+  .list{margin:8px 0 0 0; padding-left:18px}
+  .list li{margin:6px 0}
+
+  .kgrid{display:grid; grid-template-columns: repeat(auto-fit, minmax(230px,1fr)); gap:10px}
+  .box{border:1px solid rgba(120,130,170,.28); border-radius:12px; padding:12px; background:rgba(255,255,255,.03)}
+  .brow{display:flex; align-items:center; justify-content:space-between; gap:8px}
+  .btitle{font-weight:800; letter-spacing:.2px}
+
+  .sum{border:1px solid rgba(150,160,210,.28); border-radius:12px; padding:12px; min-height:100px; background:rgba(12,14,26,.65); color:#eaf0ff; white-space:pre-wrap}
+  .foot{ text-align:center; color:var(--muted); font-size:12px; padding:8px 0 16px }
+  .kbd{font:600 11px ui-monospace, SFMono-Regular, Menlo, monospace; padding:2px 6px; border:1px solid rgba(200,210,255,.2); border-radius:6px; background:#0f1221; color:#dde3ff}
+</style>
 </head>
 <body>
-  <main class="wrap" role="region" aria-label="PLNT • School">
-    <div class="top">
-      <div class="brand">
-        <div class="pencil" aria-hidden="true"></div>
-        <h1>School</h1>
-      </div>
-      <div class="note">quiet craft. lyric first. the work teaches itself when you show up.</div>
-    </div>
+  <main class="wrap">
+    <header class="hdr">
+      <div class="title">School</div>
+      <div class="tag">continuity · taylor</div>
+    </header>
 
-    <div class="grid">
+    <section class="grid">
+      <!-- Left: Status + Sigrid Kit -->
+      <section class="card">
+        <h2>Status</h2>
+        <p class="muted">School keeps the story coherent. When the checks are green, Dagny can move without drift.</p>
+        <div class="row">
+          <div>
+            <span id="p-garlic" class="pill">garlic path: —</span>
+            <span id="p-harbor" class="pill">harbor: —</span>
+            <span id="p-school" class="pill">inspector: —</span>
+          </div>
+          <div>
+            <a class="btn primary" href="/inspector/" rel="noopener">Open Inspector</a>
+            <a class="btn" href="/kit.html" rel="noopener">Continuity Kit</a>
+          </div>
+        </div>
 
-      <section class="card span6" aria-labelledby="syllabus">
-        <h2 id="syllabus">Syllabus</h2>
-        <p>Four simple rooms: Lyric Lab, Eras Seminar, Office Hours, Fieldwork. Start with ten minutes. One page. No pressure.</p>
-        <div class="cta">
-          <a class="linkbtn" href="/school/lyric-lab/">Open Lyric Lab</a>
-          <a class="linkbtn secondary" href="/school/eras-seminar/">Open Eras Seminar</a>
+        <h3 style="margin-top:12px">Sigrid Continuity Kit — Readiness</h3>
+        <div class="kgrid">
+          <div class="box">
+            <div class="brow">
+              <div class="btitle">Norwegian Bee Line</div>
+              <span id="k-no" class="pill">—</span>
+            </div>
+            <div class="muted" id="k-no-prev" style="margin-top:6px"></div>
+          </div>
+          <div class="box">
+            <div class="brow">
+              <div class="btitle">Intention</div>
+              <span id="k-intent" class="pill">—</span>
+            </div>
+            <div class="muted" id="k-intent-prev" style="margin-top:6px"></div>
+          </div>
+          <div class="box">
+            <div class="brow">
+              <div class="btitle">Constraints & Credits</div>
+              <span id="k-cred" class="pill">—</span>
+            </div>
+            <div class="muted" id="k-cred-prev" style="margin-top:6px"></div>
+          </div>
+          <div class="box">
+            <div class="brow">
+              <div class="btitle">Taylor Lesson</div>
+              <span id="k-lesson" class="pill">—</span>
+            </div>
+            <div class="muted" id="k-lesson-prev" style="margin-top:6px"></div>
+          </div>
+          <div class="box">
+            <div class="brow">
+              <div class="btitle">Ariana Vibe</div>
+              <span id="k-vibe" class="pill">—</span>
+            </div>
+            <div class="muted" id="k-vibe-prev" style="margin-top:6px"></div>
+          </div>
+          <div class="box">
+            <div class="brow">
+              <div class="btitle">Delivery Ask</div>
+              <span id="k-del" class="pill">—</span>
+            </div>
+            <div class="muted" id="k-del-prev" style="margin-top:6px"></div>
+          </div>
+          <div class="box">
+            <div class="brow">
+              <div class="btitle">Attachments</div>
+              <span id="k-links" class="pill">—</span>
+            </div>
+            <div class="muted" id="k-links-prev" style="margin-top:6px"></div>
+          </div>
         </div>
       </section>
 
-      <section class="card span6" aria-labelledby="lyriclab">
-        <h2 id="lyriclab">Lyric Lab</h2>
-        <p>Small drills for big truths. Pick a constraint and write two lines. Rhyme optional. Honesty mandatory.</p>
-        <div class="cta">
-          <button id="start-drill">Start 2-line drill</button>
-          <span class="chip" id="drill-hint">prompt: <em>write to the version of you who waited</em></span>
+      <!-- Right: Summary preview -->
+      <aside class="card">
+        <h2>Inspector Summary</h2>
+        <p class="muted">Preview of your last Inspector build (local to this device).</p>
+        <div id="sum" class="sum">—</div>
+        <div class="row" style="margin-top:10px">
+          <a class="btn primary" href="/inspector/" rel="noopener">Review / Edit</a>
+          <a class="btn pink" href="https://dagny.plnt.earth" rel="noopener">To Dagny</a>
         </div>
-      </section>
+        <h3 style="margin-top:12px">Taylor ← Sigrid (message)</h3>
+        <p class="muted" id="taylor-msg">“Jeg ser deg klart. La oss holde linjen ren og ærlig.” — I see you clearly. Let’s keep the line clean and honest.</p>
+      </aside>
+    </section>
 
-      <section class="card span8" aria-labelledby="officehours">
-        <h2 id="officehours">Office Hours</h2>
-        <p>One question to clear the path. Keep it simple. You can swap this later for a real form or a DM link.</p>
-        <div class="cta">
-          <a class="linkbtn" href="/school/office-hours/">Ask a question</a>
-          <span class="chip">template ready</span>
-        </div>
-      </section>
-
-      <section class="card span4" aria-labelledby="eras">
-        <h2 id="eras">Eras Seminar</h2>
-        <p>Study a song like a poem. Form, metaphor, movement. Ten minutes of noticing changes how you write.</p>
-        <div class="cta">
-          <a class="linkbtn secondary" href="/school/eras-seminar/">Open seminar</a>
-        </div>
-      </section>
-
-      <section class="card span6" aria-labelledby="chain">
-        <h2 id="chain">Chain Readiness</h2>
-        <p>This flips a small flag other pages can read. Use it to gate “live” features or show a subtle ribbon.</p>
-        <div class="cta">
-          <button id="mark-ready">Mark chain ready</button>
-          <button id="clear-ready" class="secondary">Clear flag</button>
-          <span id="ready-state" class="chip">state: not set</span>
-        </div>
-      </section>
-
-      <section class="card span6" aria-labelledby="nav">
-        <h2 id="nav">Nav</h2>
-        <p>Primary rooms for tonight. Replace or expand later.</p>
-        <div class="cta">
-          <a class="chip" href="https://mirrorhoney.plnt.earth/">MirrorHoney</a>
-          <a class="chip" href="https://froot.plnt.earth/">Froot</a>
-          <span class="chip soon">Haus (Gaga) • coming soon</span>
-          <span class="chip soon">Time • coming soon</span>
-        </div>
-      </section>
-
-    </div>
-
-    <div class="foot">
-      <span class="chip">school • swift</span>
-      <span class="chip">notebook mode</span>
-      <span class="chip">chain flag</span>
-    </div>
+    <footer class="foot"><span class="kbd">Garlic</span> → <span class="kbd">School</span> → <span class="kbd">Earth</span> → <span class="kbd">Harbor</span> → <span class="kbd">Dagny</span></footer>
   </main>
 
-  <script>
-    (function(){
-      // small state: chain readiness and rotating drill prompts
-      const READY_KEY = "plnt.school.chain_ready";
-      const STATE = document.getElementById("ready-state");
-      const btnReady = document.getElementById("mark-ready");
-      const btnClear = document.getElementById("clear-ready");
+<script>
+(function(){
+  // helpers
+  function truthy(v){ if(v==null) return false; var s=String(v).toLowerCase().trim(); return !(s===""||s==="0"||s==="false"||s==="null"||s==="undefined"); }
+  function getJSON(key, fallback){ try{ var raw=localStorage.getItem(key); if(!raw) return fallback; var v=JSON.parse(raw); return (v && typeof v==="object")? v : fallback; }catch(e){ return fallback; } }
+  function textOrDash(el, s){ el.textContent = s && s.trim() ? s.trim().slice(0,120) : "—"; }
 
-      function updateBadge(){
-        const val = localStorage.getItem(READY_KEY);
-        if(val === "true"){
-          STATE.textContent = "state: ready";
-          STATE.style.background = "linear-gradient(180deg, #f7fff9, #d8ffe8)";
-          STATE.style.borderColor = "#ccefdc";
-          STATE.style.color = "#1e3329";
-        }else{
-          STATE.textContent = "state: not set";
-          STATE.removeAttribute("style");
-        }
-      }
-      btnReady.addEventListener("click", function(){
-        try{ localStorage.setItem(READY_KEY, "true"); }catch(_){}
-        updateBadge();
-      }, {passive:true});
-      btnClear.addEventListener("click", function(){
-        try{ localStorage.removeItem(READY_KEY); }catch(_){}
-        updateBadge();
-      }, {passive:true});
-      updateBadge();
+  // Path pills
+  var pG = document.getElementById('p-garlic');
+  var pH = document.getElementById('p-harbor');
+  var pS = document.getElementById('p-school');
 
-      // lyric lab prompt rotation
-      const DRILL = document.getElementById("start-drill");
-      const HINT = document.getElementById("drill-hint");
-      const PROMPTS = [
-        "write to the version of you who waited",
-        "describe a room with no adjectives",
-        "tell the truth in six words",
-        "start with a sound, not a thought",
-        "what you meant to say, exactly"
-      ];
-      let i = 0;
-      DRILL.addEventListener("click", function(){
-        i = (i + 1) % PROMPTS.length;
-        HINT.innerHTML = "prompt: <em>" + PROMPTS[i] + "</em>";
-      }, {passive:true});
-    })();
-  </script>
+  // Garlic path (illumina.afg.v1)
+  var four = getJSON('illumina.afg.v1', {});
+  var gAll = ['garlic','school','earth','dagny'].every(function(k){ return !!four[k]; });
+  pG.textContent = 'garlic path: ' + (gAll ? 'all green' : 'in progress');
+  pG.classList.add(gAll ? 'ok':'warn');
+
+  // Harbor triple
+  var creditOK  = truthy(localStorage.getItem('harbor.credit'));
+  var consentOK = truthy(localStorage.getItem('harbor.consent'));
+  var resourceOK= truthy(localStorage.getItem('harbor.resource'));
+  var hState = creditOK && consentOK && resourceOK;
+  pH.textContent = 'harbor: ' + (hState ? 'green' : ['credit','consent','resource'].filter(function(k){
+    if(k==='credit') return !creditOK;
+    if(k==='consent') return !consentOK;
+    if(k==='resource') return !resourceOK;
+  }).join(' · ') || 'green');
+  pH.classList.add(hState ? 'ok':'warn');
+
+  // Inspector readiness (School)
+  var iFit = localStorage.getItem('school.inspector.fit')==='true';
+  var iLes = localStorage.getItem('school.inspector.lesson')==='true';
+  var iLoop= localStorage.getItem('school.inspector.loop')==='true';
+  var iCred= localStorage.getItem('school.inspector.credit')==='true';
+  var schoolOK = (iFit && iLes && iLoop && iCred);
+  pS.textContent = 'inspector: ' + (schoolOK ? 'ready' : 'in progress');
+  pS.classList.add(schoolOK ? 'ok' : 'warn');
+
+  // Summary preview
+  var sum = document.getElementById('sum');
+  var savedSum = localStorage.getItem('school.inspector.summary');
+  sum.textContent = savedSum ? savedSum : '—';
+
+  // Sigrid Continuity Kit fields (from school.kit.* keys)
+  function setKit(fieldKey, pillId, prevId){
+    var el = document.getElementById(pillId);
+    var prev = document.getElementById(prevId);
+    var html = localStorage.getItem('school.kit.'+fieldKey) || '';
+    var clean = html.replace(/<[^>]*>/g,'').trim();
+    var ok = clean.length > 0;
+    el.textContent = ok ? 'ok' : 'missing';
+    el.classList.add(ok ? 'ok' : 'warn');
+    textOrDash(prev, clean);
+  }
+  setKit('no',      'k-no',     'k-no-prev');
+  setKit('intent',  'k-intent', 'k-intent-prev');
+  setKit('constraints', 'k-cred','k-cred-prev');
+  setKit('lesson',  'k-lesson', 'k-lesson-prev');
+  setKit('vibe',    'k-vibe',   'k-vibe-prev');
+  setKit('delivery','k-del',    'k-del-prev');
+
+  // Links count
+  (function(){
+    var pill = document.getElementById('k-links');
+    var prev = document.getElementById('k-links-prev');
+    var html = localStorage.getItem('school.kit.links') || '';
+    var text = html.replace(/<[^>]*>/g,'').trim();
+    var lines = text ? text.split(/\n+/).filter(Boolean) : [];
+    var ok = lines.length>0;
+    pill.textContent = ok ? (lines.length + ' link' + (lines.length>1?'s':'')) : 'missing';
+    pill.classList.add(ok ? 'ok':'warn');
+    prev.textContent = ok ? lines.slice(0,3).join('\n') : '—';
+  })();
+})();
+</script>
 </body>
 </html>
