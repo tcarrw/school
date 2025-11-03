@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>School · Keys · For Good — The Forgiveness Gate</title>
+  <meta name="theme-color" content="#7d66ff" />
+  <meta name="description" content="School · Keys · For Good — The Forgiveness Gate. The release key that lets you leave the castle gracefully, carrying only what changed you." />
+  <style>
+    :root{
+      --violet-0:#0f0b1a;
+      --violet-1:#1a1230;
+      --violet-2:#2a1f55;
+      --violet-3:#5a48b6;
+      --violet-4:#b8a6ff;
+      --pearl:#f6f6ff;
+      --glass:#ffffff22;
+      --ink:#dad7ff;
+      --ink-dim:#c7c3ff;
+      --accent:#a48cff;
+      --glow:#bfaeff;
+    }
+    html,body{height:100%;margin:0}
+    body{
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Helvetica Neue", Helvetica, "Apple Color Emoji", "Segoe UI Emoji";
+      color: var(--ink);
+      background: radial-gradient(1200px 800px at 75% 10%, #261f4a 0%, var(--violet-2) 35%, var(--violet-1) 65%, var(--violet-0) 100%),
+                  conic-gradient(from 210deg at 60% 10%, #1b1537, #221b45, #151028, #1b1537);
+      background-blend-mode: screen, normal;
+      letter-spacing: 0.15px;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+
+    .frame{
+      min-height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: clamp(16px, 4vw, 32px);
+    }
+
+    .pane{
+      position:relative;
+      width:min(920px, 92vw);
+      border-radius:20px;
+      padding: clamp(20px, 4vw, 36px);
+      background: linear-gradient(180deg, #ffffff10, #ffffff06);
+      box-shadow:
+        0 10px 40px #00000080,
+        inset 0 0 0 1px #ffffff22,
+        inset 0 0 80px #a48cff0f;
+      overflow:hidden;
+      backdrop-filter: blur(12px) saturate(115%);
+      -webkit-backdrop-filter: blur(12px) saturate(115%);
+      isolation:isolate;
+    }
+
+    /* subtle mirror sheen */
+    .pane::before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        linear-gradient(120deg, transparent 0 38%, #ffffff0a 40%, #ffffff03 43%, transparent 46% 100%),
+        radial-gradient(1200px 600px at 70% -10%, #e7e3ff06 0%, transparent 60%);
+      mix-blend-mode: screen;
+      pointer-events:none;
+      animation: driftSheen 14s ease-in-out infinite;
+      z-index:0;
+    }
+    @keyframes driftSheen {
+      0%,100% { transform: translateX(-1%) translateY(0); opacity: .9; }
+      50%     { transform: translateX(1%) translateY(0);  opacity: 1; }
+    }
+
+    /* breath-on-glass fog pulse */
+    .fog{
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(220px 140px at 38% 24%, #ffffff0f 0%, #ffffff08 45%, transparent 72%),
+        radial-gradient(260px 160px at 62% 22%, #ffffff0c 0%, #ffffff05 50%, transparent 75%),
+        radial-gradient(360px 220px at 50% 30%, #ffffff08 0%, transparent 70%);
+      filter: blur(6px) saturate(105%);
+      opacity: 0;
+      z-index:1;
+      animation: fogPulse 12s ease-in-out infinite 1.8s;
+      pointer-events:none;
+    }
+    @keyframes fogPulse{
+      0%{opacity:0}
+      18%{opacity:.9}
+      42%{opacity:.35}
+      65%{opacity:.75}
+      90%{opacity:0}
+      100%{opacity:0}
+    }
+
+    header{
+      position:relative; z-index:2;
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px; margin-bottom: 18px;
+    }
+    .crumbs{
+      font-size:14px; opacity:.9;
+      color: var(--ink-dim);
+    }
+    .crumbs a{
+      color: var(--ink-dim); text-decoration: none; border-bottom: 1px dotted #cfc9ff66;
+    }
+    .tag{
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      background: linear-gradient(180deg, #6e5cff44, #6e5cff22);
+      border: 1px solid #b7a7ff55;
+      color: var(--ink);
+      letter-spacing:.3px;
+    }
+
+    h1{
+      margin: 6px 0 2px; line-height:1.15;
+      font-weight: 700; font-size: clamp(26px, 3.6vw, 40px);
+      color: var(--pearl);
+      text-shadow: 0 1px 0 #ffffff0d, 0 6px 22px #a48cff26;
+    }
+    .subtitle{
+      margin: 0 0 12px;
+      font-size: clamp(14px, 2vw, 16px);
+      color: var(--ink-dim);
+    }
+
+    .inscription{
+      position:relative; z-index:2;
+      margin-top: 16px;
+      padding: clamp(16px, 3.2vw, 22px);
+      border-radius: 16px;
+      border: 1px solid #ffffff24;
+      background: linear-gradient(180deg, #ffffff0b, #ffffff06);
+      box-shadow: inset 0 0 60px #c9bfff10, 0 10px 24px #00000055;
+    }
+
+    blockquote{
+      margin: 0 0 18px;
+      font-size: clamp(16px, 2.4vw, 18px);
+      color: var(--pearl);
+      text-wrap: balance;
+    }
+    blockquote strong{ color: var(--glow) }
+
+    .door-text{
+      margin: 0;
+      font-family: ui-serif, "Georgia", "Times New Roman", Times, serif;
+      font-size: clamp(17px, 2.4vw, 19px);
+      line-height: 1.7;
+      color: var(--ink);
+      text-wrap: pretty;
+      /* breathe-in reveal effect */
+      filter: blur(2.5px);
+      opacity: .0;
+      animation: breatheReveal 9s ease-in-out forwards 1.2s;
+    }
+    @keyframes breatheReveal{
+      0%{opacity:0; filter: blur(9px); letter-spacing:.6px}
+      35%{opacity:.92; filter: blur(2.5px)}
+      70%{opacity:.96; filter: blur(1.2px)}
+      100%{opacity:1; filter: blur(0)}
+    }
+
+    .meta{
+      display:grid; grid-template-columns: 1fr; gap:10px;
+      margin-top: 16px; color: var(--ink-dim); font-size: 13px;
+    }
+    .chip{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:8px 10px; border-radius:12px;
+      border:1px solid #ffffff22;
+      background: linear-gradient(180deg, #ffffff08, #ffffff05);
+    }
+    .dot{
+      width:10px; height:10px; border-radius:999px; background: var(--accent);
+      box-shadow: 0 0 16px var(--accent);
+    }
+
+    .flex{
+      display:flex; flex-wrap:wrap; gap:10px;
+    }
+
+    .footer{
+      position:relative; z-index:2;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+      margin-top: 22px; padding-top: 16px; border-top: 1px solid #ffffff1c;
+      color: var(--ink-dim); font-size: 14px;
+    }
+    .link{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px; border-radius:12px;
+      text-decoration:none; color: var(--ink);
+      background: linear-gradient(180deg, #ffffff12, #ffffff07);
+      border:1px solid #ffffff22;
+    }
+    .link:hover{ filter: brightness(1.05) saturate(1.04) }
+    .keyicon{
+      width:16px; height:16px; border-radius:3px;
+      background: radial-gradient(circle at 30% 30%, #fff, #d9d1ff 40%, #9b86ff 72%, #5f4fb9);
+      box-shadow: 0 2px 10px #a48cff55;
+    }
+
+    /* small helper so long lines wrap beautifully on mobile */
+    .wrap{ text-wrap: pretty }
+
+    @media (min-width: 720px){
+      .meta{ grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body data-illumina-key="release" data-domain="school" data-symbol="open_gate">
+  <div class="frame">
+    <main class="pane" aria-label="For Good — The Forgiveness Gate">
+      <div class="fog" aria-hidden="true"></div>
+
+      <header>
+        <div class="crumbs">
+          <a href="/">School</a> / <a href="/keys">Keys</a> / For Good
+        </div>
+        <span class="tag">Release Key</span>
+      </header>
+
+      <h1>For Good — The Forgiveness Gate</h1>
+      <p class="subtitle wrap">This key opens a door that does not lock. It remembers hands that tried to hold it shut and still chooses light.</p>
+
+      <section class="inscription" aria-labelledby="inscription-title">
+        <blockquote id="inscription-title"><strong>Castle Key Inscription</strong></blockquote>
+        <p class="door-text">
+          “We were each other’s spell, and breaking it set us free.”<br/><br/>
+          This door does not lock.<br/>
+          It remembers the shape of hands that once tried to hold it shut.<br/><br/>
+          Step through, and what hurt you will become air.<br/>
+          Step through, and what you loved will remain light.<br/><br/>
+          Leave your name on the threshold,<br/>
+          so the next traveler knows you learned the word enough.
+        </p>
+
+        <div class="meta" role="group" aria-label="Illumina alignment">
+          <div class="chip"><span class="dot" aria-hidden="true"></span> Element · Air · Violet Pearl</div>
+          <div class="chip"><span class="dot" aria-hidden="true" style="background:#ffc8f3; box-shadow:0 0 16px #ffc8f3"></span> Domain · Mirror ↔ School</div>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <a class="link" href="/keys" aria-label="Back to all keys">
+          <span class="keyicon" aria-hidden="true"></span>
+          Back to Keys
+        </a>
+        <a class="link" href="https://four.plnt.earth/castle/for-good" aria-label="Open interactive castle gate for For Good">
+          <span class="keyicon" aria-hidden="true"></span>
+          Open the Castle Gate
+        </a>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    /* store a gentle course flag so Center can light its tile after first visit */
+    try{
+      localStorage.setItem("castle.key.for_good","true");
+    }catch(e){}
+
+    /* optional: tiny accessibility tweak so the fog pauses when user prefers reduced motion */
+    const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if(prefersReduced){
+      const fog = document.querySelector(".fog");
+      if(fog) fog.style.animation = "none";
+      const sheet = document.createElement("style");
+      sheet.textContent = "@keyframes breatheReveal{from{opacity:1;filter:blur(0)}to{opacity:1;filter:blur(0)}}";
+      document.head.appendChild(sheet);
+    }
+  </script>
+</body>
+</html>
