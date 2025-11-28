@@ -1,259 +1,179 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>School · Index</title>
-<meta name="theme-color" content="#7d66ff" />
-<meta name="description" content="School · Canon hub for Keys and lessons." />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>School · PLNT Earth</title>
+<meta name="color-scheme" content="dark">
+
 <style>
-  :root{
-    --bg0:#0f0b1a; --bg1:#181334; --bg2:#231c44;
-    --ink:#e8e6ff; --inkd:#cfcaff; --pearl:#faf8ff; --accent:#a48cff;
-  }
-  html,body{height:100%;margin:0}
-  body{
-    min-height:100%;
-    background:
-      radial-gradient(900px 600px at 70% 10%, #2d225d 0%, var(--bg2) 38%, var(--bg1) 64%, var(--bg0) 100%),
-      linear-gradient(180deg, #0b0916, #0f0b1a);
-    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Helvetica Neue", Helvetica;
-    color:var(--ink); -webkit-font-smoothing:antialiased; letter-spacing:.15px;
-    display:flex; flex-direction:column;
-  }
-  header, footer{
-    padding: clamp(12px, 3vw, 22px);
-    color: var(--inkd);
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
-  }
-  .brand{font-weight:700; color:var(--pearl)}
-  .crumbs a{color:var(--inkd); text-decoration:none; border-bottom:1px dotted #cfc9ff66}
+:root{
+  --bg:#06070c;
+  --ink:#e8e8f8;
+  --muted:#9aa0b8;
+  --accent:#d0d6ff;
+  --glass:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.12);
+  --glow:rgba(160,160,255,0.14);
+  --maxw:850px;
+}
 
-  .section{
-    width:min(1100px, 94vw);
-    margin: 0 auto;
-    padding: clamp(12px, 3vw, 28px);
-  }
-  .h{
-    margin: 0 0 8px; font-weight:700;
-    font-size: clamp(18px, 2.6vw, 24px); color: var(--pearl);
-    text-shadow: 0 6px 20px #a48cff2a;
-  }
-  .grid{
-    display:grid; gap: clamp(12px, 2.4vw, 22px);
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  }
+body{
+  margin:0;
+  background:
+    radial-gradient(1200px 850px at 50% -10%, var(--glow), transparent 60%),
+    var(--bg);
+  color:var(--ink);
+  font-family:ui-rounded, -apple-system, system-ui, sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
 
-  /* Tile */
-  .tile{
-    position:relative; border-radius:20px; padding:18px;
-    background: linear-gradient(180deg, #ffffff10, #ffffff07);
-    border:1px solid #ffffff1f;
-    box-shadow: 0 18px 60px #00000085, inset 0 0 0 1px #ffffff16, inset 0 0 120px #a48cff12;
-    backdrop-filter: blur(8px) saturate(115%); -webkit-backdrop-filter: blur(8px) saturate(115%);
-    overflow:hidden; isolation:isolate;
-  }
-  .tile::before{
-    content:""; position:absolute; inset:0;
-    background:
-      linear-gradient(118deg, transparent 0 38%, #ffffff14 40%, #ffffff08 43%, transparent 46% 100%),
-      radial-gradient(800px 360px at 70% -14%, #e7e3ff0f 0%, transparent 62%);
-    mix-blend-mode: screen; pointer-events:none; animation: sheen 14s ease-in-out infinite;
-  }
-  @keyframes sheen{0%,100%{transform:translateX(-1%)}50%{transform:translateX(1%)}}
+main{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:48px 20px 80px;
+}
 
-  .row{display:flex; align-items:center; justify-content:space-between; gap:10px}
-  .name{font-weight:700; font-size: clamp(16px, 2.8vw, 20px); color:var(--pearl)}
-  .tag{font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid #ffffff33; background:linear-gradient(180deg,#ffffff14,#ffffff08)}
-  .hint{margin:8px 0 0; color:var(--inkd); font-size:13px}
+h1{
+  font-size:2rem;
+  margin-bottom:24px;
+  color:var(--accent);
+  text-shadow:0 0 8px var(--glow);
+}
 
-  .plate{
-    margin-top:14px; position:relative; height:160px; border-radius:16px;
-    border:1px solid #ffffff26;
-    background: radial-gradient(110% 100% at 60% 10%, #ffffff10 0%, #ffffff05 45%, transparent 70%),
-                linear-gradient(180deg,#ffffff0f,#ffffff06);
-    overflow:hidden;
-  }
-  .aura{
-    position:absolute; inset:0; pointer-events:none; opacity:0;
-    background:
-      radial-gradient(160px 120px at 30% 38%, #b9a9ff33 0%, transparent 70%),
-      radial-gradient(220px 160px at 70% 32%, #9fe7ff33 0%, transparent 72%);
-    filter: blur(6px) saturate(110%); transition: opacity .45s ease;
-  }
-  .gate{
-    position:absolute; bottom:10px; right:10px;
-    display:inline-flex; align-items:center; gap:10px;
-    padding:10px 14px; border-radius:12px;
-    border:1px solid #ffffff2a; background: linear-gradient(180deg,#ffffff16,#ffffff09);
-    color:var(--ink); text-decoration:none; user-select:none;
-  }
-  .keyicon{ width:16px; height:16px; border-radius:3px;
-    background: radial-gradient(circle at 30% 30%, #fff, #d9d1ff 40%, #9b86ff 72%, #5f4fb9);
-  }
+p{
+  line-height:1.56;
+  color:var(--muted);
+}
 
-  /* States */
-  .bright .aura{ opacity:1 }
-  .learned .tag{ border-color:#9fe7ff88; box-shadow:0 0 18px #9fe7ff44 inset }
-  .learned .hint{ color:#d3eeff }
+/* PANELS */
+.panel{
+  background:var(--glass);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:26px 22px;
+  margin:28px 0;
+  backdrop-filter:blur(12px);
+}
 
-  /* Badge */
-  .badge{
-    position:fixed; right:14px; bottom:14px; z-index:30;
-    font-size:12px; color:var(--ink);
-    padding:8px 12px; border-radius:999px;
-    border:1px solid #ffffff2a;
-    background:linear-gradient(180deg,#ffffff18,#ffffff0b);
-    box-shadow:0 10px 30px #00000066; opacity:.9;
-  }
+/* GRID NAV */
+#grid{
+  display:grid;
+  gap:16px;
+  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  margin-top:20px;
+}
+
+.tile{
+  background:linear-gradient(135deg,
+    rgba(255,255,255,0.12),
+    rgba(255,255,255,0.04));
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:16px;
+  padding:18px 12px;
+  text-align:center;
+  color:var(--ink);
+  font-size:0.95rem;
+  cursor:pointer;
+  transition:transform .25s ease, background .25s ease;
+}
+.tile:hover{
+  transform:translateY(-4px);
+  background:linear-gradient(135deg,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.07));
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  margin-top:60px;
+  color:var(--muted);
+  font-size:0.85rem;
+}
+footer a{
+  color:var(--accent);
+  text-decoration:none;
+}
 </style>
 </head>
+
 <body>
-  <header>
-    <div class="brand">School</div>
-    <div class="crumbs"><a href="/">home</a> / index</div>
-  </header>
+<main>
 
-  <section class="section" aria-label="Intro">
-    <div class="h">Keys (Canon)</div>
-    <p class="hint" style="margin:6px 0 16px">Learn a key here, then the castle at <a href="https://four.plnt.earth/castle" style="color:var(--inkd);text-decoration:none;border-bottom:1px dotted #cfc9ff66">four</a> will respond.</p>
-    <div class="grid">
-      <!-- For Good -->
-      <article class="tile" id="k-forgood">
-        <div class="row">
-          <div class="name">For Good</div>
-          <span class="tag" id="t-forgood">Unlearned</span>
-        </div>
-        <p class="hint" id="h-forgood">Release key — forgiveness as continuity.</p>
-        <div class="plate">
-          <div class="aura" id="a-forgood" aria-hidden="true"></div>
-          <a class="gate" href="/keys/for-good" aria-label="Open For Good">
-            <span class="keyicon" aria-hidden="true"></span> Read Canon
-          </a>
-        </div>
-      </article>
+<h1>Illumina School</h1>
 
-      <!-- Wonderland -->
-      <article class="tile" id="k-wonderland">
-        <div class="row">
-          <div class="name">Wonderland</div>
-          <span class="tag" id="t-wonderland">Unlearned</span>
-        </div>
-        <p class="hint" id="h-wonderland">Curiosity key — the map appears as you ask.</p>
-        <div class="plate">
-          <div class="aura" id="a-wonderland" aria-hidden="true"></div>
-          <a class="gate" href="/keys/wonderland" aria-label="Open Wonderland key">
-            <span class="keyicon" aria-hidden="true"></span> Read Canon
-          </a>
-        </div>
-      </article>
+<!-- START MY DAY -->
+<div class="panel">
+  <h2 style="margin:0 0 16px;font-size:1.2rem;color:var(--accent);">
+    Start My Day
+  </h2>
+  <p>Your day begins wherever your attention is softest.  
+  Until the Illumina calendar is fully online, mornings gently open in Marina’s Room — mirror first, then clarity, then motion.</p>
 
-      <!-- Dear John -->
-      <article class="tile" id="k-dearjohn">
-        <div class="row">
-          <div class="name">Dear John</div>
-          <span class="tag" id="t-dearjohn">Unlearned</span>
-        </div>
-        <p class="hint" id="h-dearjohn">Reckoning key — name the pattern, close the loop.</p>
-        <div class="plate">
-          <div class="aura" id="a-dearjohn" aria-hidden="true"></div>
-          <a class="gate" href="/keys/dear-john" aria-label="Open Dear John key">
-            <span class="keyicon" aria-hidden="true"></span> Read Canon
-          </a>
-        </div>
-      </article>
+  <div id="start-day-btn" class="tile" style="margin-top:18px;">
+    Begin in Marina’s Room
+  </div>
+</div>
 
-      <!-- New Romantics -->
-      <article class="tile" id="k-newromantics">
-        <div class="row">
-          <div class="name">New Romantics</div>
-          <span class="tag" id="t-newromantics">Unlearned</span>
-        </div>
-        <p class="hint" id="h-newromantics">Freedom key — build the city your chorus needs.</p>
-        <div class="plate">
-          <div class="aura" id="a-newromantics" aria-hidden="true"></div>
-          <a class="gate" href="/keys/new-romantics" aria-label="Open New Romantics key">
-            <span class="keyicon" aria-hidden="true"></span> Read Canon
-          </a>
-        </div>
-      </article>
-    </div>
-  </section>
+<!-- MAIN NAV GRID -->
+<div class="panel">
+  <h2 style="margin:0 0 16px;font-size:1.2rem;color:var(--accent);">
+    Explore School
+  </h2>
 
-  <section class="section" aria-label="Portals">
-    <div class="h">Portals</div>
-    <div class="grid">
-      <article class="tile">
-        <div class="row"><div class="name">Four · Castle</div><span class="tag">Map</span></div>
-        <p class="hint">Interactive gates. Tiles brighten after lessons.</p>
-        <div class="plate">
-          <div class="aura" id="a-four" aria-hidden="true"></div>
-          <a class="gate" href="https://four.plnt.earth/castle" aria-label="Open Four Castle"><span class="keyicon"></span> Enter Castle</a>
-        </div>
-      </article>
-      <article class="tile">
-        <div class="row"><div class="name">Center</div><span class="tag">Home</span></div>
-        <p class="hint">Keys across the ecosystem.</p>
-        <div class="plate">
-          <div class="aura" id="a-center" aria-hidden="true"></div>
-          <a class="gate" href="https://center.plnt.earth" aria-label="Open Center"><span class="keyicon"></span> Go to Center</a>
-        </div>
-      </article>
-    </div>
-  </section>
+  <div id="grid">
+    <div class="tile" onclick="go('rooms/marina.html')">Marina’s Room · Mirror</div>
 
-  <div class="badge">School · Keys</div>
+    <div class="tile" onclick="alert('Coming soon')">Sigrid’s Room · Clarity</div>
+    <div class="tile" onclick="alert('Coming soon')">Dagny’s Room · Joy</div>
+    <div class="tile" onclick="alert('Coming soon')">Dua Lipa’s Room · Motion</div>
+    <div class="tile" onclick="alert('Coming soon')">Ariana’s Room · Frequency</div>
+    <div class="tile" onclick="alert('Coming soon')">Sabrina’s Room · Honey</div>
+    <div class="tile" onclick="alert('Coming soon')">Taylor’s Room · Structure</div>
+    <div class="tile" onclick="alert('Coming soon')">Miss Monique’s Room · Pulse</div>
+    <div class="tile" onclick="alert('Coming soon')">Doechii’s Room · Edge</div>
+    <div class="tile" onclick="alert('Coming soon')">AURORA’s Room · Atmosphere</div>
+    <div class="tile" onclick="alert('Coming soon')">Tove Lo’s Room · Dream</div>
+    <div class="tile" onclick="alert('Coming soon')">Rosalía’s Room · Fire</div>
+    <div class="tile" onclick="alert('Coming soon')">Kim Petras’ Room · Key</div>
+  </div>
+</div>
 
-  <footer>
-    <div>© School · Illumina</div>
-    <div>Violet-pearl mode</div>
-  </footer>
+<!-- SNEAK PREVIEW -->
+<div class="panel">
+  <h2 style="margin:0 0 16px;font-size:1.2rem;color:var(--accent);">
+    Sneak Preview — What’s Coming
+  </h2>
+  <p>A few pieces of the School are still assembling themselves at night.  
+  These wings will materialize soon:</p>
+
+  <ul style="line-height:1.56;color:var(--muted);margin-left:20px;">
+    <li><strong>Anchor Corridors</strong> — glowing paths between the 13 Rooms</li>
+    <li><strong>Illumina Cycle Calendar</strong> — the 42-day moon-synced syllabus</li>
+    <li><strong>Elevator Docking</strong> — vertical movement between floors and rooms</li>
+    <li><strong>Research Wing</strong> — τ-lab, manifold dynamics, photon maps</li>
+    <li><strong>Daily Curriculum</strong> — each morning a different anchor lights the way</li>
+  </ul>
+
+  <p style="margin-top:14px;color:var(--accent);">
+    Check back — the rooms unlock themselves one by one.
+  </p>
+</div>
+
+<footer>
+  Part of <a href="https://earth.plnt.earth">earth.plnt.earth</a>
+</footer>
+
+</main>
 
 <script>
-(function(){
-  // Normalize & read flags (support both plain and snake_case)
-  function learned(slugPlain, slugSnake){
-    try{
-      var a = localStorage.getItem('castle.key.'+slugPlain) === 'true';
-      var b = localStorage.getItem('castle.key.'+slugSnake) === 'true';
-      if(a||b){
-        localStorage.setItem('castle.key.'+slugPlain,'true');
-        localStorage.setItem('castle.key.'+slugSnake,'true');
-      }
-      return a||b;
-    }catch(_){ return false; }
-  }
-  function brighten(el, on){ if(!el) return; el.style.opacity = on ? '1' : '0'; }
-  function setTile(id, on){
-    var tile = document.getElementById('k-'+id);
-    var tag  = document.getElementById('t-'+id);
-    var hint = document.getElementById('h-'+id);
-    var aura = document.getElementById('a-'+id);
-    if(!tile) return;
-    if(on){
-      tile.classList.add('learned','bright');
-      if(tag) tag.textContent = 'Learned';
-      if(hint) hint.textContent = 'Canon touched · the castle remembers.';
-      brighten(aura, true);
-    }
-  }
+function go(url){ window.location.href = url; }
 
-  // Keys
-  var fg = learned('forgood','for_good');
-  var wl = learned('wonderland','wonderland'); // same both
-  var dj = learned('dearjohn','dear_john');
-  var nr = learned('newromantics','new_romantics');
-
-  setTile('forgood', fg);
-  setTile('wonderland', wl);
-  setTile('dearjohn', dj);
-  setTile('newromantics', nr);
-
-  // Portals aura lights if any key learned
-  var any = fg||wl||dj||nr;
-  brighten(document.getElementById('a-four'), any);
-  brighten(document.getElementById('a-center'), any);
-})();
+document.getElementById("start-day-btn").onclick = () => {
+  go("rooms/marina.html");
+};
 </script>
+
 </body>
 </html>
