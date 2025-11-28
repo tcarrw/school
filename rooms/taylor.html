@@ -58,7 +58,7 @@ p{
   margin:28px 0;
 }
 
-/* Editable Cards Kendyl can extend */
+/* Editable Cards for Kendyl */
 #cards{
   display:grid;
   gap:18px;
@@ -119,48 +119,84 @@ footer a{
 <div class="panel">
   <p><strong>Lavender · Structure · Architect Mind</strong></p>
   <p>
-    This is a demo foundation for Taylor’s room — a quiet architectural space built from lavender light, clear lines, and intentional structure.
-    <br><br>
-    Kendyl, you can change anything you want here:
-    colors, panels, motifs, layout, or meaning.
+    This space is a starting point for Taylor’s wing.  
+    Kendyl — everything here is yours to shape.  
+    You can shift the colors, rewrite the meanings, create new sections, or build entirely new layers.
   </p>
 </div>
 
 <div class="panel">
   <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
-    Editable Cards for Kendyl
+    How to Find What Goes Here
+  </h2>
+
+  <p>
+    There’s no single “right” source.  
+    The pieces you add can come from anywhere:
+  </p>
+
+  <ul style="color:var(--muted);line-height:1.6;margin-left:20px;">
+    <li><strong>Your intuition:</strong> the room grows from what feels true to you.</li>
+    <li><strong>Your experiences:</strong> moments, moods, ideas, lyrics you relate to.</li>
+    <li><strong>Your TikToks or videos:</strong> if you want, you can embed what you’ve made or what inspires you.</li>
+    <li><strong>Quiet inspiration:</strong> sometimes the next idea arrives when you’re not looking for it.</li>
+  </ul>
+
+  <p>
+    Think of this page as a lavender blueprint —  
+    the structure appears piece by piece, and you’re the architect.
+  </p>
+</div>
+
+<div class="panel">
+  <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
+    Optional: Add a TikTok or Video
+  </h2>
+
+  <p>If you want to embed one of your videos:</p>
+
+  <pre style="background:rgba(255,255,255,0.05);padding:14px;border-radius:12px;overflow:auto;font-size:0.8rem;color:var(--muted);">
+&lt;blockquote class="tiktok-embed" cite="VIDEO_URL" data-video-id="ID" style="max-width: 400px;"&gt;&lt;/blockquote&gt;
+&lt;script async src="https://www.tiktok.com/embed.js"&gt;&lt;/script&gt;
+  </pre>
+
+  <p>But it’s not required — the room can grow through words, colors, structure, or anything you choose.</p>
+</div>
+
+<div class="panel">
+  <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
+    Editable Idea Cards
   </h2>
 
   <p style="margin-bottom:14px;">
-    These are placeholders for you to customize.  
-    Click a card to see where you might write or build.
+    These are scaffolds — click a card to see where you can add to it.
   </p>
 
   <div id="cards">
+
     <div class="card" onclick="editCard('architect')">
       <strong>Architect of Emotion</strong><br>
-      (Kendyl: Add your meaning here)
+      (Kendyl: Add your meaning)
     </div>
 
     <div class="card" onclick="editCard('floors')">
       <strong>Lavender Floors</strong><br>
-      (Kendyl: Describe how Taylor moves through structure)
+      (How Taylor moves through structure)
     </div>
 
     <div class="card" onclick="editCard('threads')">
       <strong>Invisible Threads</strong><br>
-      (Kendyl: Space for connections, relationships, story logic)
+      (Connections, stories, patterns you see)
     </div>
 
     <div class="card" onclick="editCard('clock')">
       <strong>Midnight Clock</strong><br>
-      (Kendyl: Add time motifs, lyrics, or symbols)
+      (Time motifs, lyric moments, symbols)
     </div>
+
   </div>
 
-  <div class="sig">
-    🏹 “Precision is a kind of love.”
-  </div>
+  <div class="sig">🏹 “Precision is a kind of love.”</div>
 </div>
 
 <footer>
