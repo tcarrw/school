@@ -25,7 +25,7 @@ body{
     radial-gradient(1200px 900px at 50% -20%, var(--glow), transparent 70%),
     var(--bg);
   color:var(--ink);
-  font-family:ui-rounded, -apple-system, system-ui, sans-serif;
+  font-family:ui-rounded,-apple-system,system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;
 }
 
@@ -103,7 +103,7 @@ p{
   line-height:1.55;
   resize:none;
   outline:none;
-  font-family:ui-rounded, -apple-system, system-ui, sans-serif;
+  font-family:ui-rounded,-apple-system,system-ui,sans-serif;
 }
 #notes-box:focus{
   background:rgba(255,255,255,0.12);
@@ -146,23 +146,65 @@ footer a{
   </p>
 </div>
 
+<!-- WORKING TIKTOK MOMENT CARD -->
 <div class="panel">
   <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
-    A Demo Video (Already Added for You)
+    A Moment From You
   </h2>
 
-  <blockquote class="tiktok-embed"
-      cite="https://www.tiktok.com/@kendyljustine/video/7577045134299188494"
-      data-video-id="7577045134299188494"
-      style="max-width: 400px; margin:auto;">
-  </blockquote>
-  <script async src="https://www.tiktok.com/embed.js"></script>
+  <div style="max-width:400px;margin:24px auto;">
+    <div 
+      onclick="window.open('https://www.tiktok.com/@kendyljustine/video/7577045134299188494','_blank')"
+      style="
+        position:relative;
+        width:100%;
+        aspect-ratio:9/16;
+        border-radius:16px;
+        overflow:hidden;
+        cursor:pointer;
+        background:#1a1a1d;
+      "
+    >
+      <!-- Lavender shimmer -->
+      <div style="
+        position:absolute;
+        inset:0;
+        background:linear-gradient(180deg,
+          rgba(196,181,253,0.25),
+          rgba(196,181,253,0.10)
+        );
+      "></div>
 
-  <p style="margin-top:12px;">
-    If you'd like more here, just send the URLs and they’ll be placed for you.
-  </p>
+      <!-- Play glyph -->
+      <div 
+        style="
+          position:absolute;
+          top:50%;
+          left:50%;
+          transform:translate(-50%,-50%);
+          width:70px;
+          height:70px;
+          border-radius:50%;
+          background:rgba(255,255,255,0.25);
+          backdrop-filter:blur(8px);
+          display:flex;
+          align-items:center;
+          justify-content:center;
+        "
+      >
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="white">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </div>
+    </div>
+
+    <p style="margin-top:12px;text-align:center;color:var(--muted);font-size:0.9rem;">
+      Tap to watch this moment on TikTok
+    </p>
+  </div>
 </div>
 
+<!-- IDEA CARDS -->
 <div class="panel">
   <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
     Editable Idea Cards
@@ -195,14 +237,16 @@ footer a{
   <div class="sig">🏹 “Precision is a kind of love.”</div>
 </div>
 
-<!-- KENDYL'S NOTES -->
+<!-- NOTES -->
 <div class="panel">
   <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
     Kendyl’s Notes
   </h2>
 
-  <p>Anything that comes to mind — feelings, ideas, fragments, lyrics, reminders.  
-  They save automatically and stay here just for you.</p>
+  <p>
+    Anything that comes to mind — feelings, ideas, fragments, lyrics, reminders.  
+    They save automatically and stay here just for you.
+  </p>
 
   <textarea id="notes-box" placeholder="Write anything here…"></textarea>
 </div>
@@ -220,9 +264,7 @@ function editCard(key){
 
 /* Save & load notes */
 const notesBox = document.getElementById("notes-box");
-
 notesBox.value = localStorage.getItem("kendyl-notes") || "";
-
 notesBox.addEventListener("input", () => {
   localStorage.setItem("kendyl-notes", notesBox.value);
 });
