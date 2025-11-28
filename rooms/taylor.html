@@ -89,6 +89,27 @@ p{
   );
 }
 
+/* Notes Section */
+#notes-box{
+  width:100%;
+  height:180px;
+  margin-top:16px;
+  padding:14px;
+  background:rgba(255,255,255,0.08);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:14px;
+  color:var(--ink);
+  font-size:0.95rem;
+  line-height:1.55;
+  resize:none;
+  outline:none;
+  font-family:ui-rounded, -apple-system, system-ui, sans-serif;
+}
+#notes-box:focus{
+  background:rgba(255,255,255,0.12);
+  border-color:rgba(255,255,255,0.25);
+}
+
 .sig{
   margin-top:32px;
   font-size:1rem;
@@ -120,32 +141,25 @@ footer a{
   <p>
     This room is yours to shape.  
     And don’t worry — you never need to add code yourself.  
-    If you want any videos, moments, or ideas included here,  
-    just send the links and they can be placed for you.
+    If you ever want a video or moment placed here,  
+    just send the link and it will appear for you.
   </p>
 </div>
 
 <div class="panel">
   <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
-    A Demo Video (Just to Show What’s Possible)
+    A Demo Video (Already Added for You)
   </h2>
 
-  <p>
-    Here’s an example using one of your videos — just to show what it feels like
-    when something personal lives in the space:
-  </p>
-
-  <!-- DEMO TIKTOK EMBED -->
-  <blockquote class="tiktok-embed" 
-      cite="https://www.tiktok.com/t/ZP8UU3BfJ/" 
-      data-video-id="ZP8UU3BfJ" 
+  <blockquote class="tiktok-embed"
+      cite="https://www.tiktok.com/@kendyljustine/video/7577045134299188494"
+      data-video-id="7577045134299188494"
       style="max-width: 400px; margin:auto;">
   </blockquote>
   <script async src="https://www.tiktok.com/embed.js"></script>
 
   <p style="margin-top:12px;">
-    If you'd like more of your videos here,  
-    you only need to send the URLs — nothing else.
+    If you'd like more here, just send the URLs and they’ll be placed for you.
   </p>
 </div>
 
@@ -154,36 +168,43 @@ footer a{
     Editable Idea Cards
   </h2>
 
-  <p style="margin-bottom:14px;">
-    These are places you can fill in with anything — thoughts, lyrics,
-    memories, symbols, colors. Click any of them.
-  </p>
-
   <div id="cards">
 
     <div class="card" onclick="editCard('architect')">
       <strong>Architect of Emotion</strong><br>
-      (Add anything that feels like “designing feeling”)
+      (What “designing feeling” means to you)
     </div>
 
     <div class="card" onclick="editCard('floors')">
       <strong>Lavender Floors</strong><br>
-      (Where structure becomes something you can stand on)
+      (Where structure supports you)
     </div>
 
     <div class="card" onclick="editCard('threads')">
       <strong>Invisible Threads</strong><br>
-      (Connections, symbols, patterns you notice)
+      (Connections and patterns you notice)
     </div>
 
     <div class="card" onclick="editCard('clock')">
       <strong>Midnight Clock</strong><br>
-      (Moments in time that matter to you)
+      (Moments in time that stay with you)
     </div>
 
   </div>
 
   <div class="sig">🏹 “Precision is a kind of love.”</div>
+</div>
+
+<!-- KENDYL'S NOTES -->
+<div class="panel">
+  <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
+    Kendyl’s Notes
+  </h2>
+
+  <p>Anything that comes to mind — feelings, ideas, fragments, lyrics, reminders.  
+  They save automatically and stay here just for you.</p>
+
+  <textarea id="notes-box" placeholder="Write anything here…"></textarea>
 </div>
 
 <footer>
@@ -196,6 +217,15 @@ footer a{
 function editCard(key){
   alert("This area is for Kendyl’s additions: " + key);
 }
+
+/* Save & load notes */
+const notesBox = document.getElementById("notes-box");
+
+notesBox.value = localStorage.getItem("kendyl-notes") || "";
+
+notesBox.addEventListener("input", () => {
+  localStorage.setItem("kendyl-notes", notesBox.value);
+});
 </script>
 
 </body>
