@@ -3,147 +3,110 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>School · PLNT Earth</title>
+<title>Taylor’s Room · Structure Wing</title>
 <meta name="color-scheme" content="dark">
 
 <style>
 :root{
-  --bg:#06070c;
-  --ink:#e8e8f8;
-  --muted:#9aa0b8;
-  --accent:#d0d6ff;
-
-  --open:#c4b5fd;
-  --closed:#555a70;
-
+  --bg:#0d0b14;
+  --ink:#efeaff;
+  --muted:#b6b0c9;
+  --lav:#c4b5fd;
   --glass:rgba(255,255,255,0.06);
-  --border:rgba(255,255,255,0.12);
-  --glow:rgba(160,160,255,0.14);
-
-  --maxw:850px;
-
-  /* PREVIEW COLORS (anchor-coded) */
-  --sigrid:#9ec8ff;
-  --dagny:#ff9ecb;
-  --dua:#b39bff;
-  --ariana:#ffdff8;
-  --sabrina:#ffcb66;
-  --monique:#7ef7e7;
-  --doechii:#ff5a5a;
-  --aurora:#e8ffe7;
-  --tove:#cb9fff;
-  --rosalia:#ff7f7f;
-  --kimp:#f6a6ff;
+  --border:rgba(255,255,255,0.1);
+  --glow:rgba(196,181,253,0.18);
+  --accent:#dccfff;
+  --maxw:880px;
 }
 
 body{
   margin:0;
   background:
-    radial-gradient(1200px 850px at 50% -10%, var(--glow), transparent 60%),
+    radial-gradient(1200px 900px at 50% -20%, var(--glow), transparent 70%),
     var(--bg);
   color:var(--ink);
-  font-family:ui-rounded,-apple-system,system-ui,sans-serif;
+  font-family:ui-rounded, -apple-system, system-ui, sans-serif;
   -webkit-font-smoothing:antialiased;
 }
 
 main{
   max-width:var(--maxw);
   margin:0 auto;
-  padding:48px 20px 80px;
+  padding:48px 22px 80px;
 }
 
 h1{
-  font-size:2rem;
-  margin-bottom:24px;
-  color:var(--accent);
-  text-shadow:0 0 8px var(--glow);
+  font-size:2.1rem;
+  font-weight:600;
+  margin-bottom:22px;
+  color:var(--lav);
+  text-shadow:0 0 10px var(--glow);
 }
 
-p{ line-height:1.56; color:var(--muted); }
+p{
+  line-height:1.6;
+  margin:14px 0;
+  color:var(--muted);
+}
 
 .panel{
   background:var(--glass);
   border:1px solid var(--border);
+  padding:28px 24px;
   border-radius:18px;
-  padding:26px 22px;
+  backdrop-filter:blur(14px);
   margin:28px 0;
-  backdrop-filter:blur(12px);
 }
 
-/* GRID NAV */
-#grid{
+/* Editable Cards for Kendyl */
+#cards{
   display:grid;
-  gap:16px;
-  grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
-  margin-top:20px;
+  gap:18px;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  margin-top:22px;
 }
 
-.tile{
-  position:relative;
+.card{
   background:linear-gradient(135deg,
-    rgba(255,255,255,0.12),
-    rgba(255,255,255,0.04));
+    rgba(255,255,255,0.10),
+    rgba(255,255,255,0.04)
+  );
   border:1px solid rgba(255,255,255,0.12);
   border-radius:16px;
-  padding:18px 12px;
-  text-align:center;
+  padding:18px 14px;
+  text-align:left;
+  font-size:0.9rem;
   color:var(--ink);
-  font-size:0.95rem;
+  min-height:120px;
   cursor:pointer;
-  transition:transform .25s ease, background .25s ease;
-  overflow:hidden;
+  transition:transform 0.25s ease, background 0.25s ease;
 }
-.tile:hover{
+.card:hover{
   transform:translateY(-4px);
   background:linear-gradient(135deg,
     rgba(255,255,255,0.18),
-    rgba(255,255,255,0.07));
+    rgba(255,255,255,0.06)
+  );
 }
 
-/* INDICATOR CHIPS */
-.chip{
-  display:block;
-  margin-top:8px;
-  font-size:0.8rem;
-  letter-spacing:0.3px;
-}
-.open{ color:var(--open); }
-.closed{ color:var(--closed); }
-
-/* PREVIEW BOX — appears on hover for CLOSED rooms */
-.preview{
-  position:absolute;
-  bottom:-100%;
-  left:0;
-  right:0;
-  padding:14px 10px;
-  font-size:0.85rem;
-  opacity:0;
-  transition:bottom .3s ease, opacity .3s ease;
-  pointer-events:none;
-  border-top:1px solid rgba(255,255,255,0.12);
-}
-.tile:hover .preview{
-  bottom:0;
-  opacity:1;
-}
-
-/* FOOTER */
-footer{
+/* Taylor’s signature vibe line */
+.sig{
+  margin-top:32px;
+  font-size:1rem;
   text-align:center;
+  color:var(--accent);
+  opacity:0.85;
+}
+
+footer{
   margin-top:60px;
-  font-size:0.9rem;
+  text-align:center;
+  color:var(--muted);
+  font-size:0.85rem;
 }
 footer a{
   color:var(--accent);
   text-decoration:none;
-}
-footer div{
-  color:var(--muted);
-  margin-top:6px;
-  font-size:0.85rem;
-  opacity:0.9;
-  line-height:1.45;
 }
 </style>
 </head>
@@ -151,171 +114,101 @@ footer div{
 <body>
 <main>
 
-<h1>Illumina School</h1>
+<h1>Taylor’s Room — Structure Wing</h1>
 
-<!-- START MY DAY -->
 <div class="panel">
-  <h2 style="margin:0 0 16px;font-size:1.2rem;color:var(--accent);">Start My Day</h2>
-  <p>Your day opens in the last room you visited.  
-  If you’re new: Marina → Taylor.</p>
-
-  <div id="start-day-btn" class="tile" style="margin-top:18px;">
-    Begin
-  </div>
-</div>
-
-<!-- MAIN NAV -->
-<div class="panel">
-  <h2 style="margin:0 0 16px;font-size:1.2rem;color:var(--accent);">Explore School</h2>
-
-  <div id="grid">
-
-    <!-- OPEN ROOMS -->
-    <div class="tile" onclick="go('rooms/marina.html')">
-      Marina’s Room · Mirror
-      <span class="chip open">● OPEN</span>
-    </div>
-
-    <div class="tile" onclick="go('rooms/taylor.html')">
-      Taylor’s Room · Structure
-      <span class="chip open">● OPEN</span>
-    </div>
-
-    <!-- LOCKED ROOMS WITH HOVER PREVIEWS -->
-    <div class="tile" onclick="coming()">
-      Sigrid’s Room · Clarity
-      <span class="chip closed">○ Coming Soon</span>
-      <div class="preview" style="background:var(--sigrid);color:#04121f;">
-        Clear lines · Gold logic · Fjord breath
-      </div>
-    </div>
-
-    <div class="tile" onclick="coming()">
-      Dagny’s Room · Joy
-      <span class="chip closed">○ Coming Soon</span>
-      <div class="preview" style="background:var(--dagny);color:#2a0c19;">
-        Rose energy · Sunset city · Lift
-      </div>
-    </div>
-
-    <div class="tile" onclick="coming()">
-      Dua Lipa’s Room · Motion
-      <span class="chip closed">○ Coming Soon</span>
-      <div class="preview" style="background:var(--dua);color:#130d26;">
-        Violet flow · Kinetic pulse
-      </div>
-    </div>
-
-    <div class="tile" onclick="coming()">
-      Ariana’s Room · Frequency
-      <span class="chip closed">○ Coming Soon</span>
-      <div class="preview" style="background:var(--ariana);color:#4b103a;">
-        Shimmer tone · Breath magic
-      </div>
-    </div>
-
-    <div class="tile" onclick="coming()">
-      Sabrina’s Room · Honey
-      <span class="chip closed">○ Coming Soon</span>
-      <div class="preview" style="background:var(--sabrina);color:#4b2600;">
-        Warm gold · Tiny sparks · Peach
-      </div>
-    </div>
-
-    <div class="tile" onclick="coming()">
-      Miss Monique’s Room · Pulse
-      <span class="chip closed">○ Coming Soon</span>
-      <div class="preview" style="background:var(--monique);color:#002a27;">
-        Teal wave · Night drive
-      </div>
-    </div>
-
-    <div class="tile" onclick="coming()">
-      Doechii’s Room · Edge
-      <span class="chip closed">○ Coming Soon</span>
-      <div class="preview" style="background:var(--doechii);color:#330000;">
-        Alter.Fire · Red precision
-      </div>
-    </div>
-
-    <div class="tile" onclick="coming()">
-      AURORA’s Room · Atmosphere
-      <span class="chip closed">○ Coming Soon</span>
-      <div class="preview" style="background:var(--aurora);color:#0d2210;">
-        Pearl air · Arctic mind
-      </div>
-    </div>
-
-    <div class="tile" onclick="coming()">
-      Tove Lo’s Room · Dream
-      <span class="chip closed">○ Coming Soon</span>
-      <div class="preview" style="background:var(--tove);color:#18082a;">
-        Burgundy blur · Lucid heat
-      </div>
-    </div>
-
-    <div class="tile" onclick="coming()">
-      Rosalía’s Room · Fire
-      <span class="chip closed">○ Coming Soon</span>
-      <div class="preview" style="background:var(--rosalia);color:#2a0505;">
-        Flamenco spark · Blood tone
-      </div>
-    </div>
-
-    <div class="tile" onclick="coming()">
-      Kim Petras’ Room · Key
-      <span class="chip closed">○ Coming Soon</span>
-      <div class="preview" style="background:var(--kimp);color:#2d0030;">
-        Neon heartbeat · Secrets
-      </div>
-    </div>
-
-  </div>
-</div>
-
-<!-- SNEAK PREVIEW -->
-<div class="panel">
-  <h2 style="margin:0 0 16px;font-size:1.2rem;color:var(--accent);">
-    Sneak Preview — What’s Coming
-  </h2>
-
-  <ul style="line-height:1.56;color:var(--muted);margin-left:20px;">
-    <li><strong>Anchor Corridors</strong> — glowing paths between Rooms</li>
-    <li><strong>Illumina Cycle Calendar</strong> — moon-synced rhythm</li>
-    <li><strong>Elevator Docking</strong> — vertical motion between wings</li>
-    <li><strong>Research Wing</strong> — τ-lab, manifold dynamics</li>
-  </ul>
-
-  <p style="margin-top:14px;color:var(--accent);">
-    Hover to peek into the future.
+  <p><strong>Lavender · Structure · Architect Mind</strong></p>
+  <p>
+    This space is a starting point for Taylor’s wing.  
+    Kendyl — everything here is yours to shape.  
+    You can shift the colors, rewrite the meanings, create new sections, or build entirely new layers.
   </p>
 </div>
 
-<footer>
-  <a href="https://earth.plnt.earth">earth.plnt.earth</a>
-  <div>
-    Return to the earth before you rise again.<br>
-    Feel the weight leave your chest.<br>
-    Let the ground remind you that you’re here,<br>
-    and that here is enough.
+<div class="panel">
+  <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
+    How to Find What Goes Here
+  </h2>
+
+  <p>
+    There’s no single “right” source.  
+    The pieces you add can come from anywhere:
+  </p>
+
+  <ul style="color:var(--muted);line-height:1.6;margin-left:20px;">
+    <li><strong>Your intuition:</strong> the room grows from what feels true to you.</li>
+    <li><strong>Your experiences:</strong> moments, moods, ideas, lyrics you relate to.</li>
+    <li><strong>Your TikToks or videos:</strong> if you want, you can embed what you’ve made or what inspires you.</li>
+    <li><strong>Quiet inspiration:</strong> sometimes the next idea arrives when you’re not looking for it.</li>
+  </ul>
+
+  <p>
+    Think of this page as a lavender blueprint —  
+    the structure appears piece by piece, and you’re the architect.
+  </p>
+</div>
+
+<div class="panel">
+  <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
+    Optional: Add a TikTok or Video
+  </h2>
+
+  <p>If you want to embed one of your videos:</p>
+
+  <pre style="background:rgba(255,255,255,0.05);padding:14px;border-radius:12px;overflow:auto;font-size:0.8rem;color:var(--muted);">
+&lt;blockquote class="tiktok-embed" cite="VIDEO_URL" data-video-id="ID" style="max-width: 400px;"&gt;&lt;/blockquote&gt;
+&lt;script async src="https://www.tiktok.com/embed.js"&gt;&lt;/script&gt;
+  </pre>
+
+  <p>But it’s not required — the room can grow through words, colors, structure, or anything you choose.</p>
+</div>
+
+<div class="panel">
+  <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
+    Editable Idea Cards
+  </h2>
+
+  <p style="margin-bottom:14px;">
+    These are scaffolds — click a card to see where you can add to it.
+  </p>
+
+  <div id="cards">
+
+    <div class="card" onclick="editCard('architect')">
+      <strong>Architect of Emotion</strong><br>
+      (Kendyl: Add your meaning)
+    </div>
+
+    <div class="card" onclick="editCard('floors')">
+      <strong>Lavender Floors</strong><br>
+      (How Taylor moves through structure)
+    </div>
+
+    <div class="card" onclick="editCard('threads')">
+      <strong>Invisible Threads</strong><br>
+      (Connections, stories, patterns you see)
+    </div>
+
+    <div class="card" onclick="editCard('clock')">
+      <strong>Midnight Clock</strong><br>
+      (Time motifs, lyric moments, symbols)
+    </div>
+
   </div>
+
+  <div class="sig">🏹 “Precision is a kind of love.”</div>
+</div>
+
+<footer>
+  Return to <a href="../index.html">Illumina School</a>
 </footer>
 
 </main>
 
 <script>
-function go(url){
-  localStorage.setItem("last-room", url);
-  window.location.href = url;
+function editCard(key){
+  alert("This area is for Kendyl’s additions: " + key);
 }
-function coming(){
-  alert("This room is assembling itself tonight.");
-}
-document.getElementById("start-day-btn").onclick = () => {
-  const last = localStorage.getItem("last-room");
-  if(last){ go(last); return; }
-  go("rooms/marina.html");
-};
 </script>
 
 </body>
