@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Taylor’s Room · Structure Wing</title>
+<meta name="color-scheme" content="dark">
+
+<style>
+:root{
+  --bg:#0d0b14;
+  --ink:#efeaff;
+  --muted:#b6b0c9;
+  --lav:#c4b5fd;
+  --glass:rgba(255,255,255,0.06);
+  --border:rgba(255,255,255,0.1);
+  --glow:rgba(196,181,253,0.18);
+  --accent:#dccfff;
+  --maxw:880px;
+}
+
+body{
+  margin:0;
+  background:
+    radial-gradient(1200px 900px at 50% -20%, var(--glow), transparent 70%),
+    var(--bg);
+  color:var(--ink);
+  font-family:ui-rounded, -apple-system, system-ui, sans-serif;
+  -webkit-font-smoothing:antialiased;
+}
+
+main{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:48px 22px 80px;
+}
+
+h1{
+  font-size:2.1rem;
+  font-weight:600;
+  margin-bottom:22px;
+  color:var(--lav);
+  text-shadow:0 0 10px var(--glow);
+}
+
+p{
+  line-height:1.6;
+  margin:14px 0;
+  color:var(--muted);
+}
+
+.panel{
+  background:var(--glass);
+  border:1px solid var(--border);
+  padding:28px 24px;
+  border-radius:18px;
+  backdrop-filter:blur(14px);
+  margin:28px 0;
+}
+
+/* Editable Cards Kendyl can extend */
+#cards{
+  display:grid;
+  gap:18px;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  margin-top:22px;
+}
+
+.card{
+  background:linear-gradient(135deg,
+    rgba(255,255,255,0.10),
+    rgba(255,255,255,0.04)
+  );
+  border:1px solid rgba(255,255,255,0.12);
+  border-radius:16px;
+  padding:18px 14px;
+  text-align:left;
+  font-size:0.9rem;
+  color:var(--ink);
+  min-height:120px;
+  cursor:pointer;
+  transition:transform 0.25s ease, background 0.25s ease;
+}
+.card:hover{
+  transform:translateY(-4px);
+  background:linear-gradient(135deg,
+    rgba(255,255,255,0.18),
+    rgba(255,255,255,0.06)
+  );
+}
+
+/* Taylor’s signature vibe line */
+.sig{
+  margin-top:32px;
+  font-size:1rem;
+  text-align:center;
+  color:var(--accent);
+  opacity:0.85;
+}
+
+footer{
+  margin-top:60px;
+  text-align:center;
+  color:var(--muted);
+  font-size:0.85rem;
+}
+footer a{
+  color:var(--accent);
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<h1>Taylor’s Room — Structure Wing</h1>
+
+<div class="panel">
+  <p><strong>Lavender · Structure · Architect Mind</strong></p>
+  <p>
+    This is a demo foundation for Taylor’s room — a quiet architectural space built from lavender light, clear lines, and intentional structure.
+    <br><br>
+    Kendyl, you can change anything you want here:
+    colors, panels, motifs, layout, or meaning.
+  </p>
+</div>
+
+<div class="panel">
+  <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
+    Editable Cards for Kendyl
+  </h2>
+
+  <p style="margin-bottom:14px;">
+    These are placeholders for you to customize.  
+    Click a card to see where you might write or build.
+  </p>
+
+  <div id="cards">
+    <div class="card" onclick="editCard('architect')">
+      <strong>Architect of Emotion</strong><br>
+      (Kendyl: Add your meaning here)
+    </div>
+
+    <div class="card" onclick="editCard('floors')">
+      <strong>Lavender Floors</strong><br>
+      (Kendyl: Describe how Taylor moves through structure)
+    </div>
+
+    <div class="card" onclick="editCard('threads')">
+      <strong>Invisible Threads</strong><br>
+      (Kendyl: Space for connections, relationships, story logic)
+    </div>
+
+    <div class="card" onclick="editCard('clock')">
+      <strong>Midnight Clock</strong><br>
+      (Kendyl: Add time motifs, lyrics, or symbols)
+    </div>
+  </div>
+
+  <div class="sig">
+    🏹 “Precision is a kind of love.”
+  </div>
+</div>
+
+<footer>
+  Return to <a href="../index.html">Illumina School</a>
+</footer>
+
+</main>
+
+<script>
+function editCard(key){
+  alert("This area is for Kendyl’s additions: " + key);
+}
+</script>
+
+</body>
+</html>
