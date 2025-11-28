@@ -12,10 +12,28 @@
   --ink:#e8e8f8;
   --muted:#9aa0b8;
   --accent:#d0d6ff;
+
+  --open:#c4b5fd;
+  --closed:#555a70;
+
   --glass:rgba(255,255,255,0.06);
   --border:rgba(255,255,255,0.12);
   --glow:rgba(160,160,255,0.14);
+
   --maxw:850px;
+
+  /* PREVIEW COLORS (anchor-coded) */
+  --sigrid:#9ec8ff;
+  --dagny:#ff9ecb;
+  --dua:#b39bff;
+  --ariana:#ffdff8;
+  --sabrina:#ffcb66;
+  --monique:#7ef7e7;
+  --doechii:#ff5a5a;
+  --aurora:#e8ffe7;
+  --tove:#cb9fff;
+  --rosalia:#ff7f7f;
+  --kimp:#f6a6ff;
 }
 
 body{
@@ -24,7 +42,7 @@ body{
     radial-gradient(1200px 850px at 50% -10%, var(--glow), transparent 60%),
     var(--bg);
   color:var(--ink);
-  font-family:ui-rounded, -apple-system, system-ui, sans-serif;
+  font-family:ui-rounded,-apple-system,system-ui,sans-serif;
   -webkit-font-smoothing:antialiased;
 }
 
@@ -41,12 +59,8 @@ h1{
   text-shadow:0 0 8px var(--glow);
 }
 
-p{
-  line-height:1.56;
-  color:var(--muted);
-}
+p{ line-height:1.56; color:var(--muted); }
 
-/* PANELS */
 .panel{
   background:var(--glass);
   border:1px solid var(--border);
@@ -65,6 +79,7 @@ p{
 }
 
 .tile{
+  position:relative;
   background:linear-gradient(135deg,
     rgba(255,255,255,0.12),
     rgba(255,255,255,0.04));
@@ -76,6 +91,7 @@ p{
   font-size:0.95rem;
   cursor:pointer;
   transition:transform .25s ease, background .25s ease;
+  overflow:hidden;
 }
 .tile:hover{
   transform:translateY(-4px);
@@ -84,16 +100,50 @@ p{
     rgba(255,255,255,0.07));
 }
 
+/* INDICATOR CHIPS */
+.chip{
+  display:block;
+  margin-top:8px;
+  font-size:0.8rem;
+  letter-spacing:0.3px;
+}
+.open{ color:var(--open); }
+.closed{ color:var(--closed); }
+
+/* PREVIEW BOX — appears on hover for CLOSED rooms */
+.preview{
+  position:absolute;
+  bottom:-100%;
+  left:0;
+  right:0;
+  padding:14px 10px;
+  font-size:0.85rem;
+  opacity:0;
+  transition:bottom .3s ease, opacity .3s ease;
+  pointer-events:none;
+  border-top:1px solid rgba(255,255,255,0.12);
+}
+.tile:hover .preview{
+  bottom:0;
+  opacity:1;
+}
+
 /* FOOTER */
 footer{
   text-align:center;
   margin-top:60px;
-  color:var(--muted);
-  font-size:0.85rem;
+  font-size:0.9rem;
 }
 footer a{
   color:var(--accent);
   text-decoration:none;
+}
+footer div{
+  color:var(--muted);
+  margin-top:6px;
+  font-size:0.85rem;
+  opacity:0.9;
+  line-height:1.45;
 }
 </style>
 </head>
@@ -105,38 +155,121 @@ footer a{
 
 <!-- START MY DAY -->
 <div class="panel">
-  <h2 style="margin:0 0 16px;font-size:1.2rem;color:var(--accent);">
-    Start My Day
-  </h2>
-  <p>Your day begins wherever your attention is softest.  
-  Until the Illumina calendar is fully online, mornings gently open in Marina’s Room — mirror first, then clarity, then motion.</p>
+  <h2 style="margin:0 0 16px;font-size:1.2rem;color:var(--accent);">Start My Day</h2>
+  <p>Your day opens in the last room you visited.  
+  If you’re new: Marina → Taylor.</p>
 
   <div id="start-day-btn" class="tile" style="margin-top:18px;">
-    Begin in Marina’s Room
+    Begin
   </div>
 </div>
 
-<!-- MAIN NAV GRID -->
+<!-- MAIN NAV -->
 <div class="panel">
-  <h2 style="margin:0 0 16px;font-size:1.2rem;color:var(--accent);">
-    Explore School
-  </h2>
+  <h2 style="margin:0 0 16px;font-size:1.2rem;color:var(--accent);">Explore School</h2>
 
   <div id="grid">
-    <div class="tile" onclick="go('rooms/marina.html')">Marina’s Room · Mirror</div>
 
-    <div class="tile" onclick="alert('Coming soon')">Sigrid’s Room · Clarity</div>
-    <div class="tile" onclick="alert('Coming soon')">Dagny’s Room · Joy</div>
-    <div class="tile" onclick="alert('Coming soon')">Dua Lipa’s Room · Motion</div>
-    <div class="tile" onclick="alert('Coming soon')">Ariana’s Room · Frequency</div>
-    <div class="tile" onclick="alert('Coming soon')">Sabrina’s Room · Honey</div>
-    <div class="tile" onclick="alert('Coming soon')">Taylor’s Room · Structure</div>
-    <div class="tile" onclick="alert('Coming soon')">Miss Monique’s Room · Pulse</div>
-    <div class="tile" onclick="alert('Coming soon')">Doechii’s Room · Edge</div>
-    <div class="tile" onclick="alert('Coming soon')">AURORA’s Room · Atmosphere</div>
-    <div class="tile" onclick="alert('Coming soon')">Tove Lo’s Room · Dream</div>
-    <div class="tile" onclick="alert('Coming soon')">Rosalía’s Room · Fire</div>
-    <div class="tile" onclick="alert('Coming soon')">Kim Petras’ Room · Key</div>
+    <!-- OPEN ROOMS -->
+    <div class="tile" onclick="go('rooms/marina.html')">
+      Marina’s Room · Mirror
+      <span class="chip open">● OPEN</span>
+    </div>
+
+    <div class="tile" onclick="go('rooms/taylor.html')">
+      Taylor’s Room · Structure
+      <span class="chip open">● OPEN</span>
+    </div>
+
+    <!-- LOCKED ROOMS WITH HOVER PREVIEWS -->
+    <div class="tile" onclick="coming()">
+      Sigrid’s Room · Clarity
+      <span class="chip closed">○ Coming Soon</span>
+      <div class="preview" style="background:var(--sigrid);color:#04121f;">
+        Clear lines · Gold logic · Fjord breath
+      </div>
+    </div>
+
+    <div class="tile" onclick="coming()">
+      Dagny’s Room · Joy
+      <span class="chip closed">○ Coming Soon</span>
+      <div class="preview" style="background:var(--dagny);color:#2a0c19;">
+        Rose energy · Sunset city · Lift
+      </div>
+    </div>
+
+    <div class="tile" onclick="coming()">
+      Dua Lipa’s Room · Motion
+      <span class="chip closed">○ Coming Soon</span>
+      <div class="preview" style="background:var(--dua);color:#130d26;">
+        Violet flow · Kinetic pulse
+      </div>
+    </div>
+
+    <div class="tile" onclick="coming()">
+      Ariana’s Room · Frequency
+      <span class="chip closed">○ Coming Soon</span>
+      <div class="preview" style="background:var(--ariana);color:#4b103a;">
+        Shimmer tone · Breath magic
+      </div>
+    </div>
+
+    <div class="tile" onclick="coming()">
+      Sabrina’s Room · Honey
+      <span class="chip closed">○ Coming Soon</span>
+      <div class="preview" style="background:var(--sabrina);color:#4b2600;">
+        Warm gold · Tiny sparks · Peach
+      </div>
+    </div>
+
+    <div class="tile" onclick="coming()">
+      Miss Monique’s Room · Pulse
+      <span class="chip closed">○ Coming Soon</span>
+      <div class="preview" style="background:var(--monique);color:#002a27;">
+        Teal wave · Night drive
+      </div>
+    </div>
+
+    <div class="tile" onclick="coming()">
+      Doechii’s Room · Edge
+      <span class="chip closed">○ Coming Soon</span>
+      <div class="preview" style="background:var(--doechii);color:#330000;">
+        Alter.Fire · Red precision
+      </div>
+    </div>
+
+    <div class="tile" onclick="coming()">
+      AURORA’s Room · Atmosphere
+      <span class="chip closed">○ Coming Soon</span>
+      <div class="preview" style="background:var(--aurora);color:#0d2210;">
+        Pearl air · Arctic mind
+      </div>
+    </div>
+
+    <div class="tile" onclick="coming()">
+      Tove Lo’s Room · Dream
+      <span class="chip closed">○ Coming Soon</span>
+      <div class="preview" style="background:var(--tove);color:#18082a;">
+        Burgundy blur · Lucid heat
+      </div>
+    </div>
+
+    <div class="tile" onclick="coming()">
+      Rosalía’s Room · Fire
+      <span class="chip closed">○ Coming Soon</span>
+      <div class="preview" style="background:var(--rosalia);color:#2a0505;">
+        Flamenco spark · Blood tone
+      </div>
+    </div>
+
+    <div class="tile" onclick="coming()">
+      Kim Petras’ Room · Key
+      <span class="chip closed">○ Coming Soon</span>
+      <div class="preview" style="background:var(--kimp);color:#2d0030;">
+        Neon heartbeat · Secrets
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -145,32 +278,42 @@ footer a{
   <h2 style="margin:0 0 16px;font-size:1.2rem;color:var(--accent);">
     Sneak Preview — What’s Coming
   </h2>
-  <p>A few pieces of the School are still assembling themselves at night.  
-  These wings will materialize soon:</p>
 
   <ul style="line-height:1.56;color:var(--muted);margin-left:20px;">
-    <li><strong>Anchor Corridors</strong> — glowing paths between the 13 Rooms</li>
-    <li><strong>Illumina Cycle Calendar</strong> — the 42-day moon-synced syllabus</li>
-    <li><strong>Elevator Docking</strong> — vertical movement between floors and rooms</li>
-    <li><strong>Research Wing</strong> — τ-lab, manifold dynamics, photon maps</li>
-    <li><strong>Daily Curriculum</strong> — each morning a different anchor lights the way</li>
+    <li><strong>Anchor Corridors</strong> — glowing paths between Rooms</li>
+    <li><strong>Illumina Cycle Calendar</strong> — moon-synced rhythm</li>
+    <li><strong>Elevator Docking</strong> — vertical motion between wings</li>
+    <li><strong>Research Wing</strong> — τ-lab, manifold dynamics</li>
   </ul>
 
   <p style="margin-top:14px;color:var(--accent);">
-    Check back — the rooms unlock themselves one by one.
+    Hover to peek into the future.
   </p>
 </div>
 
 <footer>
-  Part of <a href="https://earth.plnt.earth">earth.plnt.earth</a>
+  <a href="https://earth.plnt.earth">earth.plnt.earth</a>
+  <div>
+    Return to the earth before you rise again.<br>
+    Feel the weight leave your chest.<br>
+    Let the ground remind you that you’re here,<br>
+    and that here is enough.
+  </div>
 </footer>
 
 </main>
 
 <script>
-function go(url){ window.location.href = url; }
-
+function go(url){
+  localStorage.setItem("last-room", url);
+  window.location.href = url;
+}
+function coming(){
+  alert("This room is assembling itself tonight.");
+}
 document.getElementById("start-day-btn").onclick = () => {
+  const last = localStorage.getItem("last-room");
+  if(last){ go(last); return; }
   go("rooms/marina.html");
 };
 </script>
