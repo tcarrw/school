@@ -58,38 +58,6 @@ p{
   margin:28px 0;
 }
 
-/* Editable Cards */
-#cards{
-  display:grid;
-  gap:18px;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  margin-top:22px;
-}
-
-.card{
-  background:linear-gradient(135deg,
-    rgba(255,255,255,0.10),
-    rgba(255,255,255,0.04)
-  );
-  border:1px solid rgba(255,255,255,0.12);
-  border-radius:16px;
-  padding:18px 14px;
-  text-align:left;
-  font-size:0.9rem;
-  color:var(--ink);
-  min-height:120px;
-  cursor:pointer;
-  transition:transform 0.25s ease, background 0.25s ease;
-}
-.card:hover{
-  transform:translateY(-4px);
-  background:linear-gradient(135deg,
-    rgba(255,255,255,0.18),
-    rgba(255,255,255,0.06)
-  );
-}
-
-/* Notes Section */
 #notes-box{
   width:100%;
   height:180px;
@@ -110,19 +78,12 @@ p{
   border-color:rgba(255,255,255,0.25);
 }
 
-.sig{
-  margin-top:32px;
-  font-size:1rem;
-  text-align:center;
-  color:var(--accent);
-  opacity:0.85;
-}
-
 footer{
   margin-top:60px;
   text-align:center;
   color:var(--muted);
   font-size:0.85rem;
+  line-height:1.5;
 }
 footer a{
   color:var(--accent);
@@ -146,11 +107,9 @@ footer a{
   </p>
 </div>
 
-<!-- WORKING TIKTOK MOMENT CARD -->
+<!-- LAVENDER SHIMMER SVG THUMBNAIL -->
 <div class="panel">
-  <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
-    A Moment From You
-  </h2>
+  <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">A Moment From You</h2>
 
   <div style="max-width:400px;margin:24px auto;">
     <div 
@@ -165,17 +124,60 @@ footer a{
         background:#1a1a1d;
       "
     >
-      <!-- Lavender shimmer -->
-      <div style="
-        position:absolute;
-        inset:0;
-        background:linear-gradient(180deg,
-          rgba(196,181,253,0.25),
-          rgba(196,181,253,0.10)
-        );
-      "></div>
 
-      <!-- Play glyph -->
+      <!-- Lavender shimmer SVG -->
+      <svg viewBox="0 0 1080 1920" preserveAspectRatio="xMidYMid slice"
+           style="position:absolute;inset:0;width:100%;height:100%;">
+        
+        <defs>
+          <linearGradient id="lavBG" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c4b5fd"/>
+            <stop offset="70%" stop-color="#a994f0"/>
+            <stop offset="100%" stop-color="#7f6ec9"/>
+          </linearGradient>
+
+          <filter id="lavGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="22" result="blur"/>
+            <feColorMatrix type="matrix"
+              values="0.9 0 0 0 0
+                      0 0.7 0 0 0
+                      0 0 1 0 0
+                      0 0 0 1 0"
+              result="lavender"/>
+            <feBlend in="SourceGraphic" in2="lavender" mode="screen"/>
+          </filter>
+        </defs>
+
+        <rect width="1080" height="1920" fill="url(#lavBG)"/>
+
+        <g filter="url(#lavGlow)">
+          <text x="50%" y="42%" text-anchor="middle"
+                font-family="ui-rounded, -apple-system, sans-serif"
+                font-size="78" fill="#f4eaff">
+            Listening to Taylor Swift
+          </text>
+          <text x="50%" y="50%" text-anchor="middle"
+                font-family="ui-rounded, -apple-system, sans-serif"
+                font-size="70" fill="#f4eaff">
+            as a former hater / New Swiftie
+          </text>
+          <text x="50%" y="58%" text-anchor="middle"
+                font-family="ui-rounded, -apple-system, sans-serif"
+                font-size="76" fill="#f4eaff">
+            — All of the Girls You Loved Before
+          </text>
+        </g>
+
+        <rect width="1080" height="1920" fill="white" opacity="0">
+          <animate attributeName="opacity"
+                   values="0;0.12;0"
+                   dur="4.5s"
+                   repeatCount="indefinite"/>
+        </rect>
+
+      </svg>
+
+      <!-- Play button -->
       <div 
         style="
           position:absolute;
@@ -196,6 +198,7 @@ footer a{
           <path d="M8 5v14l11-7z"/>
         </svg>
       </div>
+
     </div>
 
     <p style="margin-top:12px;text-align:center;color:var(--muted);font-size:0.9rem;">
@@ -204,65 +207,29 @@ footer a{
   </div>
 </div>
 
-<!-- IDEA CARDS -->
-<div class="panel">
-  <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
-    Editable Idea Cards
-  </h2>
-
-  <div id="cards">
-
-    <div class="card" onclick="editCard('architect')">
-      <strong>Architect of Emotion</strong><br>
-      (What “designing feeling” means to you)
-    </div>
-
-    <div class="card" onclick="editCard('floors')">
-      <strong>Lavender Floors</strong><br>
-      (Where structure supports you)
-    </div>
-
-    <div class="card" onclick="editCard('threads')">
-      <strong>Invisible Threads</strong><br>
-      (Connections and patterns you notice)
-    </div>
-
-    <div class="card" onclick="editCard('clock')">
-      <strong>Midnight Clock</strong><br>
-      (Moments in time that stay with you)
-    </div>
-
-  </div>
-
-  <div class="sig">🏹 “Precision is a kind of love.”</div>
-</div>
-
 <!-- NOTES -->
 <div class="panel">
   <h2 style="margin:0 0 18px;font-size:1.2rem;color:var(--lav);">
     Kendyl’s Notes
   </h2>
 
-  <p>
-    Anything that comes to mind — feelings, ideas, fragments, lyrics, reminders.  
-    They save automatically and stay here just for you.
-  </p>
+  <p>Anything that comes to mind — feelings, ideas, fragments, lyrics, reminders.  
+    They save automatically and stay here just for you.</p>
 
   <textarea id="notes-box" placeholder="Write anything here…"></textarea>
 </div>
 
 <footer>
-  Return to <a href="../index.html">Illumina School</a>
+  <a href="https://earth.plnt.earth">earth.plnt.earth</a><br><br>
+  Return to the earth before you rise again.<br>
+  Feel the weight leave your chest.<br>
+  Let the ground remind you that you’re here,<br>
+  and that here is enough.
 </footer>
 
 </main>
 
 <script>
-function editCard(key){
-  alert("This area is for Kendyl’s additions: " + key);
-}
-
-/* Save & load notes */
 const notesBox = document.getElementById("notes-box");
 notesBox.value = localStorage.getItem("kendyl-notes") || "";
 notesBox.addEventListener("input", () => {
